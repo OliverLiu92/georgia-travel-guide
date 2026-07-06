@@ -1,8 +1,8 @@
 # 只部署核心文件，忽略其他
 *.docx
-*.pdf
 *.md
 _mobile_test.html
 mobile_*.png
 .DS_Store
-vouchers/
+# 根目录的 PDF 忽略，vouchers 下的保留
+/GoToGate_FB.pdf
