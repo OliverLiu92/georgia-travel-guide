@@ -1,0 +1,2649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>格鲁吉亚旅游手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23fff'/%3E%3Crect x='130' width='40' height='200' fill='%23E8112D'/%3E%3Crect y='80' width='300' height='40' fill='%23E8112D'/%3E%3Cg fill='%23E8112D'%3E%3Crect x='40' y='25' width='10' height='30'/%3E%3Crect x='30' y='35' width='30' height='10'/%3E%3Crect x='220' y='25' width='10' height='30'/%3E%3Crect x='210' y='35' width='30' height='10'/%3E%3Crect x='40' y='145' width='10' height='30'/%3E%3Crect x='30' y='155' width='30' height='10'/%3E%3Crect x='220' y='145' width='10' height='30'/%3E%3Crect x='210' y='155' width='30' height='10'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"></noscript>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
+
+  /* ===== Tab Navigation (双行布局) ===== */
+  .tab-bar { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e5e7; padding-top: env(safe-area-inset-top, 0); }
+  .tab-bar-row1 { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px 6px; }
+  .tab-title { font-size: 18px; font-weight: 700; color: #2E4057; white-space: nowrap; flex-shrink: 0; }
+  .tab-title span { font-size: 12px; font-weight: 400; color: #999; margin-left: 8px; }
+  .tab-bar-info { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #666; flex-shrink: 0; }
+  .tab-bar-info .info-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+  .tab-bar-info .info-divider { width: 1px; height: 14px; background: #e0e0e0; }
+  .tab-bar-info .info-icon { font-size: 14px; line-height: 1; }
+  .tab-bar-info .info-label { color: #aaa; }
+  .tab-bar-info .info-value { font-weight: 600; color: #2E4057; }
+  .rate-swap-btn { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid #e0e0e0; border-radius: 50%; background: #fff; cursor: pointer; font-size: 11px; color: #999; transition: all .25s; flex-shrink: 0; line-height: 1; padding: 0; }
+  .rate-swap-btn:hover { background: #f0f0f0; color: #2E4057; border-color: #ccc; }
+  .rate-swap-btn:active { transform: rotate(180deg); }
+  .rate-swap-btn svg { width: 12px; height: 12px; pointer-events: none; }
+  .tab-bar-row2 { display: flex; align-items: center; padding: 0 24px; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-bar-row2::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 8px 18px; font-size: 14px; font-weight: 500; color: #86868b; background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; flex-shrink: 0; }
+  .tab-btn:hover { color: #1d1d1f; }
+  .tab-btn.active { color: #2E4057; border-bottom-color: #2E4057; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px 80px; padding-bottom: calc(80px + env(safe-area-inset-bottom, 0)); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== 行程日程 ===== */
+
+  /* Day navigation pills */
+.day-nav { display: flex; gap: 6px; margin-bottom: 16px; overflow-x: auto; padding: 8px 0; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 90; background: #f5f5f7; margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+.day-nav::-webkit-scrollbar { display: none; }
+.day-pill { padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #2E4057; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 1.3; }
+.day-pill .pill-date { font-size: 10px; font-weight: 400; color: #aaa; }
+.day-pill:hover { border-color: #2E4057; color: #2E4057; }
+.day-pill.active { background: #2E4057; color: #fff; border-color: #2E4057; }
+.day-pill.active .pill-date { color: rgba(255,255,255,.65); }
+
+  /* Day card */
+  .day-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; display: none; }
+.day-card.day-active { display: block; }
+#backup { display: none; }
+#backup.day-active { display: block; }
+  .day-header { padding: 20px 24px 14px; border-bottom: 1px solid #f0f0f2; }
+  .day-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .day-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .day-header-text h2 { font-size: 17px; font-weight: 700; color: #1d1d1f; }
+  .day-header-text .day-date { font-size: 12px; color: #86868b; margin-top: 1px; }
+  .day-meta { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
+  .day-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
+  .day-meta-item svg { flex-shrink: 0; }
+
+  /* Timeline */
+  .timeline { padding: 0 24px 20px; }
+  .tl-item { display: flex; gap: 16px; position: relative; padding: 16px 0; }
+  .tl-item:not(:last-child)::after { content:''; position: absolute; left: 15px; top: 48px; bottom: 0; width: 1.5px; background: #e8e8ea; }
+  .tl-dot-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; padding-top: 2px; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; flex-shrink: 0; }
+  .tl-content { flex: 1; min-width: 0; }
+.tl-time { font-size: 11px; color: #86868b; font-weight: 500; margin-bottom: 2px; letter-spacing: .3px; }
+.tl-time .tl-duration { color: #bbb; margin-left: 4px; font-weight: 400; }
+.tl-name { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 3px; }
+.tl-name-en { font-size: 12px; color: #aaa; font-weight: 400; margin-left: 4px; }
+  .tl-desc { font-size: 13px; color: #555; line-height: 1.6; margin-top: 4px; }
+  .tl-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 500; margin-top: 6px; margin-right: 4px; }
+  .tl-tip { font-size: 12px; color: #E65100; background: #FFF8E1; padding: 6px 10px; border-radius: 8px; margin-top: 8px; display: inline-block; }
+  .tl-optional { opacity: .6; }
+  .tl-img { margin-top: 10px; border-radius: 10px; overflow: hidden; }
+  .tl-img img { width: 100%; max-width: 480px; height: auto; display: block; border-radius: 10px; cursor: pointer; transition: transform .2s, opacity .4s ease; opacity: 1; }
+  .tl-img img:hover { transform: scale(1.02); }
+  .tl-img img[loading="lazy"] { opacity: 0; }
+  .tl-img img.loaded, .tl-img img[loading="lazy"].loaded { opacity: 1; }
+  .tl-img-row { display: flex; gap: 8px; margin-top: 10px; }
+  .tl-img-row img { flex: 1; min-width: 0; max-width: 240px; height: auto; border-radius: 10px; cursor: pointer; transition: transform .2s; }
+  .tl-img-row img:hover { transform: scale(1.02); }
+  .backup-card img { width: 100%; border-radius: 8px; margin-top: 8px; cursor: pointer; transition: opacity .4s ease; }
+  .backup-card img[loading="lazy"] { opacity: 0; }
+  .backup-card img.loaded { opacity: 1; }
+
+  /* Location info */
+  .tl-loc { display: flex; align-items: flex-start; gap: 4px; margin-top: 6px; font-size: 11px; color: #999; line-height: 1.4; }
+  .tl-loc svg { flex-shrink: 0; margin-top: 1px; }
+  .tl-loc a { color: #1565C0; text-decoration: none; }
+  .tl-loc a:hover { text-decoration: underline; }
+
+  /* Map tab */
+  #tab-map { padding: 0; }
+  #tab-map .container { padding: 0; max-width: 100%; }
+  .map-wrap { width: 100%; height: calc(100vh - 82px); position: relative; min-height: 500px; }
+  #mapContainer { width: 100%; height: 100%; min-height: 500px; background: #e8e8e8; }
+  .map-legend { position: absolute; bottom: 24px; left: 16px; z-index: 500; background: #fff; border-radius: 12px; padding: 12px 16px; box-shadow: 0 2px 12px rgba(0,0,0,.12); max-width: 200px; }
+  .map-legend h4 { font-size: 12px; font-weight: 600; color: #2E4057; margin-bottom: 6px; }
+  .map-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #555; margin-bottom: 3px; }
+  .map-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .map-day-filter { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 500; display: flex; gap: 4px; background: #fff; border-radius: 20px; padding: 4px; box-shadow: 0 2px 12px rgba(0,0,0,.12); flex-wrap: nowrap; overflow-x: auto; max-width: 90vw; }
+  .map-day-filter::-webkit-scrollbar { display: none; }
+  .map-filter-btn { padding: 5px 12px; font-size: 11px; font-weight: 500; border-radius: 16px; border: none; background: transparent; color: #666; cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .map-filter-btn:hover { background: #f0f0f0; }
+  .map-filter-btn.active { background: #2E4057; color: #fff; }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 300; align-items: center; justify-content: center; cursor: zoom-out; will-change: opacity; }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,.4); }
+  .tl-optional .tl-name::after { content: '可选'; font-size: 10px; background: #f0f0f0; color: #999; padding: 1px 6px; border-radius: 8px; margin-left: 6px; font-weight: 400; vertical-align: middle; }
+
+  /* Dot colors by type */
+  .dot-spot { border-color: #1565C0; background: #E3F2FD; }
+  .dot-food { border-color: #C62828; background: #FCE4EC; }
+  .dot-hotel { border-color: #2E7D32; background: #E8F5E9; }
+  .dot-transport { border-color: #E65100; background: #FFF3E0; }
+  .dot-activity { border-color: #6A1B9A; background: #F3E5F5; }
+
+  /* Tag colors */
+  .tag-spot { background: #E3F2FD; color: #1565C0; }
+  .tag-food { background: #FCE4EC; color: #C62828; }
+  .tag-hotel { background: #E8F5E9; color: #2E7D32; }
+  .tag-transport { background: #FFF3E0; color: #E65100; }
+  .tag-tips { background: #FFF8E1; color: #F57F17; }
+
+  /* Day badge colors */
+  .badge-1 { background: linear-gradient(135deg, #5C6BC0, #3949AB); }
+  .badge-2 { background: linear-gradient(135deg, #26A69A, #00897B); }
+  .badge-3 { background: linear-gradient(135deg, #EF5350, #E53935); }
+  .badge-4 { background: linear-gradient(135deg, #AB47BC, #8E24AA); }
+  .badge-5 { background: linear-gradient(135deg, #FFA726, #FB8C00); }
+  .badge-6 { background: linear-gradient(135deg, #66BB6A, #43A047); }
+  .badge-7 { background: linear-gradient(135deg, #42A5F5, #1E88E5); }
+  .badge-8 { background: linear-gradient(135deg, #78909C, #546E7A); }
+
+  /* Backup spots */
+  .backup-section { margin-top: 8px; }
+  .backup-title { font-size: 14px; font-weight: 600; color: #86868b; padding: 12px 0 8px; display: flex; align-items: center; gap: 6px; }
+  .backup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .backup-card { background: #fff; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); border-left: 3px solid #e0e0e0; contain: layout style; }
+  .backup-card h4 { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px; }
+  .backup-card p { font-size: 12px; color: #888; line-height: 1.5; }
+  .backup-card .bc-region { font-size: 11px; color: #aaa; margin-bottom: 4px; }
+
+  /* ===== 支出记录 ===== */
+  .expense-summary { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 140px; background: #fff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .summary-card .label { font-size: 12px; color: #86868b; margin-bottom: 4px; }
+  .summary-card .value { font-size: 24px; font-weight: 700; color: #2E4057; }
+
+  .expense-table-wrap { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); overflow: hidden; }
+  .expense-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; gap: 8px; }
+  .expense-toolbar .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-chip { padding: 5px 12px; font-size: 12px; border-radius: 16px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; transition: all .2s; }
+  .filter-chip:hover, .filter-chip.active { background: #2E4057; color: #fff; border-color: #2E4057; }
+  .btn-add { padding: 7px 16px; font-size: 13px; font-weight: 500; background: #2E4057; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; }
+  .btn-add:hover { background: #1a2a3a; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th { padding: 10px 12px; font-size: 12px; font-weight: 600; color: #86868b; text-align: left; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; }
+  thead th:last-child { text-align: center; }
+  tbody td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.empty-hint td { text-align: center; color: #ccc; padding: 32px; font-size: 13px; }
+
+  .cat-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  .cat-交通 { background: #FFF3E0; color: #E65100; }
+  .cat-住宿 { background: #E8F5E9; color: #2E7D32; }
+  .cat-餐饮 { background: #FCE4EC; color: #C62828; }
+  .cat-门票 { background: #E3F2FD; color: #1565C0; }
+  .cat-购物 { background: #F3E5F5; color: #6A1B9A; }
+  .cat-其他 { background: #F5F5F5; color: #616161; }
+
+  .amount { font-variant-numeric: tabular-nums; font-weight: 500; text-align: right; }
+  .actions { text-align: center; }
+  .btn-del { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; padding: 4px 8px; border-radius: 4px; transition: color .2s; }
+  .btn-del:hover { color: #e53935; }
+
+  /* ===== Modal ===== */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 200; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: #fff; border-radius: 16px; padding: 28px 24px; width: 420px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+  .modal h3 { font-size: 17px; font-weight: 700; color: #2E4057; margin-bottom: 20px; }
+  .modal .field { margin-bottom: 14px; }
+  .modal label { display: block; font-size: 12px; font-weight: 500; color: #86868b; margin-bottom: 4px; }
+  .modal input, .modal select { width: 100%; padding: 9px 12px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 8px; outline: none; transition: border .2s; }
+  .modal input:focus, .modal select:focus { border-color: #2E4057; }
+  .modal .row { display: flex; gap: 10px; }
+  .modal .row .field { flex: 1; }
+  .modal .btn-row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .modal .btn-cancel { padding: 9px 20px; font-size: 14px; background: #f5f5f5; border: none; border-radius: 8px; cursor: pointer; color: #666; }
+  .modal .btn-save { padding: 9px 20px; font-size: 14px; background: #2E4057; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+  .modal .btn-save:hover { background: #1a2a3a; }
+
+  /* ===== 出行清单 ===== */
+  .checklist-progress { background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); display: flex; align-items: center; gap: 16px; }
+  .progress-bar-wrap { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #43A047, #66BB6A); border-radius: 4px; transition: width .3s; }
+  .progress-text { font-size: 13px; color: #86868b; white-space: nowrap; }
+
+  .checklist-section { margin-bottom: 16px; }
+  .section-header { font-size: 13px; font-weight: 600; color: #2E4057; padding: 10px 16px 6px; }
+  .checklist-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); overflow: hidden; }
+  .checklist-item { display: flex; align-items: center; padding: 11px 16px; border-bottom: 1px solid #f5f5f5; gap: 12px; transition: background .15s; }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item:hover { background: #fafafa; }
+  .checklist-item.checked .item-name { text-decoration: line-through; color: #bbb; }
+  .checklist-item.checked .item-note { color: #ddd; }
+  .check-box { width: 22px; height: 22px; border: 2px solid #d0d0d0; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; }
+  .check-box:hover { border-color: #43A047; }
+  .checklist-item.checked .check-box { background: #43A047; border-color: #43A047; }
+  .check-box svg { display: none; }
+  .checklist-item.checked .check-box svg { display: block; }
+  .item-name { font-size: 14px; flex: 1; }
+  .item-note { font-size: 12px; color: #999; max-width: 200px; text-align: right; }
+  .item-del { background: none; border: none; color: #ddd; cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity .2s; }
+  .checklist-item:hover .item-del { opacity: 1; }
+  .item-del:hover { color: #e53935; }
+  .add-item-row { display: flex; gap: 8px; padding: 8px 16px; }
+  .add-item-row input { flex: 1; padding: 8px 12px; font-size: 13px; border: 1px dashed #ddd; border-radius: 8px; outline: none; }
+  .add-item-row input:focus { border-color: #2E4057; border-style: solid; }
+  .add-item-row button { padding: 8px 14px; font-size: 13px; background: #f5f5f5; border: none; border-radius: 8px; cursor: pointer; color: #666; }
+  .add-item-row button:hover { background: #2E4057; color: #fff; }
+
+  /* ===== 凭证管理 ===== */
+  .cert-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+  .cert-toolbar .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .cert-card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; transition: box-shadow .2s; }
+  .cert-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  .cert-card-head { display: flex; align-items: center; gap: 10px; padding: 16px 18px 12px; }
+  .cert-type-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .cert-type-flight { background: #E3F2FD; }
+  .cert-type-hotel { background: #E8F5E9; }
+  .cert-type-ticket { background: #FFF3E0; }
+  .cert-type-transport { background: #F3E5F5; }
+  .cert-type-insurance { background: #FFF8E1; }
+  .cert-type-other { background: #F5F5F5; }
+  .cert-card-title { font-size: 15px; font-weight: 600; color: #1d1d1f; }
+  .cert-card-subtitle { font-size: 12px; color: #999; margin-top: 1px; }
+  .cert-card-body { padding: 0 18px 14px; }
+  .cert-thumb { width: 100%; border-radius: 8px; cursor: pointer; transition: transform .2s; display: block; }
+  .cert-thumb:hover { transform: scale(1.01); }
+  .cert-thumb-grid { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cert-thumb-grid img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform .2s; border: 1px solid #f0f0f0; }
+  .cert-thumb-grid img:hover { transform: scale(1.05); }
+  .cert-no-file { color: #ccc; font-size: 13px; text-align: center; padding: 24px 0; border: 1px dashed #e0e0e0; border-radius: 8px; }
+  .cert-card-foot { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; border-top: 1px solid #f0f0f2; background: #fafafa; }
+  .cert-card-actions { display: flex; gap: 6px; }
+  .cert-btn-sm { font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; transition: all .15s; }
+  .cert-btn-sm:hover { border-color: #2E4057; color: #2E4057; }
+  .cert-btn-sm.danger:hover { border-color: #e53935; color: #e53935; }
+  .cert-type-tag { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 8px; }
+  .cert-empty { text-align: center; color: #ccc; padding: 60px 0; font-size: 14px; }
+  .cert-detail-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 200; align-items: center; justify-content: center; flex-direction: column; }
+  .cert-detail-overlay.show { display: flex; }
+  .cert-detail-top { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 900px; padding: 16px 20px; }
+  .cert-detail-title { font-size: 16px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .cert-detail-close { font-size: 28px; color: rgba(255,255,255,.7); cursor: pointer; background: none; border: none; line-height: 1; }
+  .cert-detail-close:hover { color: #fff; }
+  .cert-detail-imgs { flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 0 20px 40px; width: 100%; max-width: 900px; }
+  .cert-detail-imgs img { max-width: 100%; max-height: 80vh; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+  .cert-detail-nofile { color: rgba(255,255,255,.5); font-size: 15px; padding: 80px 0; }
+
+  /* 凭证超链接（行程内） */
+  .tl-cert-link { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #1565C0; text-decoration: none; background: #E3F2FD; padding: 2px 8px; border-radius: 8px; margin-top: 6px; margin-right: 4px; cursor: pointer; transition: background .15s; }
+  .tl-cert-link:hover { background: #BBDEFB; }
+  .tl-cert-link svg { flex-shrink: 0; }
+
+  /* ===== Responsive — Mobile ===== */
+  @media (max-width: 640px) {
+    /* --- Tab Navigation: 双行 + 横向可滚动 --- */
+    .tab-bar-row1 { padding: 8px 12px 4px; }
+    .tab-title { font-size: 15px; }
+    .tab-title span { display: none; }
+    .tab-bar-info { gap: 8px; font-size: 11px; }
+    .tab-bar-info .info-divider { height: 12px; }
+    .tab-bar-row2 { padding: 0 12px; }
+    .tab-btn { padding: 7px 11px; font-size: 13px; }
+
+    /* --- Container --- */
+    .container { padding: 14px 10px 80px; }
+
+    /* --- Day nav 吸顶适配 --- */
+    .day-nav { margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; }
+
+    /* --- Day 卡片 --- */
+    .day-header { padding: 14px 14px 10px; }
+    .day-header-text h2 { font-size: 16px; }
+    .day-badge { width: 38px; height: 38px; font-size: 12px; }
+    .timeline { padding: 0 14px 14px; }
+    .tl-item { gap: 12px; }
+    .tl-name { font-size: 14px; }
+    .tl-desc { font-size: 12.5px; }
+    .tl-img img { max-width: 100%; border-radius: 8px; }
+    .tl-img img:hover { transform: none; }
+    .tl-img-row { flex-direction: column; }
+    .tl-img-row img { max-width: 100%; }
+
+    /* --- 乘机人信息溢出 --- */
+    .passenger-info, [style*="background:#F8F9FA"] { font-size: 12px; word-break: break-all; }
+
+    /* --- 备选景点 --- */
+    .backup-grid { grid-template-columns: 1fr; }
+    .backup-card img:hover { transform: none; }
+
+    /* --- 支出记录表格: 横向可滚动 --- */
+    .expense-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .expense-table-wrap table { min-width: 600px; }
+    .summary-card { min-width: 0; padding: 12px 14px; }
+    .summary-card .value { font-size: 20px; }
+
+    /* --- 弹窗 --- */
+    .modal { padding: 20px 16px; width: 100%; max-width: 92vw; }
+    .modal .row { flex-direction: column; gap: 0; }
+
+    /* --- 出行清单 --- */
+    .item-note { max-width: 100px; font-size: 11px; }
+    .item-del { opacity: 1; }  /* 手机上没有 hover，始终显示删除按钮 */
+    .checklist-item { padding: 10px 12px; gap: 10px; }
+    .check-box { width: 20px; height: 20px; }
+    .item-name { font-size: 13px; }
+    .add-item-row { padding: 8px 12px; }
+
+    /* --- 凭证 --- */
+    .cert-grid { grid-template-columns: 1fr; }
+    .cert-card-head { padding: 14px 14px 10px; }
+    .cert-card-body { padding: 0 14px 12px; }
+    .cert-card-foot { padding: 8px 14px; }
+    .cert-detail-top { padding: 12px 16px; }
+    .cert-detail-imgs { padding: 0 12px 30px; }
+
+    /* --- 地图 --- */
+    .map-wrap { height: calc(100vh - 72px); min-height: 400px; }
+    .map-legend { bottom: 12px; left: 8px; padding: 8px 12px; max-width: 160px; font-size: 10px; }
+    .map-legend h4 { font-size: 11px; }
+    .map-day-filter { max-width: 95vw; top: 8px; padding: 3px; }
+    .map-filter-btn { padding: 4px 10px; font-size: 10px; }
+
+    /* --- Lightbox --- */
+    .lightbox img { max-width: 96vw; max-height: 88vh; border-radius: 4px; }
+
+    /* --- 全局触摸优化 --- */
+    .tab-btn, .day-pill, .filter-chip, .btn-add, .btn-del, .cert-btn-sm, .check-box,
+    .map-filter-btn, .tl-cert-link, .add-item-row button, .modal .btn-cancel, .modal .btn-save {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* 禁用手机上无意义的 hover 效果 */
+    .cert-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    .cert-thumb:hover { transform: none; }
+    .cert-thumb-grid img:hover { transform: none; }
+    tbody tr:hover { background: transparent; }
+    .checklist-item:hover { background: transparent; }
+    .btn-del:hover { color: #ccc; }
+  }
+
+  /* ===== 避雷指南 ===== */
+  .tips-hero { background: linear-gradient(135deg, #FF6B35, #F7C948); border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; color: #fff; position: relative; overflow: hidden; }
+  .tips-hero::after { content: '⚡'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: .15; }
+  .tips-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .tips-hero p { font-size: 13px; opacity: .9; line-height: 1.6; }
+
+  .tips-nav { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .tips-nav::-webkit-scrollbar { display: none; }
+  .tips-nav-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 20px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; }
+  .tips-nav-btn:hover { border-color: #FF6B35; color: #FF6B35; }
+  .tips-nav-btn.active { background: #FF6B35; color: #fff; border-color: #FF6B35; }
+
+  .tips-section { margin-bottom: 24px; scroll-margin-top: 80px; }
+  .tips-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .tips-section-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .tips-section-title { font-size: 17px; font-weight: 700; color: #2E4057; }
+
+  .tip-card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 12px; overflow: hidden; border-left: 4px solid transparent; }
+  .tip-card.danger { border-left-color: #E53935; }
+  .tip-card.warning { border-left-color: #FF9800; }
+  .tip-card.info { border-left-color: #1976D2; }
+  .tip-card.good { border-left-color: #43A047; }
+
+  .tip-card-inner { padding: 16px 18px; }
+  .tip-title { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .tip-level { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .level-danger { background: #FFEBEE; color: #C62828; }
+  .level-warning { background: #FFF3E0; color: #E65100; }
+  .level-info { background: #E3F2FD; color: #1565C0; }
+  .level-good { background: #E8F5E9; color: #2E7D32; }
+  .tip-body { font-size: 13px; color: #555; line-height: 1.7; }
+  .tip-body strong { color: #1d1d1f; font-weight: 600; }
+  .tip-compare { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .tip-compare-item { flex: 1; min-width: 140px; padding: 10px 14px; border-radius: 10px; font-size: 12px; line-height: 1.5; }
+  .tip-cn { background: #FFF8E1; border: 1px solid #FFE082; }
+  .tip-ge { background: #E8F5E9; border: 1px solid #A5D6A7; }
+  .tip-compare-label { font-size: 11px; font-weight: 600; margin-bottom: 4px; display: block; }
+  .tip-cn .tip-compare-label { color: #F57F17; }
+  .tip-ge .tip-compare-label { color: #2E7D32; }
+
+  .tips-quick-ref { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; margin-bottom: 24px; }
+  .tips-quick-ref h3 { font-size: 15px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #E53935, #C62828); padding: 14px 18px; }
+  .tips-quick-table { width: 100%; border-collapse: collapse; }
+  .tips-quick-table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #f5f5f5; vertical-align: top; }
+  .tips-quick-table tr:last-child td { border-bottom: none; }
+  .tips-quick-table td:first-child { font-weight: 600; color: #C62828; white-space: nowrap; width: 120px; }
+  .tips-quick-table td:last-child { color: #43A047; }
+
+  @media (max-width: 640px) {
+    .tips-hero { padding: 20px 16px; }
+    .tips-hero h2 { font-size: 18px; }
+    .tips-hero::after { font-size: 48px; right: 12px; }
+    .tips-nav-btn { padding: 7px 14px; font-size: 12px; }
+    .tip-card-inner { padding: 14px 14px; }
+    .tip-compare { flex-direction: column; }
+    .tips-quick-table td:first-child { width: auto; }
+    .tips-quick-ref { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  }
+
+  /* ===== 极窄屏幕适配 (≤360px) ===== */
+  @media (max-width: 360px) {
+    .tab-title { font-size: 14px; margin-right: 8px; }
+    .tab-btn { padding: 10px 10px; font-size: 12px; }
+    
+    .day-header-text h2 { font-size: 15px; }
+    .tl-name { font-size: 13px; }
+    .tl-desc { font-size: 12px; }
+    .summary-card .value { font-size: 18px; }
+  }
+
+  /* ===== 历史文化 ===== */
+  .hist-hero { background: linear-gradient(135deg, #6A4C93, #2E4057); border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; color: #fff; position: relative; overflow: hidden; }
+  .hist-hero::after { content: '🏛️'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: .15; }
+  .hist-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .hist-hero p { font-size: 13px; opacity: .9; line-height: 1.6; max-width: 90%; }
+  .hist-hero .hist-source { font-size: 11px; opacity: .7; margin-top: 10px; }
+
+  .hist-nav { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .hist-nav::-webkit-scrollbar { display: none; }
+  .hist-nav-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 20px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; }
+  .hist-nav-btn:hover { border-color: #6A4C93; color: #6A4C93; }
+  .hist-nav-btn.active { background: #6A4C93; color: #fff; border-color: #6A4C93; }
+
+  /* 时间线（国家简史） */
+  .hist-timeline-wrap { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 20px 20px 6px; margin-bottom: 24px; }
+  .hist-timeline-wrap h3 { font-size: 15px; font-weight: 700; color: #2E4057; margin-bottom: 16px; }
+  .hist-era { display: flex; gap: 14px; padding-bottom: 18px; position: relative; }
+  .hist-era:not(:last-child)::after { content: ''; position: absolute; left: 5px; top: 22px; bottom: 0; width: 1.5px; background: #ece6f5; }
+  .hist-era-dot { width: 11px; height: 11px; border-radius: 50%; background: #6A4C93; flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 3px #ece6f5; }
+  .hist-era-body .hist-era-time { font-size: 11px; font-weight: 700; color: #6A4C93; text-transform: uppercase; letter-spacing: .3px; }
+  .hist-era-body .hist-era-title { font-size: 14px; font-weight: 600; color: #1d1d1f; margin: 2px 0 4px; }
+  .hist-era-body .hist-era-desc { font-size: 12.5px; color: #666; line-height: 1.65; }
+
+  /* 章节 */
+  .hist-section { margin-bottom: 26px; scroll-margin-top: 80px; }
+  .hist-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .hist-section-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .hist-section-title { font-size: 17px; font-weight: 700; color: #2E4057; }
+  .hist-section-sub { font-size: 12px; color: #999; margin-top: 1px; }
+
+  /* 景点/城市卡片 */
+  .hist-card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 14px; overflow: hidden; }
+  .hist-card-inner { padding: 16px 18px; }
+  .hist-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .hist-card-title { font-size: 15px; font-weight: 700; color: #1d1d1f; }
+  .hist-card-title .en { font-size: 11.5px; color: #aaa; font-weight: 400; margin-left: 6px; }
+  .hist-card-badge { font-size: 10.5px; font-weight: 600; padding: 2px 9px; border-radius: 10px; background: #F3E8FF; color: #6A4C93; white-space: nowrap; }
+  .hist-card-body { font-size: 13px; color: #555; line-height: 1.75; }
+  .hist-card-body strong { color: #1d1d1f; font-weight: 600; }
+  .hist-card-body + .hist-card-body { margin-top: 8px; }
+  .hist-tag-row { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .hist-tag { font-size: 10.5px; font-weight: 500; padding: 2px 9px; border-radius: 10px; background: #F5F5F7; color: #777; }
+  .hist-fact { margin-top: 10px; font-size: 12px; color: #8E5C00; background: #FFF8E1; padding: 8px 12px; border-radius: 8px; line-height: 1.6; }
+  .hist-fact b { color: #E65100; }
+
+  /* 关联行程标记 */
+  .hist-itin-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #2E7D32; background: #E8F5E9; padding: 2px 9px; border-radius: 10px; margin-top: 10px; }
+
+  @media (max-width: 640px) {
+    .hist-hero { padding: 20px 16px; }
+    .hist-hero h2 { font-size: 18px; }
+    .hist-hero p { max-width: 100%; }
+    .hist-hero::after { font-size: 48px; right: 12px; }
+    .hist-nav-btn { padding: 7px 14px; font-size: 12px; }
+    .hist-card-inner { padding: 14px 14px; }
+    .hist-timeline-wrap { padding: 16px 16px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <div class="tab-bar-row1">
+    <div class="tab-title">🇬🇪 格鲁吉亚<span>馒头 & 刺猬</span></div>
+    <div class="tab-bar-info" id="headerInfo">
+      <div class="info-item" id="weatherInfo"><span class="info-icon">☀️</span><span class="info-value">--°C</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="rateInfo1"><span class="info-label">1₾≈</span><span class="info-value">--</span><span>¥</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="rateInfo2"><span class="info-label">1₾≈</span><span class="info-value">--</span><span>$</span></div>
+      <button class="rate-swap-btn" id="rateSwapBtn" onclick="toggleRateDirection()" title="切换汇率方向"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></button>
+    </div>
+  </div>
+  <div class="tab-bar-row2">
+    <button class="tab-btn active" onclick="switchTab('itinerary')">旅行日程</button>
+    <button class="tab-btn" onclick="switchTab('map')">地图模式</button>
+    <button class="tab-btn" onclick="switchTab('certs')">凭证</button>
+    <button class="tab-btn" onclick="switchTab('expense')">支出记录</button>
+    <button class="tab-btn" onclick="switchTab('checklist')">出行清单</button>
+    <button class="tab-btn" onclick="switchTab('history')">🏛️ 历史文化</button>
+    <button class="tab-btn" onclick="switchTab('tips')">⚡ 避雷指南</button>
+  </div>
+</div>
+
+<!-- ===== 旅行日程 ===== -->
+<div id="tab-itinerary" class="tab-content active">
+<div class="container">
+
+  <!-- Day nav pills -->
+  <div class="day-nav">
+    <span class="day-pill active" onclick="scrollToDay('day1')">Day 1 第比利斯<span class="pill-date">7.29 周三</span></span>
+    <span class="day-pill" onclick="scrollToDay('day2')">Day 2 巴统<span class="pill-date">7.30 周四</span></span>
+    <span class="day-pill" onclick="scrollToDay('day3')">Day 3 第比利斯<span class="pill-date">7.31 周五</span></span>
+    <span class="day-pill" onclick="scrollToDay('day4')">Day 4 西格纳吉<span class="pill-date">8.1 周六</span></span>
+    <span class="day-pill" onclick="scrollToDay('day5')">Day 5 泰拉维<span class="pill-date">8.2 周日</span></span>
+    <span class="day-pill" onclick="scrollToDay('day6')">Day 6 卡兹别克<span class="pill-date">8.3 周一</span></span>
+    <span class="day-pill" onclick="scrollToDay('day7')">Day 7 第比利斯<span class="pill-date">8.4 周二</span></span>
+    <span class="day-pill" onclick="scrollToDay('day8')">Day 8 返程<span class="pill-date">8.5 周三</span></span>
+    <span class="day-pill" onclick="scrollToDay('backup')">备选景点</span>
+  </div>
+
+  <!-- ========== Day 1 ========== -->
+  <div class="day-card" id="day1">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-1">D1</div>
+        <div class="day-header-text">
+          <h2>上海 → 第比利斯</h2>
+          <div class="day-date">7月29日 周三 · 到达日</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M22 2L2 10l7 3 3 7z"/></svg>
+          东航 MU285 · 12:50–19:00
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          入住第比利斯酒店
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:50 <span class="tl-duration">· 10h10m</span></div>
+          <div class="tl-name">上海浦东 → 第比利斯</div>
+          <div class="tl-desc">东航 MU285 直飞，12:50 起飞，当地时间 19:00 到达（飞行约 10h10m）。机型空客 A332(宽)，含热正餐、免费上网。格鲁吉亚比北京时间晚 4 小时。</div>
+          <span class="tl-tag tag-transport">免费托运 1件 ≤23kg</span>
+          <span class="tl-tag tag-transport">随身 1件 ≤8kg</span>
+          <div style="margin-top:10px;padding:10px 14px;background:#f8f9fa;border-radius:10px;font-size:13px;line-height:1.8">
+            <div style="font-weight:600;color:#2E4057;margin-bottom:4px">乘机人信息</div>
+            <div>👤 馒头 · LIU/MING · 座位 38C · 订单号 <span style="font-family:monospace;font-size:12px;color:#666">7860260701518818​14</span> <a class="tl-cert-link" onclick="gotoCert('cert_1')" style="margin-left:2px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>凭证</a></div>
+            <div>👤 刺猬 · ZHOU/ZIWEI · 座位 38A · 订单号 <span style="font-family:monospace;font-size:12px;color:#666">7860260701518828​78</span> <a class="tl-cert-link" onclick="gotoCert('cert_2')" style="margin-left:2px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>凭证</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">出关入境</div>
+<div class="tl-desc">持中国普通护照可免签入境，单次停留不超过30天，每180天累计停留不超过90天。白本护照也没问题，直接盖章入境。建议备好护照（有效期6个月以上）、往返机票行程单、酒店预订单的电子版或复印件，以备不时之需。</div>
+          <span class="tl-tag tag-tips">免签入境 · 白本友好</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">20:00 <span class="tl-duration">· 15min</span></div>
+          <div class="tl-name">换汇</div>
+          <div class="tl-desc">到达机场后先换 1000 美元的拉里，够前几天用。推荐机场出口处的 InteliExpress 换汇点，免手续费（No Commission），汇率在机场里算不错的。</div>
+          <div style="margin-top:10px;border-radius:10px;overflow:hidden">
+            <img src="images/exchange_inteliexpress.jpg" alt="InteliExpress 换汇点" style="width:100%;display:block;border-radius:10px">
+          </div>
+          <span class="tl-tag tag-tips">InteliExpress · 免手续费</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">20:15 <span class="tl-duration">· 15min</span></div>
+          <div class="tl-name">购买电话卡</div>
+          <div class="tl-desc">在机场到达大厅的运营商柜台购买本地 SIM 卡，推荐 Magti 或 Geocell，约 20-30 拉里可买到含流量的套餐，方便导航和联络。</div>
+          <span class="tl-tag tag-tips">推荐 Magti / Geocell</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">21:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店<span class="tl-name-en">Ibis Tbilisi Airport</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Airport St, Isani-Samgori, Tbilisi 0158 · <a href="https://www.google.com/maps?q=Ibis+Tbilisi+Airport" target="_blank">地图</a> · 📞 00995-322102424</span></div>
+          <div class="tl-desc">宜必思机场店，到达后直接入住休息。标准双床房（2张单人床），1成人+1儿童。15:00后入住，次日12:00前退房。</div>
+          <div style="margin-top:6px;font-size:12px;color:#999">携程预订 · 订单号 1128149056255984 · ¥501 + 住宿税≈¥95 · 7.26 15:00前免费取消 · <a href="vouchers/Ibis_Airport_Voucher.pdf" target="_blank" style="color:#5C6BC0">入住凭证 PDF</a></div>
+          <span class="tl-tag tag-hotel">住宿：Ibis Tbilisi Airport · 已预订</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 2 ========== -->
+  <div class="day-card" id="day2">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-2">D2</div>
+        <div class="day-header-text">
+          <h2>第比利斯 → 巴统</h2>
+          <div class="day-date">7月30日 周四 · 黑海明珠</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          Georgian Airways A9505
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住巴统 Rooms
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">07:30 <span class="tl-duration">· 20min</span></div>
+          <div class="tl-name">退房 · 步行前往机场</div>
+          <div class="tl-desc">最晚 7:30 退房（Ibis 12:00 前退房，提前走即可），酒店紧邻机场，步行约 5 分钟到达航站楼。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:00 <span class="tl-duration">· 45min</span></div>
+          <div class="tl-name">第比利斯 → 巴统<span class="tl-name-en">Georgian Airways A9505</span></div>
+          <div class="tl-desc">09:00 起飞，09:45 落地巴统机场。乘客：LIU/MING、ZHOU/ZIWEI。经济舱，已预选座位（坐在一起）。航空公司值机参考：013LT7。</div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Batumi International Airport (BUS) · <a href="https://www.google.com/maps/search/Batumi+International+Airport" target="_blank">地图</a></span></div>
+          <div style="margin-top:6px;padding:8px 12px;background:#F1F8E9;border-radius:8px;border-left:3px solid #7CB342;font-size:12px;color:#33691E;line-height:1.6">
+            MING LIU：托运行李 1件23kg + 手提行李 8kg（55×40×20cm）· 电子机票号 606-2906403274<br>
+            ZIWEI ZHOU：托运行李 1件23kg + 手提行李 8kg（55×40×20cm）· 电子机票号 606-2906403273
+          </div>
+          <div style="margin-top:6px;font-size:12px;color:#999">Gotogate 预订 · 订单编号 1136-248-649 · ¥1,457.43（$214.63）· <a href="vouchers/Tbilisi_Batumi_Flight_A9505.pdf" target="_blank" style="color:#5C6BC0">机票凭证 PDF</a></div>
+          <span class="tl-tag tag-transport">已出票 · 经济舱</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:15 <span class="tl-duration">· 15min</span></div>
+          <div class="tl-name">打车前往酒店<span class="tl-name-en">Taxi → Rooms Hotel</span></div>
+          <div class="tl-desc">出机场后打车前往 Rooms Hotel Batumi，机场距酒店约 6 公里，车程约 10–15 分钟。可用 Bolt 叫车，费用约 10–15 GEL。</div>
+          <span class="tl-tag tag-transport">机场 → 酒店 · 约 6km · 10-15₾</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:30 <span class="tl-duration">· 15min</span></div>
+          <div class="tl-name">酒店寄存行李<span class="tl-name-en">Rooms Hotel Batumi</span></div>
+          <div class="tl-desc">酒店 15:00 才能正式入住，先在前台寄存行李，轻装出发逛巴统。</div>
+          <span class="tl-tag tag-hotel">寄存行李 · 15:00 后正式入住</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:45 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">阿里和尼诺<span class="tl-name-en">Ali &amp; Nino</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Batumi Boulevard · <a href="https://www.google.com/maps/search/Batumi+Boulevard" target="_blank">地图</a></span></div>
+          <div class="tl-desc">巴统海滨标志性的移动雕塑，两个人像不断靠近、融合、穿过彼此又分离，象征爱情与战争。</div>
+          <div class="tl-img"><img src="images/image16.png" alt="阿里和尼诺" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">11:25 <span class="tl-duration">· 40min</span></div>
+          <div class="tl-name">巴统圣母主教座堂<span class="tl-name-en">Church of Mother of God</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>53 Gamsakhurdia St, Batumi · <a href="https://www.google.com/maps/search/Batumi+Cathedral+of+the+Mother+of+God" target="_blank">地图</a></span></div>
+          <div class="tl-desc">巴统的标志性教堂。</div>
+          <div class="tl-img"><img src="images/image17.png" alt="巴统圣母主教座堂" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">14:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">阿尔戈号缆车<span class="tl-name-en">Argo Cable Car</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>2 Gogebashvili St, Batumi · <a href="https://www.google.com/maps/search/Argo+Cable+Car+Batumi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">以伊阿宋前往科尔基斯夺取金羊毛所乘的船命名，长 2.6 公里，通往城市上方的阿努里亚山（Anuria Hill），可将黑海与城市风光一览无余，夜景尤其美丽。</div>
+          <span class="tl-tag tag-tips">往返 15 拉里 · 码头附近乘坐</span>
+          <div class="tl-img"><img src="images/image18.png" alt="阿尔戈号缆车" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">16:00 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">全球最美麦当劳</div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Batumi Boulevard · <a href="https://www.google.com/maps/search/McDonalds+Batumi+Boulevard" target="_blank">地图</a></span></div>
+          <div class="tl-desc">巴统的网红打卡点，建筑造型独特。</div>
+          <div class="tl-img"><img src="images/image19.png" alt="全球最美麦当劳" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">17:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">正式入住酒店<span class="tl-name-en">Rooms Hotel Batumi</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Gogebashvili Street 10, 6010 巴统 · <a href="https://www.google.com/maps/search/Rooms+Hotel+Batumi" target="_blank">地图</a> · 📞 +995 32 202 00 20</span></div>
+          <div class="tl-desc">双层小屋（Bunk Cabin），2张单人床，2位成人，含早餐（自助/单点混合）。15:00后入住，次日12:00前退房。免费WiFi，私人浴室。</div>
+          <div style="margin-top:6px;font-size:12px;color:#999">Booking.com 预订 · 确认号 6195148729 · GEL 343.05（¥22,533 含税，Booking.com 补贴 GEL 24.95）· 7.26 23:59前免费取消 · <a href="vouchers/Rooms_Hotel_Batumi_Voucher.pdf" target="_blank" style="color:#5C6BC0">入住凭证 PDF</a></div>
+          <span class="tl-tag tag-hotel">住宿：Rooms Hotel Batumi · 已预订</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 3 ========== -->
+  <div class="day-card" id="day3">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-3">D3</div>
+        <div class="day-header-text">
+          <h2>巴统 → 第比利斯</h2>
+          <div class="day-date">7月31日 周五 · 返回首都</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          火车返回第比利斯
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住第比利斯
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">上午 <span class="tl-duration">· 自由活动</span></div>
+          <div class="tl-name">巴统自由活动</div>
+          <div class="tl-desc">上午可以在巴统海边散步、逛逛老城，或者去 Ali and Nino 雕塑前打卡。中午退房后前往巴统火车站。</div>
+          <span class="tl-tag tag-tips">记得提前退房取行李</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">16:50 <span class="tl-duration">· 4h59min</span></div>
+          <div class="tl-name">巴统 → 第比利斯<span class="tl-name-en">GR #801 · Stadler</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>巴统火车站 → 第比利斯中央火车站 · <a href="https://www.google.com/maps/search/Batumi+Railway+Station" target="_blank">巴统站地图</a> · <a href="https://www.google.com/maps/search/Tbilisi+Central+Railway+Station" target="_blank">第比利斯站地图</a></span></div>
+          <div class="tl-desc">格鲁吉亚铁路 GR #801 次列车（Stadler 车型），16:50 从巴统火车站出发，21:49 抵达第比利斯中央火车站，车程 4 小时 59 分钟。车上有 WiFi、充电口、餐饮服务和卫生间，沿途可欣赏格鲁吉亚乡村风光。建议选靠窗座位。</div>
+          <span class="tl-tag tag-transport">GR #801 · 16:50 出发 → 21:49 到达</span>
+          <div class="tl-tip">⚠️ 车票尚未购买，预计本周六（7月12日）开放购票，届时记得及时抢票！</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">22:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店</div>
+          <span class="tl-tag tag-hotel">住宿：第比利斯（待确认）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 4 ========== -->
+  <div class="day-card" id="day4">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-4">D4</div>
+        <div class="day-header-text">
+          <h2>第比利斯 → 西格纳吉</h2>
+          <div class="day-date">8月1日 周六 · 租车 · 红酒小镇</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          租车自驾
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住西格纳吉
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:00 <span class="tl-duration">· 2h</span></div>
+          <div class="tl-name">前往西格纳吉</div>
+          <div class="tl-desc">从第比利斯 Samgori 地铁站附近乘坐发往西格纳吉的小巴，每 2 小时一班，车程近 2 小时，车费 10 拉里。自驾更灵活。</div>
+          <span class="tl-tag tag-transport">小巴：Samgori 出发 · 每 2h 一班 · 10₾</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">11:30 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">古城墙<span class="tl-name-en">Sighnaghi City Wall</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Sighnaghi Fortress, Kakheti · <a href="https://www.google.com/maps/search/Sighnaghi+Fortress" target="_blank">地图</a></span></div>
+          <div class="tl-desc">完工于 18 世纪伊拉克略二世在位期间，总长 4 公里，镶嵌着 23 座塔楼。城墙内有圣乔治教堂（Saint George Church），钟楼主宰小镇天际线。黄昏是漫步城墙的最佳时间——近处是错落有致的红瓦民居，远处是连绵的高加索山脉，夕阳下彷如油画。</div>
+          <span class="tl-tag tag-tips">推荐黄昏时分登城墙</span>
+          <div class="tl-img"><img src="images/image20.png" alt="西格纳吉城墙" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">13:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">圣尼诺修道院<span class="tl-name-en">Monastery of St. Nino</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Bodbe Monastery, Sighnaghi · <a href="https://www.google.com/maps/search/Bodbe+Monastery+Sighnaghi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">格鲁吉亚基督教化的圣地。</div>
+          <div class="tl-img"><img src="images/image21.png" alt="圣尼诺修道院" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">15:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">Pheasant's Tears 餐厅</div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>18 Baratashvili St, Sighnaghi · <a href="https://www.google.com/maps/search/Pheasant's+Tears+Sighnaghi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">西格纳吉最受欢迎的餐厅之一，以自然酒和格鲁吉亚传统菜闻名。</div>
+          <span class="tl-tag tag-food">推荐餐厅</span>
+          <div class="tl-img"><img src="images/image22.png" alt="Pheasant's Tears" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">17:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店</div>
+          <span class="tl-tag tag-hotel">住宿：西格纳吉（待确认）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 5 ========== -->
+  <div class="day-card" id="day5">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-5">D5</div>
+        <div class="day-header-text">
+          <h2>西格纳吉 → 泰拉维</h2>
+          <div class="day-date">8月2日 周日 · 酒庄之旅</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          自驾 / 小巴 9:00 发车
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住泰拉维 AGARANI Estate
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">前往泰拉维</div>
+          <div class="tl-desc">西格纳吉与泰拉维之间小巴一天仅一班，西格纳吉发车时间 9:00，泰拉维发车时间 15:00。自驾更灵活。</div>
+          <span class="tl-tag tag-transport">小巴：西格纳吉 9:00 发车</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">泰拉维古堡<span class="tl-name-en">Batonistsikhe Castle</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Batonistsikhe, Telavi, Kakheti · <a href="https://www.google.com/maps/search/Batonis+Tsikhe+Telavi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">泰拉维是卡赫季的首府，镇上的古堡曾是卡赫季国王的住处。附近的卡赫季葡萄酒协会（Kakheti Wine Guild）可组织酒庄团队游，也可包车自行探索。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">Shumi Estate</div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Tsinandali, Telavi, Kakheti · <a href="https://www.google.com/maps/search/Tsinandali+Estate" target="_blank">地图</a></span></div>
+          <div class="tl-desc">泰拉维附近的知名酒庄，品酒 + 参观。</div>
+          <span class="tl-tag tag-spot">酒庄</span>
+          <div class="tl-img"><img src="images/image9.png" alt="Shumi Estate" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">14:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">查夫查瓦泽故居博物馆<span class="tl-name-en">House Museum of Alexander Chavchavadze</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Tsinandali Estate, Telavi · <a href="https://www.google.com/maps/search/Tsinandali+Estate" target="_blank">地图</a></span></div>
+          <div class="tl-desc">格鲁吉亚浪漫主义诗人的故居。</div>
+          <div class="tl-img"><img src="images/image10.png" alt="查夫查瓦泽故居博物馆" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">15:30 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店</div>
+          <div class="tl-desc">备选住宿：Qvevrebi 陶罐酒店。</div>
+          <span class="tl-tag tag-hotel">住宿：AGARANI Estate</span>
+          <div class="tl-img"><img src="images/image8.png" alt="泰拉维酒店" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 6 ========== -->
+  <div class="day-card" id="day6">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-6">D6</div>
+        <div class="day-header-text">
+          <h2>泰拉维 → 卡兹别克</h2>
+          <div class="day-date">8月3日 周一 · 高加索山脉</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          租车自驾
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住 Rooms Kazbegi
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">08:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">阿拉韦尔迪主教座堂<span class="tl-name-en">Alaverdi Cathedral</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Alaverdi Monastery, Akhmeta · <a href="https://www.google.com/maps/search/Alaverdi+Monastery+Georgia" target="_blank">地图</a></span></div>
+          <div class="tl-desc">卡赫季地区最重要的中世纪教堂之一，离开泰拉维后顺路参观。</div>
+          <div class="tl-img"><img src="images/image12.png" alt="阿拉韦尔迪主教座堂" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">阿娜努日要塞<span class="tl-name-en">Ananuri Fortress</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Ananuri, Dusheti Municipality · <a href="https://www.google.com/maps/search/Ananuri+Fortress" target="_blank">地图</a></span></div>
+          <div class="tl-desc">旧版《孤独星球》外高加索篇的封面，2007 年被联合国教科文组织列入世界文化遗产。</div>
+          <span class="tl-tag tag-spot">世界文化遗产</span>
+          <div class="tl-img"><img src="images/image5.png" alt="阿娜努日要塞" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">16:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店</div>
+          <span class="tl-tag tag-hotel">住宿：Rooms Kazbegi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 7 ========== -->
+  <div class="day-card" id="day7">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-7">D7</div>
+        <div class="day-header-text">
+          <h2>卡兹别克 → 第比利斯</h2>
+          <div class="day-date">8月4日 周二 · 经典一日</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          租车自驾
+        </div>
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          住第比利斯
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">07:00 <span class="tl-duration">· 3h</span></div>
+          <div class="tl-name">卡兹别克圣三一教堂<span class="tl-name-en">Gergeti Trinity Church</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Gergeti, Stepantsminda, Kazbegi · <a href="https://www.google.com/maps/search/Gergeti+Trinity+Church" target="_blank">地图</a></span></div>
+          <div class="tl-desc">海拔 2170 米山顶的中世纪教堂，背靠卡兹别克雪山，格鲁吉亚最具标志性的风景之一。</div>
+          <div class="tl-img"><img src="images/image6.png" alt="卡兹别克圣三一教堂" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item tl-optional">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">11:30 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">俄格友谊纪念碑</div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Georgian Military Highway, Gudauri · <a href="https://www.google.com/maps/search/Gudauri+Friendship+Monument" target="_blank">地图</a></span></div>
+          <div class="tl-desc">时间不够可略过。</div>
+          <div class="tl-img"><img src="images/image7.png" alt="俄格友谊纪念碑" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">14:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">巨石阵<span class="tl-name-en">Chronicles of Georgia</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Tbilisi Sea area, Tbilisi · <a href="https://www.google.com/maps/search/Chronicles+of+Georgia+Tbilisi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">纪念碑背后的山下是第比利斯海，一片人造湖泊。先坐地铁到 Grmagele 站下，再换 60 路小巴即可到达。</div>
+          <span class="tl-tag tag-transport">地铁 Grmagele 站 → 换 60 路小巴</span>
+          <div class="tl-img"><img src="images/image4.png" alt="巨石阵" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">17:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">里克公园 + 缆车<span class="tl-name-en">Rike Park</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Rike Park, Tbilisi · <a href="https://www.google.com/maps/search/Rike+Park+Tbilisi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">黄昏到里克公园，坐缆车上山看格鲁吉亚母亲雕像（Mother Georgia）——一尊一手持剑、一手端葡萄酒的雕像，高 20 米，苏联时期作品。</div>
+          <span class="tl-tag tag-tips">缆车攻略待确认</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:00 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">钟楼<span class="tl-name-en">Clock Tower</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>13 Shavteli St, Tbilisi 0105 · <a href="https://www.google.com/maps/search/Tbilisi+Old+Town" target="_blank">地图</a></span></div>
+          <div class="tl-desc">每到整点，顶部阳台会打开，有个小天使出来敲铃。12:00 和 19:00 下面的阳台会打开，上演 2 分钟的迷你木偶剧。</div>
+          <span class="tl-tag tag-tips">推荐 12:00 或 19:00 到</span>
+          <div class="tl-img"><img src="images/image2.png" alt="钟楼" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">20:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住酒店</div>
+          <span class="tl-tag tag-hotel">住宿：第比利斯（待确认）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Day 8 ========== -->
+  <div class="day-card" id="day8">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-8">D8</div>
+        <div class="day-header-text">
+          <h2>第比利斯 · 返程</h2>
+          <div class="day-date">8月5日 周三 · 回家</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M22 2L2 10l7 3 3 7z"/></svg>
+          返程航班待定
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">08:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">圣剑山<span class="tl-name-en">Didgori Battle Memorial</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Didgori, Tetritskaro · <a href="https://www.google.com/maps/search/Didgori+Battle+Memorial" target="_blank">地图</a></span></div>
+          <div class="tl-desc">迪格里战役纪念碑，纪念 1121 年格鲁吉亚大卫四世大败塞尔柱突厥联军。</div>
+          <div class="tl-img"><img src="images/image14.png" alt="圣剑山" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">11:30 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">钟楼<span class="tl-name-en">Clock Tower</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>13 Shavteli St, Tbilisi 0105 · <a href="https://www.google.com/maps/search/Tbilisi+Old+Town" target="_blank">地图</a></span></div>
+          <div class="tl-desc">每到整点，顶部阳台会打开，有个小天使出来敲铃。12:00 和 19:00 下面的阳台会打开，上演 2 分钟的迷你木偶剧。</div>
+          <span class="tl-tag tag-tips">推荐 12:00 或 19:00 到</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">第比利斯圣三一主教座堂<span class="tl-name-en">Holy Trinity Cathedral</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Elia Hill, Tbilisi · <a href="https://www.google.com/maps/search/Elia+Hill+Tbilisi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">第比利斯最大的东正教教堂，高 101 米，是格鲁吉亚东正教的象征。</div>
+          <div class="tl-img"><img src="images/image3.png" alt="圣三一主教座堂" onclick="openLightbox(this)" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">旱桥市场<span class="tl-name-en">Dry Bridge</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>9 April St, Tbilisi · <a href="https://www.google.com/maps/search/Rustaveli+Avenue+Tbilisi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">第比利斯最有特色的跳蚤市场。9 点开始摆摊，下午 4 点左右收摊，周末最热闹。过旱桥后对面的 Aghmashenebeli 街是越夜越美丽的酒吧街。</div>
+          <span class="tl-tag tag-tips">建议上午去，摊位最全</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">16:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">第比利斯 → 上海</div>
+          <div class="tl-desc">返程机票待购买。参考价 ¥2990 起。</div>
+          <span class="tl-tag tag-tips">返程机票待定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 备选景点 ========== -->
+  <div id="backup">
+    <div class="backup-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      备选景点（已从行程移出）
+    </div>
+    <div class="backup-grid">
+      <div class="backup-card">
+        <div class="bc-region">第比利斯</div>
+        <h4>国家博物馆</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>3 Rustaveli Ave, Tbilisi · <a href="https://www.google.com/maps/search/Georgian+National+Museum+Tbilisi" target="_blank">地图</a></span></div>
+        <p>Georgian National Museum</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">泰拉维 Telavi</div>
+        <h4>双胞胎酒窖</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Napareuli, Telavi, Kakheti · <a href="https://www.google.com/maps/search/Napareuli+Winery+Kakheti" target="_blank">地图</a></span></div>
+        <p>Twins Wine Cellar。有一个奎弗瑞葡萄酒博物馆，可参观、品酒、参与采摘葡萄、清洁奎弗瑞等活动。</p>
+        <img src="images/image11.png" alt="双胞胎酒窖" onclick="openLightbox(this)" loading="lazy">
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">卡赫季 Kakheti</div>
+        <h4>海列巴酒庄</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Khareba Winery, Kvareli, Kakheti · <a href="https://www.google.com/maps/search/Khareba+Winery+Kvareli" target="_blank">地图</a></span></div>
+        <p>Kvareli Wine Cave。隧道改造的酒窖，14-15°恒温，可参观并品酒。</p>
+        <img src="images/image13.png" alt="海列巴酒庄" onclick="openLightbox(this)" loading="lazy">
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">库塔伊西 Kutaisi</div>
+        <h4>科尔基斯喷泉</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>David Agmashenebeli Sq, Kutaisi · <a href="https://www.google.com/maps/search/Kutaisi+Central+Square" target="_blank">地图</a></span></div>
+        <p>Colchis Fountain。南边 200 米的库塔伊西国立历史博物馆藏品丰富。</p>
+        <img src="images/image23.png" alt="科尔基斯喷泉" onclick="openLightbox(this)" loading="lazy">
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">库塔伊西 Kutaisi</div>
+        <h4>巴格拉特主教座堂</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Bagrati Cathedral, Kutaisi · <a href="https://www.google.com/maps/search/Bagrati+Cathedral+Kutaisi" target="_blank">地图</a></span></div>
+        <p>Bagrati Cathedral</p>
+        <img src="images/image24.png" alt="巴格拉特主教座堂" onclick="openLightbox(this)" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ===== 地图模式 ===== -->
+<div id="tab-map" class="tab-content">
+  <div class="map-wrap">
+    <div class="map-day-filter" id="mapDayFilter">
+      <button class="map-filter-btn active" data-day="all">全部</button>
+      <button class="map-filter-btn" data-day="1">D1</button>
+      <button class="map-filter-btn" data-day="2">D2 巴统</button>
+      <button class="map-filter-btn" data-day="4">D4 西格纳吉</button>
+      <button class="map-filter-btn" data-day="5">D5 泰拉维</button>
+      <button class="map-filter-btn" data-day="6">D6 卡兹别克</button>
+      <button class="map-filter-btn" data-day="7">D7 第比利斯</button>
+      <button class="map-filter-btn" data-day="8">D8 返程</button>
+      <button class="map-filter-btn" data-day="backup">备选</button>
+    </div>
+    <div id="mapContainer"></div>
+    <div class="map-legend">
+      <h4>图例</h4>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#5C6BC0"></div> D1 到达</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#26A69A"></div> D2 巴统</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#EF5350"></div> D4 西格纳吉</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#AB47BC"></div> D5 泰拉维</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#FF7043"></div> D6 卡兹别克</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#FFA726"></div> D7 第比利斯</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#78909C"></div> D8 返程</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#90A4AE"></div> 备选景点</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 凭证管理 ===== -->
+<div id="tab-certs" class="tab-content">
+<div class="container">
+  <div class="cert-toolbar">
+    <div class="filters">
+      <span class="filter-chip active" data-certcat="全部" onclick="filterCerts('全部',this)">全部</span>
+      <span class="filter-chip" data-certcat="机票" onclick="filterCerts('机票',this)">机票</span>
+      <span class="filter-chip" data-certcat="酒店" onclick="filterCerts('酒店',this)">酒店</span>
+      <span class="filter-chip" data-certcat="门票" onclick="filterCerts('门票',this)">门票</span>
+      <span class="filter-chip" data-certcat="交通" onclick="filterCerts('交通',this)">交通</span>
+      <span class="filter-chip" data-certcat="保险" onclick="filterCerts('保险',this)">保险</span>
+      <span class="filter-chip" data-certcat="其他" onclick="filterCerts('其他',this)">其他</span>
+    </div>
+    <button class="btn-add" onclick="openCertModal()">+ 添加凭证</button>
+  </div>
+  <div class="cert-grid" id="certGrid"></div>
+</div>
+</div>
+
+<!-- 凭证详情查看器（全屏暗色背景展示原图） -->
+<div class="cert-detail-overlay" id="certDetailOverlay" onclick="if(event.target===this||event.target.classList.contains('cert-detail-imgs'))closeCertDetail()">
+  <div class="cert-detail-top">
+    <div class="cert-detail-title" id="certDetailTitle"></div>
+    <button class="cert-detail-close" onclick="closeCertDetail()">×</button>
+  </div>
+  <div class="cert-detail-imgs" id="certDetailImgs"></div>
+</div>
+
+<!-- 添加凭证弹窗 -->
+<div class="modal-overlay" id="certModalOverlay" onclick="if(event.target===this)closeCertModal()">
+<div class="modal">
+  <h3>添加凭证</h3>
+  <div class="row">
+    <div class="field"><label>类型</label>
+      <select id="cfType"><option>机票</option><option>酒店</option><option>门票</option><option>交通</option><option>保险</option><option>其他</option></select>
+    </div>
+    <div class="field"><label>标题</label><input type="text" id="cfTitle" placeholder="如：去程机票 MU285（馒头）"></div>
+  </div>
+  <div class="field"><label>凭证图片</label>
+    <input type="file" id="cfFiles" multiple accept="image/*,.pdf" style="width:100%;padding:9px 0;font-size:13px;">
+    <div style="font-size:11px;color:#999;margin-top:4px">支持多选，图片会保存在 images/certs/ 目录下</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-cancel" onclick="closeCertModal()">取消</button>
+    <button class="btn-save" onclick="saveCert()">保存</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== 支出记录 ===== -->
+<div id="tab-expense" class="tab-content">
+<div class="container">
+  <div class="expense-summary">
+    <div class="summary-card"><div class="label">总支出 (CNY)</div><div class="value" id="totalCNY">--</div></div>
+    <div class="summary-card"><div class="label">总支出 (GEL)</div><div class="value" id="totalGEL">--</div></div>
+    <div class="summary-card"><div class="label">笔数</div><div class="value" id="totalCount">--</div></div>
+  </div>
+  <div class="expense-table-wrap">
+    <div class="expense-toolbar">
+      <div class="filters">
+        <span class="filter-chip active" data-cat="全部">全部</span>
+        <span class="filter-chip" data-cat="交通">交通</span>
+        <span class="filter-chip" data-cat="住宿">住宿</span>
+        <span class="filter-chip" data-cat="餐饮">餐饮</span>
+        <span class="filter-chip" data-cat="门票">门票</span>
+        <span class="filter-chip" data-cat="购物">购物</span>
+        <span class="filter-chip" data-cat="其他">其他</span>
+      </div>
+      <button class="btn-add" onclick="openModal()">+ 添加</button>
+    </div>
+    <table>
+      <thead><tr><th>日期</th><th>类别</th><th>项目</th><th style="text-align:right">GEL</th><th style="text-align:right">CNY</th><th>支付方式</th><th>备注</th><th></th></tr></thead>
+      <tbody id="expenseBody"></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ===== 出行清单 ===== -->
+<div id="tab-checklist" class="tab-content">
+<div class="container">
+  <div class="checklist-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">0/0 已完成</div>
+  </div>
+  <div id="checklistContainer"></div>
+</div>
+</div>
+
+<!-- ===== 历史文化 ===== -->
+<div id="tab-history" class="tab-content">
+<div class="container">
+
+<div class="hist-hero">
+  <h2>格鲁吉亚历史文化</h2>
+  <p>从基督教发源圣城到岩壁洞穴要塞，从高加索雪山教堂到苏联温泉废墟，跟着行程串起格鲁吉亚 3000 年的信仰、王朝与秘境。</p>
+  <div class="hist-source">内容整理自纪录片《环球山河志》「格鲁吉亚」篇及公开历史资料</div>
+</div>
+
+<!-- 快速导航 -->
+<div class="hist-nav">
+  <button class="hist-nav-btn active" onclick="scrollToHistSection('hist-overview')">国家简史</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-mtskheta')">基督教发源</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-tbilisi')">第比利斯</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-cave')">岩壁洞穴城市</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-mountain')">雪山与边境村镇</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-region')">周边名城</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-soviet')">苏联印记</button>
+</div>
+
+<!-- ====== 国家简史时间线 ====== -->
+<div class="hist-timeline-wrap" id="hist-overview">
+  <h3>📜 格鲁吉亚千年简史</h3>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">公元前6世纪 — 前4世纪</div>
+      <div class="hist-era-title">科尔基斯与伊比利亚：两个古国</div>
+      <div class="hist-era-desc">格鲁吉亚西部是希腊神话「金羊毛」传说的发生地科尔基斯王国，东部则是伊比利亚王国（卡特里王国）。考古发现格鲁吉亚境内有约 8000 年前的葡萄酒酿造痕迹，被普遍认为是世界葡萄酒的发源地之一。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">公元 337 年</div>
+      <div class="hist-era-title">圣尼诺传教，基督教定为国教</div>
+      <div class="hist-era-desc">女修士圣尼诺（St. Nino）从卡帕多西亚来到姆茨赫塔传教，感化伊比利亚国王米利安三世皈依基督教。格鲁吉亚由此成为世界上最早将基督教定为国教的国家之一，仅次于亚美尼亚。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">公元 5 世纪</div>
+      <div class="hist-era-title">迁都第比利斯</div>
+      <div class="hist-era-desc">伊比利亚国王瓦赫坦格一世（Vakhtang Gorgasali）相传狩猎时发现温泉，遂在此建城，并将首都从姆茨赫塔迁至第比利斯（格鲁吉亚语「第比利」意为温暖）。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">7 — 11 世纪</div>
+      <div class="hist-era-title">阿拉伯征服与王国统一</div>
+      <div class="hist-era-desc">阿拉伯人一度占领第比利斯并建立酋长国，格鲁吉亚各封建公国长期分裂、抵御外敌。公元 1003 年，巴格拉特三世统一格鲁吉亚各公国，建立统一的格鲁吉亚王国，定都库塔伊西。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">12 — 13 世纪初</div>
+      <div class="hist-era-title">塔玛尔女王与黄金时代</div>
+      <div class="hist-era-desc">格鲁吉亚在国王乔治三世与其女塔玛尔女王（Queen Tamar the Great）统治下达到鼎盛，疆域、军事、文学、建筑全面繁荣，史称「黄金时代」。瓦尔济亚洞穴城即建于这一时期，用以抵御波斯与突厥的入侵。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">13 — 18 世纪</div>
+      <div class="hist-era-title">蒙古、波斯、奥斯曼的轮番入侵</div>
+      <div class="hist-era-desc">蒙古西征、帖木儿入侵、波斯萨法维王朝与奥斯曼帝国相继争夺高加索，格鲁吉亚长期在大国夹缝中挣扎，境内多处教堂古迹屡遭焚毁又重建，也是斯瓦涅季石塔和西格纳吉防御城墙修筑的历史背景。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">1801 — 1917 年</div>
+      <div class="hist-era-title">并入俄罗斯帝国</div>
+      <div class="hist-era-desc">1801 年东格鲁吉亚被沙俄吞并，此后西部各公国相继并入，格鲁吉亚全境成为俄罗斯帝国的一部分，第比利斯发展为外高加索的行政与文化中心。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">1921 — 1991 年</div>
+      <div class="hist-era-title">苏维埃时期</div>
+      <div class="hist-era-desc">1918 年短暂独立后，1921 年红军进入格鲁吉亚，1936 年正式成为苏联加盟共和国。苏联时代格鲁吉亚是重要的疗养与农产基地（茶叶、葡萄酒、矿泉水），茨卡尔图博等温泉小镇一度是苏联精英的度假天堂，斯大林本人也出生于格鲁吉亚哥里。</div>
+    </div>
+  </div>
+
+  <div class="hist-era">
+    <div class="hist-era-dot"></div>
+    <div class="hist-era-body">
+      <div class="hist-era-time">1991 年至今</div>
+      <div class="hist-era-title">独立建国</div>
+      <div class="hist-era-desc">1991 年格鲁吉亚宣布独立，此后经历阿布哈兹、南奥塞梯冲突及 2008 年俄格战争等波折。如今的格鲁吉亚在传承千年信仰与建筑遗产的同时，也在探索独立自主的现代国家身份。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 基督教发源地：姆茨赫塔 ====== -->
+<div class="hist-section" id="hist-mtskheta">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#E3F2FD;">⛪</div>
+    <div>
+      <div class="hist-section-title">姆茨赫塔 — 基督教发源的千年圣城</div>
+      <div class="hist-section-sub">Mtskheta · 世界文化遗产 · 格鲁吉亚精神摇篮</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">姆茨赫塔古城 <span class="en">Mtskheta</span></div>
+        <div class="hist-card-badge">公元前3世纪建都</div>
+      </div>
+      <div class="hist-card-body">姆茨赫塔坐落于姆特克瓦里河与阿拉格维河交汇处，早在第比利斯建城前，这里就是伊比利亚（卡特里）王国的都城，直至公元 5 世纪瓦赫坦格一世才迁都第比利斯。作为格鲁吉亚最古老的城市之一，姆茨赫塔从未因迁都而没落，反而因公元 4 世纪基督教的传入，成为格鲁吉亚人心目中真正的「精神首都」。</div>
+      <div class="hist-tag-row">
+        <span class="hist-tag">世界遗产 1994</span>
+        <span class="hist-tag">距第比利斯 20 公里</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">生命之柱大教堂 <span class="en">Svetitskhoveli Cathedral</span></div>
+        <div class="hist-card-badge">4 世纪起源 · 11 世纪定型</div>
+      </div>
+      <div class="hist-card-body">相传耶稣基督的圣袍被两名姆茨赫塔犹太商人带回并埋葬于此，故得名「生命之柱」（格鲁吉亚语 Sveti「柱」+ Tskhoveli「生命」）。教堂始建于公元 4 世纪，现存主体建于 11 世纪初，是格鲁吉亚东正教最重要的圣殿，地位仅次于耶路撒冷圣墓教堂，历代格鲁吉亚国王的加冕、婚礼、葬礼均在此举行。</div>
+      <div class="hist-fact">💡 教堂中央供奉的圣尼诺十字架，相传由圣尼诺本人所立，是格鲁吉亚的「第一国宝」。</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">季瓦里修道院 <span class="en">Jvari Monastery</span></div>
+        <div class="hist-card-badge">建于 6 世纪</div>
+      </div>
+      <div class="hist-card-body">又称「十字架教堂」，矗立在俯瞰姆茨赫塔的山丘上。相传圣尼诺公元 4 世纪携带葡萄藤十字架从卡帕多西亚出发，在此立起木十字架，促成国王米利安三世皈依基督教，格鲁吉亚从此奠定「圣国」地位。季瓦里修道院是格鲁吉亚现存最早的十字穹顶建筑之一，站在山顶可俯瞰两河交汇的壮丽全景。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 第比利斯 ====== -->
+<div class="hist-section" id="hist-tbilisi">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#FFF3E0;">🏰</div>
+    <div>
+      <div class="hist-section-title">第比利斯掠影 — 硫磺温泉建起的千年首都</div>
+      <div class="hist-section-sub">Tbilisi · 建城于公元 4-5 世纪</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">第比利斯建城传说</div>
+        <div class="hist-card-badge">约公元 4-5 世纪</div>
+      </div>
+      <div class="hist-card-body">相传伊比利亚国王瓦赫坦格一世狩猎时，猎鹰追逐野鸡坠入温泉而被烫熟，国王由此发现城中的天然硫磺温泉，遂决定在此建城，并将都城从姆茨赫塔迁来。格鲁吉亚语「第比利斯」（Tbilisi）正是源于「Tbili」（温暖），指代这里的地热温泉。老城至今仍保留着硫磺浴场（Abanotubani），是第比利斯最具标志性的体验之一。</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">纳里卡拉要塞 <span class="en">Narikala Fortress</span></div>
+        <div class="hist-card-badge">始建于 4 世纪</div>
+      </div>
+      <div class="hist-card-body">俯瞰整个老城的纳里卡拉要塞，与第比利斯建城同期修建，是保卫城市的最后一道军事防线，被誉为「母亲的堡垒」。历经波斯、阿拉伯、奥斯曼多次统治与战火，1827 年俄军火药库爆炸曾令要塞严重损毁，现存城墙多为 17 世纪重建。山顶矗立着高大的「格鲁吉亚母亲」雕像，一手持剑警示敌人，一手持酒杯欢迎宾客，恰是格鲁吉亚民族性格的写照。</div>
+      <div class="hist-tag-row">
+        <span class="hist-tag">缆车 6 分钟直达</span>
+        <span class="hist-tag">圣尼古拉教堂 12世纪</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">第比利斯老城与自由广场</div>
+        <div class="hist-card-badge">多元文明交汇</div>
+      </div>
+      <div class="hist-card-body">老城位于库拉河西岸，狭窄石板巷弄间东正教教堂、亚美尼亚教堂、清真寺与犹太会堂比邻而立，是格鲁吉亚地处欧亚十字路口、历经波斯-拜占庭-奥斯曼-俄罗斯多重文明影响的缩影。木质雕花阳台是老城建筑的标志性符号，融合了波斯与欧洲风格。</div>
+      <div class="hist-itin-link">✓ 已列入行程 Day7 卡兹别克→第比利斯 / Day8 返程日</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 岩壁洞穴城市 ====== -->
+<div class="hist-section" id="hist-cave">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#EFEBE9;">🗿</div>
+    <div>
+      <div class="hist-section-title">岩壁奇观与宗教遗存 — 凿石而生的洞穴城市</div>
+      <div class="hist-section-sub">格鲁吉亚三大洞穴城市：乌普利斯齐赫、瓦尔济亚等</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">乌普利斯齐赫 <span class="en">Uplistsikhe</span></div>
+        <div class="hist-card-badge">铁器时代起 · 3000 余年</div>
+      </div>
+      <div class="hist-card-body">「乌普利斯齐赫」意为「主的堡垒」，起源于古代伊比利亚（卡特里）王国，是格鲁吉亚最古老的城市化聚落之一，也是三大洞穴城市中唯一保存完好的一个。鼎盛时期拥有超过 700 个洞穴建筑，公元 10 世纪人口一度多达两万，融合了安纳托利亚与波斯的宗教文化元素，直到 19 世纪才最终废弃。</div>
+      <div class="hist-tag-row">
+        <span class="hist-tag">哥里以东约 10 公里</span>
+        <span class="hist-tag">世界遗产预备名录</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">瓦尔济亚洞穴城 <span class="en">Vardzia</span></div>
+        <div class="hist-card-badge">12 世纪黄金时代</div>
+      </div>
+      <div class="hist-card-body">世界现存规模最大的洞穴城市，由塔玛尔女王之父乔治三世下令在埃鲁舍季山（「熊山」）的火山凝灰岩崖壁上开凿，用以抵御波斯与突厥入侵。相传塔玛尔女王下令一天开凿一个洞穴，共凿出 365 个洞窟，鼎盛时多达 300 余个洞穴、13 层楼台，内部有教堂、修道院、图书馆和至今仍在流淌的地下引水系统。1283 年一场大地震震落大片崖壁，超过三分之二的建筑受损，暴露的洞窟从此失去了原本的隐蔽防御价值。</div>
+      <div class="hist-fact">💡 瓦尔济亚最早的居住痕迹可追溯至青铜时代，距今已有两千余年历史。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 雪山教堂与边境村镇 ====== -->
+<div class="hist-section" id="hist-mountain">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#E1F5FE;">🏔️</div>
+    <div>
+      <div class="hist-section-title">高加索雪山教堂与边境高海拔村镇</div>
+      <div class="hist-section-sub">卡兹别克 · 斯瓦涅季 · 与世隔绝的信仰与堡垒</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">格尔盖蒂三一教堂 <span class="en">Gergeti Trinity Church</span></div>
+        <div class="hist-card-badge">建于 14 世纪 · 海拔 2170 米</div>
+      </div>
+      <div class="hist-card-body">背靠海拔 5033 米的卡兹别克雪山，格尔盖蒂三一教堂是格鲁吉亚最具标志性的画面之一，也被称为「离天堂最近的教堂」。相传僧侣加布里埃尔在山岩上目睹圣三位一体显现，受启示而建造此教堂；另一则传说称建造者夜宿工地，清晨醒来却发现圆顶已神秘竣工。教堂墙面仍残留 16 世纪壁画痕迹，是赫维地区现存最古老的十字穹顶建筑。卡兹别克山在希腊神话中还被认为是普罗米修斯被锁链缚身、遭鹰啄食肝脏之地。</div>
+      <div class="hist-itin-link">✓ 已列入行程 Day6 泰拉维→卡兹别克 / Day7 卡兹别克→第比利斯</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">上斯瓦涅季与乌树故里 <span class="en">Svaneti · Ushguli</span></div>
+        <div class="hist-card-badge">世界遗产 1996</div>
+      </div>
+      <div class="hist-card-body">斯瓦涅季被称为「千塔之国」，斯凡人世代居住在海拔两千米以上的高山中，冬季大雪封山、与外界完全隔绝，独特的地理环境反而完整保留了古老的斯凡文化。家家户户建有石砌防御塔楼「斯万塔」，现存最古老的可追溯至公元 8-9 世纪，高 10-25 米，兼具居住、瞭望、防御与避难功能，是氏族纷争年代的生存智慧。乌树故里坐落在什哈拉雪山脚下，海拔 2200 米，是欧洲海拔最高的永久居住聚落。</div>
+      <div class="hist-fact">💡 斯瓦涅季现存超过 200 座中世纪塔楼，最高可达 28 米。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 周边名城 ====== -->
+<div class="hist-section" id="hist-region">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#FCE4EC;">🍇</div>
+    <div>
+      <div class="hist-section-title">周边名城 — 从爱情之城到黄金时代都城</div>
+      <div class="hist-section-sub">西格纳吉 · 库塔伊西 · 巴统</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">西格纳吉 <span class="en">Sighnaghi</span></div>
+        <div class="hist-card-badge">城墙建于 18 世纪</div>
+      </div>
+      <div class="hist-card-body">「西格纳吉」一词源自突厥语，意为「防御的住所」。18 世纪国王埃雷克勒二世为抵御波斯、奥斯曼入侵，修建了一条长逾 4 公里、拥有 23 座塔楼和 6 座城门的防御城墙，环绕整个山城，常被称作「微缩长城」。因小镇拥有全天候营业的婚姻登记处，被戏称为「爱情之城」。西格纳吉所在的卡赫季地区是格鲁吉亚葡萄酒的核心产区，酿酒历史长达 8000 年，被视为世界葡萄酒的发源地。附近的波德别修道院相传是圣尼诺的安息之地。</div>
+      <div class="hist-itin-link">✓ 已列入行程 Day4 西格纳吉 / Day5 泰拉维</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">库塔伊西与巴格拉特大教堂 <span class="en">Kutaisi · Bagrati Cathedral</span></div>
+        <div class="hist-card-badge">格鲁吉亚统一王国首都</div>
+      </div>
+      <div class="hist-card-body">库塔伊西历史可追溯至公元前 3 世纪，曾是科尔基斯王国、格鲁吉亚统一王国（975-1122 年）及伊梅列季王国的都城。公元 1003 年，统一格鲁吉亚各公国的巴格拉特三世下令修建巴格拉特大教堂，标志着格鲁吉亚黄金时代的开启。教堂历经奥斯曼军队摧毁、近 300 年半废墟状态，2012 年修复重建，如今矗立在库塔伊西的制高点上，可俯瞰全城。</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">巴统 <span class="en">Batumi</span></div>
+        <div class="hist-card-badge">黑海门户</div>
+      </div>
+      <div class="hist-card-body">巴统地处黑海之滨，自古是格鲁吉亚（科尔基斯）通往地中海世界的贸易门户，19 世纪并入俄罗斯帝国后发展为重要港口城市。如今的巴统融合了古典教堂建筑（如巴统圣母主教座堂）与现代地标（Ali & Nino 移动雕塑、网红建筑群），是格鲁吉亚黑海沿岸古今交汇的缩影。</div>
+      <div class="hist-tag-row"><span class="hist-tag">备选目的地</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 苏联印记 ====== -->
+<div class="hist-section" id="hist-soviet">
+  <div class="hist-section-header">
+    <div class="hist-section-icon" style="background:#ECEFF1;">🏚️</div>
+    <div>
+      <div class="hist-section-title">苏联印记 — 温泉疗养帝国的兴衰</div>
+      <div class="hist-section-sub">茨卡尔图博 Tskaltubo · 昔日「苏联里维埃拉」</div>
+    </div>
+  </div>
+
+  <div class="hist-card">
+    <div class="hist-card-inner">
+      <div class="hist-card-head">
+        <div class="hist-card-title">茨卡尔图博温泉小镇 <span class="en">Tskaltubo</span></div>
+        <div class="hist-card-badge">1930s 苏联旗舰疗养地</div>
+      </div>
+      <div class="hist-card-body">茨卡尔图博天然氡碳酸盐温泉自古被认为有治疗效果，20 世纪 30 年代起在斯大林推崇下被打造为苏联旗舰疗养胜地，鼎盛时期建有 19 座大型疗养院、9 座公共浴场，每天有专列从莫斯科开来，年接待游客超过 12 万人次，专为苏联精英、高官与劳模提供「医疗度假」服务。苏联解体后疗养体系随之瓦解，如今大部分疗养院已废弃，恢弘的野兽派建筑与斑驳的雕花楼梯在岁月侵蚀中静静矗立，成为记录一个时代兴衰的「苏联废墟」。</div>
+      <div class="hist-fact">💡 格鲁吉亚国父斯大林出生于第比利斯以西的哥里，哥里也保留着乌普利斯齐赫洞穴城和斯大林博物馆，是探访苏联历史的重要一站。</div>
+      <div class="hist-tag-row"><span class="hist-tag">位于库塔伊西附近</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== 避雷指南 ===== -->
+<div id="tab-tips" class="tab-content">
+<div class="container">
+
+<div class="tips-hero">
+  <h2>格鲁吉亚避雷指南</h2>
+  <p>那些和中国习惯截然不同的文化差异，帮你避开社交雷区，做一个受欢迎的旅行者。</p>
+</div>
+
+<!-- 快速导航 -->
+<div class="tips-nav">
+  <button class="tips-nav-btn active" onclick="scrollToTipSection('tips-quick')">快速避雷</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-wine')">酒桌文化</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-religion')">宗教礼仪</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-social')">社交礼仪</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-food')">饮食注意</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-traffic')">交通安全</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-safety')">防骗防盗</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-other')">其他差异</button>
+</div>
+
+<!-- ====== 快速避雷表 ====== -->
+<div class="tips-quick-ref" id="tips-quick">
+  <h3>🚨 中国游客最常踩的 10 个坑</h3>
+  <table class="tips-quick-table">
+    <tr><td>❌ 用啤酒敬酒</td><td>✅ 敬酒只能用葡萄酒或 Chacha（烈酒），用啤酒等于诅咒对方</td></tr>
+    <tr><td>❌ 进教堂穿短裤</td><td>✅ 女性戴头巾穿长裙，男性不穿无袖和短裤</td></tr>
+    <tr><td>❌ 教堂内拍照</td><td>✅ 教堂内禁止拍照，安静参观</td></tr>
+    <tr><td>❌ 随便找换汇点</td><td>✅ 推荐机场 InteliExpress，免手续费</td></tr>
+    <tr><td>❌ 路边拦出租不议价</td><td>✅ 用 Bolt / Yandex 打车，或先谈好价</td></tr>
+    <tr><td>❌ Tamada 发言时插嘴</td><td>✅ 安静聆听祝酒词，等说完再饮酒</td></tr>
+    <tr><td>❌ 打听收入和年龄</td><td>✅ 严重侵犯隐私，绝对不问</td></tr>
+    <tr><td>❌ 未经同意拍当地人</td><td>✅ 拍照前先征得对方同意</td></tr>
+    <tr><td>❌ 讨论俄格政治</td><td>✅ 避免提及俄格关系、南奥塞梯等话题</td></tr>
+    <tr><td>❌ 山区自驾不买全险</td><td>✅ 山路险峻，务必购买全险和人身险</td></tr>
+  </table>
+</div>
+
+<!-- ====== 酒桌文化 ====== -->
+<div class="tips-section" id="tips-wine">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#FCE4EC;">🍷</div>
+    <div class="tips-section-title">酒桌文化 — 差异最大，最易踩雷</div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 绝对不要用啤酒敬酒</div>
+      <div class="tip-body">在格鲁吉亚，<strong>用啤酒敬酒等于诅咒对方遭遇坏运气</strong>。这是中国游客最容易踩的文化雷区。敬酒必须用葡萄酒或 Chacha（格鲁吉亚白兰地），啤酒只能自己默默喝，不能举杯碰杯。</div>
+      <div class="tip-compare">
+        <div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>啤酒、白酒、葡萄酒都可以敬酒碰杯</div>
+        <div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇬🇪 格鲁吉亚</span>敬酒只能用葡萄酒或烈酒，啤酒敬酒 = 诅咒</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> Supra 宴席和 Tamada 酒司令</div>
+      <div class="tip-body">格鲁吉亚社交核心是 <strong>Supra（传统宴席）</strong>，由 <strong>Tamada（酒司令）</strong>主持。Tamada 每次提出一个祝酒主题（友谊、家人、已故的人等），从左手边依次传递，每个人必须围绕该主题讲出自己的感受，讲完后将杯中酒一饮而尽。<strong>Tamada 说祝酒词期间绝对不能插嘴</strong>，否则 Tamada 有权罚酒。<strong>在 Tamada 说完之前不要提前喝酒</strong>，否则会被当作没喝，要补喝一杯。一场正式宴席主人通常会敬 12 次以上的酒。</div>
+      <div class="tip-compare">
+        <div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>酒桌上随时可以自由敬酒、碰杯，气氛灵活</div>
+        <div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇬🇪 格鲁吉亚</span>严格由 Tamada 掌控节奏，轮流发言，仪式感极强</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 不能轻易拒绝主人的酒和食物</div>
+      <div class="tip-body">格鲁吉亚人将宾客视为「上天的恩赐」，热情好客到令人惊讶的程度。被邀请到当地人家中做客时，主人会准备远超正常食量的食物和酒。<strong>直接拒绝食物和酒会被视为不礼貌</strong>。如果实在喝不了，可以委婉地说「够了够了，实在太好了」而不是直接拒绝。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 吃 Khinkali 的正确方式</div>
+      <div class="tip-body">Khinkali（格鲁吉亚大饺子）的正确吃法：<strong>用手拿着顶部的褶皱，先咬一小口，吸出里面的汤汁，再吃肉馅和面皮</strong>。不要用刀叉，顶部面疙瘩通常不吃。如果用刀叉切开饺子，会被当地人善意地「教育」。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 宗教礼仪 ====== -->
+<div class="tips-section" id="tips-religion">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#E3F2FD;">⛪</div>
+    <div class="tips-section-title">宗教与教堂礼仪</div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 进教堂的着装要求（严格执行）</div>
+      <div class="tip-body"><strong>女性：</strong>必须戴头巾（或帽子）包裹头发，穿过膝长裙，不能穿短裤短裙。教堂门口通常备有头巾和围裙供游客借用。<br><strong>男性：</strong>不能穿无袖上衣，必须脱帽，避免穿短裤。<br>第比利斯圣三一大教堂（Sameba）因游客量大，要求相对宽松，但其他教堂和修道院都严格执行。</div>
+      <div class="tip-compare">
+        <div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>参观寺庙时着装要求比较宽松</div>
+        <div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇬🇪 格鲁吉亚</span>教堂着装要求非常严格，不达标不让进</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 教堂内禁止拍照</div>
+      <div class="tip-body">大多数教堂和修道院<strong>禁止在室内拍照</strong>，尤其是有宗教仪式进行时。虽然少数旅游热门教堂对游客有所宽容，但最好的做法是不拍。教堂外部可以自由拍照。不要触摸圣像和宗教器物，保持安静。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 教堂和修道院全部免费</div>
+      <div class="tip-body">格鲁吉亚所有教堂和修道院都<strong>免费参观</strong>，无需购票。遇到宗教仪式或游行时，不要凑热闹拍照，以免冒犯信众。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 社交礼仪 ====== -->
+<div class="tips-section" id="tips-social">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#F3E5F5;">🤝</div>
+    <div class="tips-section-title">社交礼仪</div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 不要打听收入、年龄和宗教信仰</div>
+      <div class="tip-body">在中国，朋友之间聊收入和年龄是常见话题，但在格鲁吉亚，<strong>打探他人的个人收入、年龄和宗教信仰被视为严重侵犯隐私</strong>。即使是善意的问候，也不要提这些话题。</div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 避免敏感政治话题</div>
+      <div class="tip-body">避免讨论俄罗斯-格鲁吉亚关系、阿布哈兹和南奥塞梯独立等政治话题。虽然斯大林是格鲁吉亚人（出生于哥里），但<strong>格鲁吉亚人对斯大林普遍没有好感</strong>，不要赞美斯大林或拿他开玩笑。</div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 拍照前必须征得同意</div>
+      <div class="tip-body">给当地人拍照前<strong>必须征得对方同意</strong>，尤其是老人和宗教人士。未经同意拍照可能引起不快甚至冲突。遇到示威游行时不要凑热闹拍照。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 贴面礼和拥抱</div>
+      <div class="tip-body">朋友之间（不分性别）见面和告别时会拥抱和贴面。<strong>通常贴面三次（左右左）</strong>，不要只贴一次就缩回，否则会显得不自然。初次见面一般握手即可。格鲁吉亚人性格粗犷豪放，沟通方式很直接，不要被他们的直率冒犯。</div>
+      <div class="tip-compare">
+        <div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>握手或点头致意，亲密朋友也很少贴面</div>
+        <div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇬🇪 格鲁吉亚</span>亲友之间拥抱贴面三次，很热情很直接</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 入座方向和坐姿</div>
+      <div class="tip-body"><strong>入座时应从椅子的左边入座，从椅子的左边站起</strong>。坐在椅子上随意转动或移动位置被视为不礼貌。倾听长辈或客人谈话时，不能一手撑头一手玩弄东西。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 送花和送礼的讲究</div>
+      <div class="tip-body"><strong>送花必须送奇数朵</strong>（偶数用于葬礼）。<strong>不要送菊花、白花或紫花</strong>，这些在格鲁吉亚与丧葬有关。如果格鲁吉亚朋友赠送你一把剑（象征尊敬），必须立即用一枚硬币还礼以示友谊。参加婚礼不要穿白色衣服或戴白色帽子。</div>
+    </div>
+  </div>
+
+  <div class="tip-card good">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 时间观念比较宽松</div>
+      <div class="tip-body">格鲁吉亚人的时间观念比中国人更宽松，约会或聚会<strong>迟到 15-30 分钟很正常</strong>。不用因此焦虑或生气。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 饮食注意 ====== -->
+<div class="tips-section" id="tips-food">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#FFF3E0;">🧀</div>
+    <div class="tips-section-title">饮食注意</div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 口味偏重偏咸，高热量</div>
+      <div class="tip-body">格鲁吉亚饮食受地中海和俄罗斯影响，<strong>口味偏重偏咸</strong>，大量使用奶酪、黄油和肉类，热量较高。如果你口味清淡，可能需要适应几天。常用香料包括香菜、蓝胡芦巴和金盏花。</div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 过敏原提醒</div>
+      <div class="tip-body"><strong>乳糖不耐受：</strong>Khachapuri（奶酪面包）是国民食物，含大量奶酪和黄油，乳糖不耐受者需注意。<br><strong>坚果过敏：</strong>很多菜肴使用核桃碎（如 Satsivi 酱、Pkhali），坚果过敏者需特别警惕。<br><strong>麸质：</strong>面包类食物含有麸质。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 素食选择有限</div>
+      <div class="tip-body">格鲁吉亚菜以肉和奶酪为主，<strong>纯素食选择有限</strong>。可以尝试：Pkhali（菠菜/甜菜根蔬菜泥冷盘）、Lobio（红豆炖菜）、Ajapsandali（茄子炖菜）。但很多看似素食的菜可能含有核桃或奶酪，点菜时需确认。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 葡萄酒发源地</div>
+      <div class="tip-body">格鲁吉亚是世界葡萄酒发源地之一，拥有 <strong>8000 年酿酒史</strong>。传统陶罐酿酒工艺（Qvevri）已被列入联合国非物质文化遗产。葡萄酒在社交生活中无处不在，即使不喝酒也建议了解基本敬酒礼仪。</div>
+    </div>
+  </div>
+
+  <div class="tip-card good">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 餐厅小费非强制</div>
+      <div class="tip-body">格鲁吉亚<strong>不是强制小费国家</strong>。如果账单中未包含服务费，给 10% 左右的小费即可。出租车通常不需要给小费，留下找零的零钱就行。酒店行李员 1-2 拉里即可。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 交通安全 ====== -->
+<div class="tips-section" id="tips-traffic">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#FFF8E1;">🚗</div>
+    <div class="tips-section-title">交通安全</div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 自驾风险较高</div>
+      <div class="tip-body">中国驻格鲁吉亚大使馆多次发出安全提醒：格鲁吉亚城市<strong>单向车道较多</strong>，山区道路蜿蜒崎岖，陡坡急弯路段多。当地人<strong>驾驶车速较快</strong>，交通事故频发。如坚持自驾，务必购买全险及人身险，详细了解交规和路况，杜绝饮酒、超速和疲劳驾驶。部分山区无通讯信号。</div>
+      <div class="tip-compare">
+        <div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>高速公路和国道基础设施成熟，信号覆盖广</div>
+        <div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇬🇪 格鲁吉亚</span>山路为主，路况复杂，部分区域无信号</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 打车务必用软件或先谈价</div>
+      <div class="tip-body">机场出租车<strong>存在宰客现象</strong>。建议使用打车软件 <strong>Bolt</strong> 或 <strong>Yandex</strong>。如乘坐路边出租车，必须提前谈好价格。可选择线上平台预订包车前往卡兹别克、西格纳吉等分散景点。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 防骗防盗 ====== -->
+<div class="tips-section" id="tips-safety">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#FFEBEE;">🛡️</div>
+    <div class="tips-section-title">防骗防盗</div>
+  </div>
+
+  <div class="tip-card danger">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 常见骗局</div>
+      <div class="tip-body"><strong>换汇陷阱：</strong>机场推荐 InteliExpress（免手续费），避免随意找换汇点；路边陌生人搭讪换汇是骗局。<br><strong>「Free Card」骗局：</strong>机场有人推销免费电话卡，实则套路。<br><strong>「免费送机」骗局：</strong>机场出口常有人以免费送机为诱饵。<br><strong>电信诈骗：</strong>有人冒充使馆或国内公检法工作人员进行诈骗，不要轻易透露护照、身份证、银行卡信息。</div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 人身财物安全</div>
+      <div class="tip-body">格鲁吉亚整体治安尚可，但<strong>游客密集区域需防范小偷</strong>（如自由广场、地铁站）。女性游客应避免独自在偏僻街区夜间出行。妥善保管护照等证件，复印留存并与原件分开保管。不随身携带大量现金，消费尽量使用银行卡。</div>
+    </div>
+  </div>
+
+  <div class="tip-card warning">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 边境地区需谨慎</div>
+      <div class="tip-body">前往<strong>阿布哈兹和南奥塞梯方向</strong>的边境地区需格外谨慎，这些地区存在边境冲突风险。远离示威游行等密集人员活动。徒步、滑雪等活动需关注天气变化，遇恶劣天气果断中止。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 其他差异 ====== -->
+<div class="tips-section" id="tips-other">
+  <div class="tips-section-header">
+    <div class="tips-section-icon" style="background:#E8F5E9;">💡</div>
+    <div class="tips-section-title">其他文化差异</div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 「不吉利」的数字和颜色</div>
+      <div class="tip-body"><strong>数字 13</strong> 在格鲁吉亚被认为不吉利（与中国的 4 类似）。黑色在穆斯林聚居区不受欢迎。送礼时避免白色和紫色包装（与丧葬相关）。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 保守地区着装</div>
+      <div class="tip-body">在第比利斯、巴统等大城市着装自由。但在农村地区、穆斯林聚居区（如阿扎尔自治共和国）应穿着更为保守。女性即使在教堂外也应避免过于暴露的服装（露肩、超短裙等）。去清真寺时女性需要戴头巾。</div>
+    </div>
+  </div>
+
+  <div class="tip-card info">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 吃饭礼仪细节</div>
+      <div class="tip-body">吃饭时<strong>不要发出太大的声音</strong>。不要在人面前剔牙、吐痰，格鲁吉亚人认为这有失文雅。这与中国部分地区对用餐声音比较宽容的习惯有所不同。</div>
+    </div>
+  </div>
+
+  <div class="tip-card good">
+    <div class="tip-card-inner">
+<div class="tip-title"><span class="tip-level level-good">好消息</span> 中国护照免签入境</div>
+<div class="tip-body">持中国普通护照可免签入境格鲁吉亚，单次停留不超过30天，每180天累计停留不超过90天。白本护照也没问题，直接盖章入境。建议随身携带护照、往返机票行程单和酒店预订单的电子版或复印件备查。</div>
+    </div>
+  </div>
+
+  <div class="tip-card good">
+    <div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 物价友好，性价比极高</div>
+      <div class="tip-body">格鲁吉亚物价相对较低，一顿丰盛的正餐大约 30-50 拉里（约 70-120 元人民币），一瓶不错的葡萄酒仅 10-20 拉里（约 25-50 元）。住宿、交通费用也相当亲民。</div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:20px 0 10px;color:#ccc;font-size:12px;">
+  信息来源：中国驻格鲁吉亚大使馆安全提醒、WikiTravel、马蜂窝、知乎等<br>建议出行前查阅最新旅行指南和使馆安全提醒
+</div>
+
+</div>
+</div>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ===== Modal ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+<div class="modal">
+  <h3 id="modalTitle">添加支出</h3>
+  <div class="row">
+    <div class="field"><label>日期</label><input type="date" id="fDate"></div>
+    <div class="field"><label>类别</label>
+      <select id="fCat"><option>交通</option><option>住宿</option><option>餐饮</option><option>门票</option><option>购物</option><option>其他</option></select>
+    </div>
+  </div>
+  <div class="field"><label>项目</label><input type="text" id="fItem" placeholder="如：机场打车"></div>
+  <div class="row">
+    <div class="field"><label>金额 (GEL)</label><input type="number" id="fGEL" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label>金额 (CNY)</label><input type="number" id="fCNY" step="0.01" placeholder="0.00"></div>
+  </div>
+  <div class="row">
+    <div class="field"><label>支付方式</label>
+      <select id="fPay"><option value="">-</option><option>现金</option><option>信用卡</option><option>支付宝</option><option>微信</option><option>其他</option></select>
+    </div>
+    <div class="field"><label>备注</label><input type="text" id="fNote" placeholder="可选"></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-cancel" onclick="closeModal()">取消</button>
+    <button class="btn-save" onclick="saveExpense()">保存</button>
+  </div>
+</div>
+</div>
+
+<script>
+// ===== Data persistence =====
+const STORAGE_EXP = 'georgia_expenses';
+const STORAGE_CHK = 'georgia_checklist';
+
+function loadExpenses() { try { return JSON.parse(localStorage.getItem(STORAGE_EXP)) || []; } catch { return []; } }
+function saveExpenses(d) { localStorage.setItem(STORAGE_EXP, JSON.stringify(d)); }
+function loadChecklist() { try { return JSON.parse(localStorage.getItem(STORAGE_CHK)); } catch { return null; } }
+function saveChecklist(d) { localStorage.setItem(STORAGE_CHK, JSON.stringify(d)); }
+
+let expenses = loadExpenses();
+if (!expenses.length) {
+  expenses = [
+    { date:'2026-07-29', cat:'交通', item:'去程机票 MU285 上海→第比利斯（馒头）', gel:'', cny:3018, pay:'支付宝', note:'东航经济舱 12:50-19:00' },
+    { date:'2026-07-29', cat:'交通', item:'去程机票 MU285 上海→第比利斯（刺猬）', gel:'', cny:3018, pay:'支付宝', note:'东航经济舱 12:50-19:00' },
+  ];
+  saveExpenses(expenses);
+}
+
+const defaultChecklist = [
+  { section:'证件 & 钱', items:[ {name:'护照',note:'有效期需超过6个月',checked:false}, {name:'身份证',note:'国内段备用',checked:false}, {name:'机票行程单',note:'电子版即可',checked:false}, {name:'酒店预订确认单',note:'打印或截图',checked:false}, {name:'现金（拉里/美元）',note:'少量美元到当地换拉里',checked:false}, {name:'信用卡/银行卡',note:'Visa/Mastercard',checked:false} ]},
+  { section:'入境准备', items:[ {name:'确认免签政策',note:'单次≤30天/180天累计≤90天',checked:false}, {name:'护照复印件/电子版',note:'有效期6个月以上',checked:false}, {name:'往返机票行程单',note:'电子版或复印件备查',checked:false}, {name:'酒店预订单',note:'电子版或复印件备查',checked:false} ]},
+  { section:'电子设备', items:[ {name:'手机 + 充电器',note:'',checked:false}, {name:'充电宝',note:'≤20000mAh 可登机',checked:false}, {name:'转换插头',note:'格鲁吉亚用欧标圆头',checked:false}, {name:'相机/GoPro',note:'',checked:false}, {name:'耳机',note:'',checked:false} ]},
+  { section:'衣物', items:[ {name:'换洗衣物',note:'7-8月日间30°+，早晚凉',checked:false}, {name:'薄外套/防风衣',note:'山区温差大',checked:false}, {name:'舒适步行鞋',note:'古城石板路多',checked:false}, {name:'拖鞋',note:'',checked:false}, {name:'泳衣',note:'温泉/泳池',checked:false}, {name:'墨镜/帽子',note:'',checked:false} ]},
+  { section:'日用品', items:[ {name:'防晒霜',note:'SPF50+',checked:false}, {name:'洗漱用品',note:'',checked:false}, {name:'常用药品',note:'肠胃药、感冒药、创可贴',checked:false}, {name:'湿纸巾/纸巾',note:'',checked:false}, {name:'雨伞/雨衣',note:'夏季偶有阵雨',checked:false} ]},
+  { section:'出行工具', items:[ {name:'国际驾照/翻译件',note:'租车自驾需要',checked:false}, {name:'导航离线地图',note:'Google Maps 离线包',checked:false}, {name:'当地SIM卡/eSIM',note:'机场可买或提前开通',checked:false}, {name:'VPN',note:'备用',checked:false} ]},
+  { section:'其他', items:[ {name:'旅行保险',note:'含航班延误/医疗',checked:false}, {name:'小背包/腰包',note:'日间出行用',checked:false}, {name:'零食',note:'飞机上吃',checked:false} ]},
+];
+
+let checklist = loadChecklist() || JSON.parse(JSON.stringify(defaultChecklist));
+// 自动补充新增的 section（如入境准备），不覆盖用户已有数据
+defaultChecklist.forEach(defSec => {
+  if (!checklist.find(s => s.section === defSec.section)) {
+    checklist.splice(1, 0, JSON.parse(JSON.stringify(defSec)));
+  }
+});
+saveChecklist(checklist);
+
+// ===== Lazy Image Fade-In =====
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  if (img.complete) { img.classList.add('loaded'); }
+  else { img.addEventListener('load', () => img.classList.add('loaded'), { once: true }); }
+});
+
+// ===== localStorage Version Management =====
+const STORAGE_VERSION = 'georgia_v';
+const CURRENT_VERSION = '1';
+(function migrateStorage() {
+  const v = localStorage.getItem(STORAGE_VERSION);
+  if (v !== CURRENT_VERSION) {
+    // Future migrations go here; for now just stamp version
+    localStorage.setItem(STORAGE_VERSION, CURRENT_VERSION);
+  }
+})();
+
+// ===== Tab Switch (cached DOM) =====
+let currentFilter = '全部';
+const _tabBtns = document.querySelectorAll('.tab-btn');
+const _tabContents = document.querySelectorAll('.tab-content');
+function switchTab(tab) {
+  _tabBtns.forEach(b => b.classList.remove('active'));
+  _tabContents.forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ===== Day nav scroll =====
+// 行程日期映射：day1=7.29, day2=7.30, ... day8=8.5 (2026年)
+var tripDayDates = [
+  { id: 'day1', month: 7, date: 29 },
+  { id: 'day2', month: 7, date: 30 },
+  { id: 'day3', month: 7, date: 31 },
+  { id: 'day4', month: 8, date: 1 },
+  { id: 'day5', month: 8, date: 2 },
+  { id: 'day6', month: 8, date: 3 },
+  { id: 'day7', month: 8, date: 4 },
+  { id: 'day8', month: 8, date: 5 },
+];
+var tripYear = 2026;
+
+function scrollToDay(id) {
+  // 更新 pill 高亮
+  document.querySelectorAll('.day-pill').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.day-pill').forEach(function(p) {
+    var oc = p.getAttribute('onclick') || '';
+    if (oc.indexOf("'" + id + "'") !== -1) p.classList.add('active');
+  });
+  // 让 active pill 在导航栏内水平滚动到可见位置
+  var activeP = document.querySelector('.day-pill.active');
+  var nav = document.querySelector('.day-nav');
+  if (activeP && nav) {
+    var pillLeft = activeP.offsetLeft - nav.offsetLeft;
+    var scrollTarget = pillLeft - (nav.clientWidth / 2) + (activeP.clientWidth / 2);
+    nav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+  }
+  // 隐藏所有 day-card 和 backup，只显示当前选中的
+  document.querySelectorAll('.day-card').forEach(function(c) { c.classList.remove('day-active'); });
+  var backup = document.getElementById('backup');
+  if (backup) backup.classList.remove('day-active');
+  var el = document.getElementById(id);
+  if (el) el.classList.add('day-active');
+  // 滚动到 container 顶部，让 day-nav 吸顶可见
+  var container = document.querySelector('#tab-itinerary .container');
+  if (container) {
+    var tabBar = document.querySelector('.tab-bar');
+    var tabBarH = tabBar ? tabBar.offsetHeight : 0;
+    var top = container.getBoundingClientRect().top + window.pageYOffset - tabBarH;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+  }
+}
+
+// 动态设置 day-nav 吸顶位置（跟随 tab-bar 高度）
+(function setDayNavStickyTop() {
+  function update() {
+    var tabBar = document.querySelector('.tab-bar');
+    var dayNav = document.querySelector('.day-nav');
+    if (tabBar && dayNav) dayNav.style.top = tabBar.offsetHeight + 'px';
+  }
+  update();
+  window.addEventListener('resize', update);
+})();
+
+// 页面加载时根据系统时间自动定位到当天
+(function initDayByDate() {
+  var now = new Date();
+  var y = now.getFullYear(), m = now.getMonth() + 1, d = now.getDate();
+  var targetId = 'day1'; // 默认 Day 1
+  if (y === tripYear) {
+    for (var i = 0; i < tripDayDates.length; i++) {
+      var td = tripDayDates[i];
+      if (m === td.month && d === td.date) { targetId = td.id; break; }
+    }
+  }
+  // 延迟执行确保 DOM 已渲染
+  setTimeout(function() { scrollToDay(targetId); }, 100);
+})();
+
+// ===== Tips nav scroll =====
+function scrollToTipSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.tips-nav-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.tips-nav-btn');
+  btns.forEach(b => { if (b.getAttribute('onclick').includes(id)) b.classList.add('active'); });
+}
+
+// ===== History nav scroll =====
+function scrollToHistSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.hist-nav-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.hist-nav-btn');
+  btns.forEach(b => { if (b.getAttribute('onclick').includes(id)) b.classList.add('active'); });
+}
+
+// ===== Credentials (凭证) =====
+// 凭证数据：id, type(类型), title(标题), files(图片路径数组)
+const STORAGE_CERT = 'georgia_certs';
+function loadCerts() { try { return JSON.parse(localStorage.getItem(STORAGE_CERT)) || []; } catch { return []; } }
+function saveCertsData(d) { localStorage.setItem(STORAGE_CERT, JSON.stringify(d)); }
+
+let certs = loadCerts();
+// 默认凭证：机票截图 — 始终确保默认凭证的文件路径正确
+const DEFAULT_CERTS = {
+  'cert_1': { id:'cert_1', type:'机票', title:'去程机票 MU285（馒头 LIU/MING）', files:['images/certs/b5cf5423e9c1295b9b98ee39134e7803.jpg'] },
+  'cert_2': { id:'cert_2', type:'机票', title:'去程机票 MU285（刺猬 ZHOU/ZIWEI）', files:['images/certs/a2e750dc6e3e4f8f7faa9033d21a727e.jpg'] },
+};
+if (!certs.length) {
+  certs = Object.values(DEFAULT_CERTS);
+} else {
+  // 强制修复默认凭证的文件路径（无论旧值是什么）
+  Object.values(DEFAULT_CERTS).forEach(dc => {
+    const existing = certs.find(c => c.id === dc.id);
+    if (existing) { existing.files = dc.files; existing.title = dc.title; }
+    else { certs.unshift(dc); }
+  });
+}
+saveCertsData(certs);
+
+const certTypeIcons = { '机票':'✈️', '酒店':'🏨', '门票':'🎫', '交通':'🚗', '保险':'🛡️', '其他':'📄' };
+const certTypeCls = { '机票':'flight', '酒店':'hotel', '门票':'ticket', '交通':'transport', '保险':'insurance', '其他':'other' };
+const certTypeBg = { '机票':'#E3F2FD', '酒店':'#E8F5E9', '门票':'#FFF3E0', '交通':'#F3E5F5', '保险':'#FFF8E1', '其他':'#F5F5F5' };
+const certTypeColor = { '机票':'#1565C0', '酒店':'#2E7D32', '门票':'#E65100', '交通':'#6A1B9A', '保险':'#F57F17', '其他':'#616161' };
+let certFilter = '全部';
+
+function filterCerts(cat, el) {
+  certFilter = cat;
+  document.querySelectorAll('#tab-certs .filter-chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderCerts();
+}
+
+function renderCerts() {
+  const grid = document.getElementById('certGrid');
+  const filtered = certFilter === '全部' ? certs : certs.filter(c => c.type === certFilter);
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="cert-empty">暂无凭证，点击右上角「+ 添加凭证」开始管理</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(c => {
+    const icon = certTypeIcons[c.type] || '📄';
+    const cls = certTypeCls[c.type] || 'other';
+    const bg = certTypeBg[c.type] || '#F5F5F5';
+    const color = certTypeColor[c.type] || '#616161';
+    const files = c.files || [];
+    let bodyHtml;
+    if (files.length === 1) {
+      bodyHtml = `<img class="cert-thumb" src="${esc(files[0])}" alt="${esc(c.title)}" onclick="showCertDetail('${c.id}')">`;
+    } else if (files.length > 1) {
+      bodyHtml = `<div class="cert-thumb-grid">${files.map(f => `<img src="${esc(f)}" alt="" onclick="showCertDetail('${c.id}')">`).join('')}</div>`;
+    } else {
+      bodyHtml = `<div class="cert-no-file">📎 凭证图片待添加</div>`;
+    }
+    const fileCount = files.length ? `${files.length} 个文件` : '无文件';
+    return `<div class="cert-card" id="${c.id}">
+      <div class="cert-card-head">
+        <div class="cert-type-icon cert-type-${cls}">${icon}</div>
+        <div><div class="cert-card-title">${esc(c.title)}</div><div class="cert-card-subtitle">${fileCount}</div></div>
+      </div>
+      <div class="cert-card-body">${bodyHtml}</div>
+      <div class="cert-card-foot">
+        <span class="cert-type-tag" style="background:${bg};color:${color}">${esc(c.type)}</span>
+        <div class="cert-card-actions">
+          ${files.length ? `<button class="cert-btn-sm" onclick="showCertDetail('${c.id}')">查看原件</button>` : ''}
+          <button class="cert-btn-sm danger" onclick="delCert('${c.id}')">删除</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showCertDetail(id) {
+  const c = certs.find(x => x.id === id);
+  if (!c) return;
+  const icon = certTypeIcons[c.type] || '📄';
+  document.getElementById('certDetailTitle').innerHTML = `${icon} ${esc(c.title)}`;
+  const files = c.files || [];
+  if (files.length) {
+    document.getElementById('certDetailImgs').innerHTML = files.map(f =>
+      `<img src="${esc(f)}" alt="${esc(c.title)}">`
+    ).join('');
+  } else {
+    document.getElementById('certDetailImgs').innerHTML = '<div class="cert-detail-nofile">暂无凭证文件</div>';
+  }
+  document.getElementById('certDetailOverlay').classList.add('show');
+}
+function closeCertDetail() { document.getElementById('certDetailOverlay').classList.remove('show'); }
+
+function openCertModal() {
+  document.getElementById('cfType').value = '机票';
+  document.getElementById('cfTitle').value = '';
+  document.getElementById('cfFiles').value = '';
+  document.getElementById('certModalOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('cfTitle').focus(), 100);
+}
+function closeCertModal() { document.getElementById('certModalOverlay').classList.remove('show'); }
+
+function saveCert() {
+  const title = document.getElementById('cfTitle').value.trim();
+  if (!title) { document.getElementById('cfTitle').focus(); return; }
+  const fileInput = document.getElementById('cfFiles');
+  const filePaths = [];
+  // 读取选中的文件，转为 base64 data URL 存入（本地使用）
+  const promises = Array.from(fileInput.files).map(file => new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => { filePaths.push(e.target.result); resolve(); };
+    reader.readAsDataURL(file);
+  }));
+  Promise.all(promises).then(() => {
+    const cert = {
+      id: 'cert_' + Date.now(),
+      type: document.getElementById('cfType').value,
+      title,
+      files: filePaths
+    };
+    certs.push(cert);
+    saveCertsData(certs);
+    renderCerts();
+    closeCertModal();
+  });
+}
+
+function delCert(id) {
+  if (!confirm('确认删除这条凭证？')) return;
+  certs = certs.filter(c => c.id !== id);
+  saveCertsData(certs);
+  renderCerts();
+}
+
+// Navigate to cert detail from itinerary link
+function gotoCert(id) {
+  switchTab('certs');
+  setTimeout(() => showCertDetail(id), 150);
+}
+
+renderCerts();
+
+// ===== Debounce Helper =====
+function debounce(fn, ms) { let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); }; }
+
+// ===== Expense Rendering (cached DOM refs) =====
+const _expenseBody = document.getElementById('expenseBody');
+const _totalCNY = document.getElementById('totalCNY');
+const _totalGEL = document.getElementById('totalGEL');
+const _totalCount = document.getElementById('totalCount');
+function renderExpenses() {
+  const filtered = currentFilter === '全部' ? expenses : expenses.filter(e => e.cat === currentFilter);
+  if (!filtered.length) {
+    _expenseBody.innerHTML = '<tr class="empty-hint"><td colspan="8">暂无记录，点击右上角「+ 添加」开始记账</td></tr>';
+  } else {
+    _expenseBody.innerHTML = filtered.map(e => {
+      const ri = expenses.indexOf(e);
+      const d = e.date ? e.date.slice(5).replace('-','/') : '';
+      return `<tr><td>${d}</td><td><span class="cat-tag cat-${e.cat}">${e.cat}</span></td><td>${esc(e.item)}</td><td class="amount">${e.gel!==''&&e.gel!==null?Number(e.gel).toFixed(2):'-'}</td><td class="amount">${e.cny!==''&&e.cny!==null?Number(e.cny).toFixed(2):'-'}</td><td>${esc(e.pay||'')}</td><td style="color:#999;font-size:12px">${esc(e.note||'')}</td><td class="actions"><button class="btn-del" onclick="delExpense(${ri})" title="删除">×</button></td></tr>`;
+    }).join('');
+  }
+  let tCNY=0, tGEL=0;
+  expenses.forEach(e => { tCNY += Number(e.cny)||0; tGEL += Number(e.gel)||0; });
+  _totalCNY.innerHTML = tCNY ? `¥${tCNY.toLocaleString()}` : '--';
+  _totalGEL.innerHTML = tGEL ? `₾${tGEL.toLocaleString()}` : '--';
+  _totalCount.textContent = expenses.length;
+}
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+document.querySelectorAll('#tab-expense .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#tab-expense .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentFilter = chip.dataset.cat;
+    renderExpenses();
+  });
+});
+
+let editIdx = -1;
+function openModal(idx) {
+  editIdx = idx !== undefined ? idx : -1;
+  document.getElementById('modalTitle').textContent = editIdx >= 0 ? '编辑支出' : '添加支出';
+  if (editIdx >= 0) {
+    const e = expenses[editIdx];
+    document.getElementById('fDate').value = e.date||'';
+    document.getElementById('fCat').value = e.cat||'其他';
+    document.getElementById('fItem').value = e.item||'';
+    document.getElementById('fGEL').value = e.gel||'';
+    document.getElementById('fCNY').value = e.cny||'';
+    document.getElementById('fPay').value = e.pay||'';
+    document.getElementById('fNote').value = e.note||'';
+  } else {
+    document.getElementById('fDate').value = '';
+    document.getElementById('fCat').value = '交通';
+    document.getElementById('fItem').value = '';
+    document.getElementById('fGEL').value = '';
+    document.getElementById('fCNY').value = '';
+    document.getElementById('fPay').value = '';
+    document.getElementById('fNote').value = '';
+  }
+  document.getElementById('modalOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('fItem').focus(), 100);
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('show'); }
+function saveExpense() {
+  const e = { date:document.getElementById('fDate').value, cat:document.getElementById('fCat').value, item:document.getElementById('fItem').value.trim(), gel:document.getElementById('fGEL').value, cny:document.getElementById('fCNY').value, pay:document.getElementById('fPay').value, note:document.getElementById('fNote').value.trim() };
+  if (!e.item) { document.getElementById('fItem').focus(); return; }
+  if (editIdx >= 0) { expenses[editIdx] = e; } else { expenses.push(e); }
+  saveExpenses(expenses); renderExpenses(); closeModal();
+}
+function delExpense(idx) {
+  if (!confirm('确认删除这条记录？')) return;
+  expenses.splice(idx, 1); saveExpenses(expenses); renderExpenses();
+}
+
+// ===== Checklist =====
+function renderChecklist() {
+  const container = document.getElementById('checklistContainer');
+  let total=0, done=0;
+  checklist.forEach(s => s.items.forEach(it => { total++; if(it.checked) done++; }));
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progressBar').style.width = pct+'%';
+  document.getElementById('progressText').textContent = `${done}/${total} 已完成`;
+  container.innerHTML = checklist.map((sec,si) => `
+    <div class="checklist-section">
+      <div class="section-header">${esc(sec.section)}</div>
+      <div class="checklist-card">
+        ${sec.items.map((it,ii) => `
+          <div class="checklist-item${it.checked?' checked':''}">
+            <div class="check-box" onclick="toggleCheck(${si},${ii})">
+              <svg width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7l3 3 6-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="item-name">${esc(it.name)}</span>
+            <span class="item-note">${esc(it.note||'')}</span>
+            <button class="item-del" onclick="delCheckItem(${si},${ii})" title="删除">×</button>
+          </div>
+        `).join('')}
+        <div class="add-item-row">
+          <input type="text" placeholder="添加物品…" id="addInput_${si}" onkeydown="if(event.key==='Enter')addCheckItem(${si})">
+          <button onclick="addCheckItem(${si})">添加</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleCheck(si,ii) { checklist[si].items[ii].checked=!checklist[si].items[ii].checked; saveChecklist(checklist); renderChecklist(); }
+function delCheckItem(si,ii) { checklist[si].items.splice(ii,1); if(!checklist[si].items.length) checklist.splice(si,1); saveChecklist(checklist); renderChecklist(); }
+function addCheckItem(si) {
+  const input=document.getElementById('addInput_'+si); const name=input.value.trim(); if(!name) return;
+  checklist[si].items.push({name,note:'',checked:false}); saveChecklist(checklist); renderChecklist();
+  setTimeout(()=>{ const ni=document.getElementById('addInput_'+si); if(ni) ni.focus(); },50);
+}
+
+// ===== Lightbox =====
+const _lightbox = document.getElementById('lightbox');
+const _lightboxImg = document.getElementById('lightboxImg');
+function openLightbox(img) {
+  _lightboxImg.src = img.src;
+  _lightbox.classList.add('show');
+  // 手机端禁止背景滚动
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  _lightbox.classList.remove('show');
+  document.body.style.overflow = '';
+}
+// 点击图片本身不关闭（阻止冒泡）
+_lightboxImg.addEventListener('click', e => e.stopPropagation());
+
+// 凭证详情弹窗也锁定背景滚动
+const _origShowCertDetail = showCertDetail;
+showCertDetail = function(id) { _origShowCertDetail(id); document.body.style.overflow = 'hidden'; };
+const _origCloseCertDetail = closeCertDetail;
+closeCertDetail = function() { _origCloseCertDetail(); document.body.style.overflow = ''; };
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeLightbox(); closeCertDetail(); } });
+
+renderExpenses();
+renderChecklist();
+
+// ===== Map =====
+const spots = [
+  {id:1,name_zh:"第比利斯国际机场",name_en:"Tbilisi International Airport",lat:41.6692,lng:44.9547,day:1},
+  {id:2,name_zh:"阿里和尼诺",name_en:"Ali & Nino",lat:41.6468,lng:41.6417,day:2},
+  {id:3,name_zh:"巴统圣母教堂",name_en:"Church of Mother of God",lat:41.6439,lng:41.6369,day:2},
+  {id:4,name_zh:"阿尔戈号缆车",name_en:"Argo Cable Car",lat:41.6487,lng:41.6357,day:2},
+  {id:5,name_zh:"全球最美麦当劳",name_en:"Batumi McDonald's",lat:41.6453,lng:41.6405,day:2},
+  {id:6,name_zh:"西格纳吉城墙",name_en:"Sighnaghi City Wall",lat:41.6162,lng:45.9217,day:4},
+  {id:7,name_zh:"圣尼诺修道院",name_en:"Bodbe Monastery",lat:41.6074,lng:45.9286,day:4},
+  {id:8,name_zh:"Pheasant's Tears",name_en:"Pheasant's Tears",lat:41.6171,lng:45.9218,day:4},
+  {id:9,name_zh:"泰拉维古堡",name_en:"Batonistsikhe Castle",lat:41.9197,lng:45.4722,day:5},
+  {id:10,name_zh:"舒米酒庄",name_en:"Shumi Estate",lat:41.8882,lng:45.5852,day:5},
+  {id:11,name_zh:"查夫查瓦泽故居",name_en:"Chavchavadze Museum",lat:41.8868,lng:45.5882,day:5},
+  {id:12,name_zh:"阿拉韦尔迪教堂",name_en:"Alaverdi Cathedral",lat:41.9832,lng:45.3762,day:6},
+  {id:13,name_zh:"阿娜努日要塞",name_en:"Ananuri Fortress",lat:42.1629,lng:44.7020,day:6},
+  {id:14,name_zh:"卡兹别克圣三一教堂",name_en:"Gergeti Trinity Church",lat:42.6627,lng:44.6199,day:7},
+  {id:15,name_zh:"俄格友谊纪念碑",name_en:"Friendship Monument",lat:42.4927,lng:44.4668,day:7},
+  {id:16,name_zh:"巨石阵",name_en:"Chronicles of Georgia",lat:41.7440,lng:44.7569,day:7},
+  {id:17,name_zh:"里克公园",name_en:"Rike Park",lat:41.6912,lng:44.8098,day:7},
+  {id:18,name_zh:"钟楼",name_en:"Clock Tower",lat:41.6919,lng:44.8065,day:7},
+  {id:19,name_zh:"圣剑山",name_en:"Didgori Memorial",lat:41.6953,lng:44.3619,day:8},
+  {id:20,name_zh:"钟楼",name_en:"Clock Tower",lat:41.6919,lng:44.8065,day:8},
+  {id:21,name_zh:"圣三一主教座堂",name_en:"Holy Trinity Cathedral",lat:41.6976,lng:44.8074,day:8},
+  {id:22,name_zh:"旱桥市场",name_en:"Dry Bridge Market",lat:41.6972,lng:44.8015,day:8},
+  {id:23,name_zh:"国家博物馆",name_en:"National Museum",lat:41.6966,lng:44.8014,day:"backup"},
+  {id:24,name_zh:"双胞胎酒窖",name_en:"Twins Wine Cellar",lat:41.8667,lng:45.6030,day:"backup"},
+  {id:25,name_zh:"海列巴酒庄",name_en:"Kvareli Wine Cave",lat:41.9530,lng:45.7970,day:"backup"},
+  {id:26,name_zh:"科尔基斯喷泉",name_en:"Colchis Fountain",lat:42.2667,lng:42.6946,day:"backup"},
+  {id:27,name_zh:"巴格拉特教堂",name_en:"Bagrati Cathedral",lat:42.2748,lng:42.6916,day:"backup"},
+];
+
+const dayColors = {1:'#5C6BC0',2:'#26A69A',3:'#7E57C2',4:'#EF5350',5:'#AB47BC',6:'#FF7043',7:'#FFA726',8:'#78909C',backup:'#90A4AE'};
+const dayLabels = {1:'D1',2:'D2',3:'D3',4:'D4',5:'D5',6:'D6',7:'D7',8:'D8',backup:'备选'};
+
+let map = null;
+let markers = [];
+let routeLines = [];
+
+function initMap() {
+  if (map) { map.invalidateSize(); return; }
+  // Wait for Leaflet to load (defer script)
+  if (typeof L === 'undefined') { setTimeout(initMap, 100); return; }
+  const container = document.getElementById('mapContainer');
+  if (!container || container.clientHeight < 10) {
+    setTimeout(initMap, 200);
+    return;
+  }
+  map = L.map('mapContainer', { zoomControl: true }).setView([42.0, 43.8], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+  // ensure tiles render after container is visible
+  setTimeout(() => map.invalidateSize(), 300);
+
+  renderMarkers('all');
+
+  // Day filter buttons
+  document.querySelectorAll('.map-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMarkers(btn.dataset.day);
+    });
+  });
+}
+
+function renderMarkers(dayFilter) {
+  markers.forEach(m => map.removeLayer(m));
+  routeLines.forEach(l => map.removeLayer(l));
+  markers = [];
+  routeLines = [];
+
+  const filtered = dayFilter === 'all' ? spots : spots.filter(s => String(s.day) === dayFilter);
+  const bounds = [];
+
+  filtered.forEach(s => {
+    const color = dayColors[s.day] || '#78909C';
+    const label = dayLabels[s.day] || '';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width:28px;height:28px;border-radius:50%;background:${color};color:#fff;
+        display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;
+        box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff;
+      ">${s.id}</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
+    });
+
+    const marker = L.marker([s.lat, s.lng], { icon })
+      .bindPopup(`
+        <div style="min-width:160px">
+          <b style="font-size:14px">${s.name_zh}</b><br>
+          <span style="font-size:11px;color:#888">${s.name_en}</span><br>
+          <span style="display:inline-block;margin-top:4px;padding:1px 6px;border-radius:8px;font-size:10px;background:${color};color:#fff">${label} ${typeof s.day==='number'?'Day '+s.day:'备选'}</span><br>
+          <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name_en)}" target="_blank" style="font-size:11px;color:#1565C0;margin-top:4px;display:inline-block">在 Google Maps 中打开 →</a>
+        </div>
+      `)
+      .addTo(map);
+    markers.push(marker);
+    bounds.push([s.lat, s.lng]);
+  });
+
+  // Draw route lines for specific days
+  if (dayFilter !== 'all' && dayFilter !== 'backup') {
+    const daySpots = spots.filter(s => String(s.day) === dayFilter).sort((a,b) => a.id - b.id);
+    if (daySpots.length > 1) {
+      const latlngs = daySpots.map(s => [s.lat, s.lng]);
+      const color = dayColors[dayFilter] || '#999';
+      const line = L.polyline(latlngs, { color, weight: 2.5, opacity: 0.6, dashArray: '8,6' }).addTo(map);
+      routeLines.push(line);
+    }
+  }
+
+  if (bounds.length) {
+    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+  }
+}
+
+// Override switchTab to initialize map on first view
+const _origSwitchTab = switchTab;
+switchTab = function(tab) {
+  _origSwitchTab(tab);
+  if (tab === 'map') {
+    setTimeout(() => initMap(), 200);
+  }
+};
+// ===== 天气 & 汇率实时数据 =====
+(function() {
+  const WEATHER_MAP = {
+    '113':['☀️','晴'],'116':['⛅','多云'],'119':['☁️','阴'],'122':['☁️','阴天'],
+    '143':['🌫️','雾'],'176':['🌦️','小雨'],'179':['🌨️','小雪'],'182':['🌧️','冻雨'],
+    '185':['🌧️','冻雨'],'200':['⛈️','雷阵雨'],'227':['🌨️','飘雪'],'230':['❄️','暴风雪'],
+    '248':['🌫️','雾'],'260':['🌫️','冻雾'],'263':['🌦️','毛毛雨'],'266':['🌦️','小雨'],
+    '281':['🌧️','冻雨'],'284':['🌧️','冻雨'],'293':['🌧️','小雨'],'296':['🌧️','小雨'],
+    '299':['🌧️','中雨'],'302':['🌧️','中雨'],'305':['🌧️','大雨'],'308':['🌧️','暴雨'],
+    '311':['🌧️','冻雨'],'314':['🌧️','冻雨'],'317':['🌨️','雨夹雪'],'320':['🌨️','雨夹雪'],
+    '323':['🌨️','小雪'],'326':['🌨️','小雪'],'329':['❄️','中雪'],'332':['❄️','中雪'],
+    '335':['❄️','大雪'],'338':['❄️','大雪'],'350':['🌧️','冰雹'],'353':['🌦️','阵雨'],
+    '356':['🌧️','中雨'],'359':['🌧️','大雨'],'362':['🌨️','雨夹雪'],'365':['🌨️','雨夹雪'],
+    '368':['🌨️','阵雪'],'371':['❄️','中雪'],'374':['🌧️','冰雹'],'377':['🌧️','冰雹'],
+    '386':['⛈️','雷阵雨'],'389':['⛈️','雷暴'],'392':['⛈️','雷雪'],'395':['❄️','暴风雪']
+  };
+
+  function updateWeather() {
+    fetch('https://wttr.in/Tbilisi?format=j1')
+      .then(r => r.json())
+      .then(d => {
+        const c = d.current_condition[0];
+        const temp = c.temp_C;
+        const code = c.weatherCode;
+        const m = WEATHER_MAP[code] || ['🌤️','晴'];
+        const el = document.getElementById('weatherInfo');
+        if (el) el.innerHTML = '<span class="info-icon">' + m[0] + '</span><span class="info-value">' + temp + '°</span><span style="color:#aaa">' + m[1] + '</span>';
+      })
+      .catch(() => {});
+  }
+
+  // 汇率方向: false = 1 GEL → CNY/USD, true = 1 CNY/USD → GEL
+  var rateReversed = false;
+  var cachedRates = null;
+
+  function updateRates() {
+    fetch('https://api.exchangerate-api.com/v4/latest/GEL')
+      .then(r => r.json())
+      .then(d => {
+        cachedRates = { cny: d.rates.CNY, usd: d.rates.USD };
+        renderRates();
+      })
+      .catch(() => {});
+  }
+
+  function renderRates() {
+    if (!cachedRates) return;
+    const el1 = document.getElementById('rateInfo1');
+    const el2 = document.getElementById('rateInfo2');
+    if (rateReversed) {
+      const gelPerCny = (1 / cachedRates.cny).toFixed(2);
+      const gelPerUsd = (1 / cachedRates.usd).toFixed(2);
+      if (el1) el1.innerHTML = '<span class="info-label">1¥≈</span><span class="info-value">' + gelPerCny + '</span><span>₾</span>';
+      if (el2) el2.innerHTML = '<span class="info-label">1$≈</span><span class="info-value">' + gelPerUsd + '</span><span>₾</span>';
+    } else {
+      if (el1) el1.innerHTML = '<span class="info-label">1₾≈</span><span class="info-value">' + cachedRates.cny.toFixed(2) + '</span><span>¥</span>';
+      if (el2) el2.innerHTML = '<span class="info-label">1₾≈</span><span class="info-value">' + cachedRates.usd.toFixed(2) + '</span><span>$</span>';
+    }
+  }
+
+  window.toggleRateDirection = function() {
+    rateReversed = !rateReversed;
+    var btn = document.getElementById('rateSwapBtn');
+    if (btn) { btn.style.transform = 'rotate(180deg)'; setTimeout(function(){ btn.style.transform = ''; }, 300); }
+    renderRates();
+  };
+
+  // 页面加载时立即刷新
+  updateWeather();
+  updateRates();
+  // 每30分钟自动刷新
+  setInterval(updateWeather, 30 * 60 * 1000);
+  setInterval(updateRates, 30 * 60 * 1000);
+})();
+</script>
+</body>
+</html>
