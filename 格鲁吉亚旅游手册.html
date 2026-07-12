@@ -14,13 +14,13 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
 
-  /* ===== Tab Navigation (三行布局) ===== */
+  /* ===== Tab Navigation (多行布局) ===== */
   .tab-bar { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e5e7; padding-top: env(safe-area-inset-top, 0); }
-  .tab-bar-row0 { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px 0; }
-  .tab-title { font-size: 20px; font-weight: 700; color: #2E4057; white-space: nowrap; }
+  .tab-bar-row0 { display: flex; align-items: center; justify-content: center; padding: 10px 24px 2px; }
+  .tab-title { font-size: 22px; font-weight: 700; color: #2E4057; white-space: nowrap; }
   .tab-title .tab-subtitle { font-size: 12px; font-weight: 400; color: #999; margin-left: 8px; }
-  .tab-bar-row1 { display: flex; align-items: center; justify-content: flex-start; padding: 6px 24px 4px; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .tab-bar-row1::-webkit-scrollbar { display: none; }
+  .tab-bar-status { display: flex; flex-direction: column; align-items: center; padding: 2px 24px 4px; gap: 2px; }
+  .tab-bar-status-row { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; color: #666; }
   .tab-bar-info { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #666; flex-shrink: 0; }
   .tab-bar-info .info-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
   .tab-bar-info .info-divider { width: 1px; height: 14px; background: #e0e0e0; }
@@ -240,10 +240,11 @@
 
   /* ===== Responsive — Mobile ===== */
   @media (max-width: 640px) {
-/* --- Tab Navigation: 三行 + 横向可滚动 --- */
-.tab-bar-row0 { padding: 8px 12px 0; }
-.tab-title { font-size: 17px; }
-.tab-bar-row1 { padding: 4px 12px 2px; }
+/* --- Tab Navigation: 多行 + 居中 --- */
+.tab-bar-row0 { padding: 8px 12px 2px; }
+.tab-title { font-size: 19px; }
+.tab-bar-status { padding: 2px 12px 2px; gap: 1px; }
+.tab-bar-status-row { gap: 6px; font-size: 11px; }
 .tab-bar-info { gap: 6px; font-size: 11px; }
     .tab-bar-info .info-divider { height: 12px; }
     .tab-bar-row2 { padding: 0 12px; }
@@ -377,7 +378,8 @@
 
   /* ===== 极窄屏幕适配 (≤360px) ===== */
   @media (max-width: 360px) {
-    .tab-title { font-size: 15px; }
+    .tab-title { font-size: 17px; }
+.tab-bar-status-row { gap: 4px; font-size: 10px; }
 .tab-bar-info { gap: 4px; font-size: 10px; }
     .tab-btn { padding: 10px 10px; font-size: 12px; }
     
@@ -452,14 +454,17 @@
   <div class="tab-bar-row0">
     <div class="tab-title">🇬🇪 格鲁吉亚旅游手册<span class="tab-subtitle">馒头 & 刺猬</span></div>
   </div>
-  <div class="tab-bar-row1">
-    <div class="tab-bar-info" id="headerInfo">
-      <div class="info-item" id="clockTbs"><span class="info-icon">🇬🇪</span><span class="info-label">第比利斯</span><span class="info-value">--:--</span></div>
+  <div class="tab-bar-status">
+    <div class="tab-bar-status-row">
+      <div class="info-item" id="clockTbs"><span class="info-icon">🇬🇪</span><span class="info-value">--:--</span></div>
       <div class="info-divider"></div>
-      <div class="info-item" id="clockBj"><span class="info-icon">🇨🇳</span><span class="info-label">北京</span><span class="info-value">--:--</span></div>
+      <div class="info-item" id="clockBj"><span class="info-icon">🇨🇳</span><span class="info-value">--:--</span></div>
       <div class="info-divider"></div>
       <div class="info-item" id="weatherInfo"><span class="info-icon">☀️</span><span class="info-value">--°C</span></div>
       <div class="info-divider"></div>
+      <div class="info-item" id="sunsetInfo"><span class="info-icon">🌅</span><span class="info-label">日落</span><span class="info-value">--:--</span></div>
+    </div>
+    <div class="tab-bar-status-row" id="headerInfo">
       <div class="info-item" id="rateInfo1"><span class="info-label">1₾≈</span><span class="info-value">--</span><span>¥</span></div>
       <div class="info-divider"></div>
       <div class="info-item" id="rateInfo2"><span class="info-label">1₾≈</span><span class="info-value">--</span><span>$</span></div>
@@ -2624,17 +2629,55 @@ switchTab = function(tab) {
       }).format(new Date());
     } catch (e) { return '--:--'; }
   }
-  function updateClocks() {
-    var t = document.querySelector('#clockTbs .info-value');
-    var b = document.querySelector('#clockBj .info-value');
-    if (t) t.textContent = fmtTime('Asia/Tbilisi');
-    if (b) b.textContent = fmtTime('Asia/Shanghai');
-  }
+function updateClocks() {
+var t = document.querySelector('#clockTbs .info-value');
+var b = document.querySelector('#clockBj .info-value');
+if (t) t.textContent = fmtTime('Asia/Tbilisi');
+if (b) b.textContent = fmtTime('Asia/Shanghai');
+}
 
-  // 页面加载时立即刷新
-  updateWeather();
-  updateRates();
-  updateClocks();
+// 日落时间计算（第比利斯 41.7151°N, 44.8271°E）
+function calcSunset() {
+var lat = 41.7151, lng = 44.8271;
+// 获取第比利斯当前日期
+var now = new Date();
+var tbilisi = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tbilisi' }));
+var start = new Date(tbilisi.getFullYear(), 0, 1);
+var dayOfYear = Math.floor((tbilisi - start) / 86400000) + 1;
+var zenith = 90.833;
+var D2R = Math.PI / 180, R2D = 180 / Math.PI;
+var lngHour = lng / 15;
+var tSet = dayOfYear + (18 - lngHour) / 24;
+var M = 0.9856 * tSet - 3.289;
+var L = M + 1.916 * Math.sin(M * D2R) + 0.020 * Math.sin(2 * M * D2R) + 282.634;
+L = ((L % 360) + 360) % 360;
+var RA = R2D * Math.atan(0.91764 * Math.tan(L * D2R));
+RA = ((RA % 360) + 360) % 360;
+RA += Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90;
+RA = RA / 15;
+var sinDec = 0.39782 * Math.sin(L * D2R);
+var cosDec = Math.cos(Math.asin(sinDec));
+var cosH = (Math.cos(zenith * D2R) - sinDec * Math.sin(lat * D2R)) / (cosDec * Math.cos(lat * D2R));
+if (cosH > 1 || cosH < -1) return '--:--';
+var H = R2D * Math.acos(cosH) / 15;
+var T = H + RA - 0.06571 * tSet - 6.622;
+var UT = ((T - lngHour) % 24 + 24) % 24;
+// 第比利斯 UTC+4
+var localH = Math.floor(UT + 4);
+var localM = Math.round((UT + 4 - localH) * 60);
+if (localM === 60) { localH++; localM = 0; }
+return (localH < 10 ? '0' : '') + localH + ':' + (localM < 10 ? '0' : '') + localM;
+}
+function updateSunset() {
+var el = document.querySelector('#sunsetInfo .info-value');
+if (el) el.textContent = calcSunset();
+}
+
+// 页面加载时立即刷新
+updateWeather();
+updateRates();
+updateClocks();
+updateSunset();
   // 时钟每 10 秒刷新（分钟级显示，误差可忽略）
   setInterval(updateClocks, 10 * 1000);
   // 每30分钟自动刷新
