@@ -14,12 +14,14 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
 
-  /* ===== Tab Navigation (双行布局) ===== */
+  /* ===== Tab Navigation (三行布局) ===== */
   .tab-bar { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e5e7; padding-top: env(safe-area-inset-top, 0); }
-  .tab-bar-row1 { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px 6px; }
-  .tab-title { font-size: 18px; font-weight: 700; color: #2E4057; white-space: nowrap; flex-shrink: 0; }
-  .tab-title span { font-size: 12px; font-weight: 400; color: #999; margin-left: 8px; }
-  .tab-bar-info { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #666; flex-shrink: 0; }
+  .tab-bar-row0 { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px 0; }
+  .tab-title { font-size: 20px; font-weight: 700; color: #2E4057; white-space: nowrap; }
+  .tab-title .tab-subtitle { font-size: 12px; font-weight: 400; color: #999; margin-left: 8px; }
+  .tab-bar-row1 { display: flex; align-items: center; justify-content: flex-start; padding: 6px 24px 4px; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-bar-row1::-webkit-scrollbar { display: none; }
+  .tab-bar-info { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #666; flex-shrink: 0; }
   .tab-bar-info .info-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
   .tab-bar-info .info-divider { width: 1px; height: 14px; background: #e0e0e0; }
   .tab-bar-info .info-icon { font-size: 14px; line-height: 1; }
@@ -238,11 +240,11 @@
 
   /* ===== Responsive — Mobile ===== */
   @media (max-width: 640px) {
-    /* --- Tab Navigation: 双行 + 横向可滚动 --- */
-    .tab-bar-row1 { padding: 8px 12px 4px; }
-    .tab-title { font-size: 15px; }
-    .tab-title span { display: none; }
-    .tab-bar-info { gap: 8px; font-size: 11px; }
+/* --- Tab Navigation: 三行 + 横向可滚动 --- */
+.tab-bar-row0 { padding: 8px 12px 0; }
+.tab-title { font-size: 17px; }
+.tab-bar-row1 { padding: 4px 12px 2px; }
+.tab-bar-info { gap: 6px; font-size: 11px; }
     .tab-bar-info .info-divider { height: 12px; }
     .tab-bar-row2 { padding: 0 12px; }
     .tab-btn { padding: 7px 11px; font-size: 13px; }
@@ -375,7 +377,8 @@
 
   /* ===== 极窄屏幕适配 (≤360px) ===== */
   @media (max-width: 360px) {
-    .tab-title { font-size: 14px; margin-right: 8px; }
+    .tab-title { font-size: 15px; }
+.tab-bar-info { gap: 4px; font-size: 10px; }
     .tab-btn { padding: 10px 10px; font-size: 12px; }
     
     .day-header-text h2 { font-size: 15px; }
@@ -446,8 +449,10 @@
 <body>
 
 <div class="tab-bar">
+  <div class="tab-bar-row0">
+    <div class="tab-title">🇬🇪 格鲁吉亚旅游手册<span class="tab-subtitle">馒头 & 刺猬</span></div>
+  </div>
   <div class="tab-bar-row1">
-    <div class="tab-title">🇬🇪 格鲁吉亚<span>馒头 & 刺猬</span></div>
     <div class="tab-bar-info" id="headerInfo">
       <div class="info-item" id="clockTbs"><span class="info-icon">🇬🇪</span><span class="info-label">第比利斯</span><span class="info-value">--:--</span></div>
       <div class="info-divider"></div>
