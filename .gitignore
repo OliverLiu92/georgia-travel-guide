@@ -6,3 +6,5 @@ mobile_*.png
 .DS_Store
 # 根目录的 PDF 忽略，vouchers 下的保留
 /GoToGate_FB.pdf
+# 图片原图备份（压缩前），仅本地保留不部署
+images/*_original.jpg
