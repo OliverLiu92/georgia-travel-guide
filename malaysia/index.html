@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>马来西亚亲子游手册 · 2027 寒假</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 20'%3E%3Cg fill='%23CC0001'%3E%3Crect width='28' height='20'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect y='1.43' width='28' height='1.43'/%3E%3Crect y='4.29' width='28' height='1.43'/%3E%3Crect y='7.14' width='28' height='1.43'/%3E%3Crect y='10' width='28' height='1.43'/%3E%3Crect y='12.86' width='28' height='1.43'/%3E%3Crect y='15.71' width='28' height='1.43'/%3E%3Crect y='18.57' width='28' height='1.43'/%3E%3C/g%3E%3Crect width='14' height='11.43' fill='%23010066'/%3E%3Ccircle cx='6' cy='5.7' r='3.6' fill='%23FC0'/%3E%3Ccircle cx='7' cy='5.7' r='3' fill='%23010066'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"></noscript>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
+
+  /* ===== Tab Navigation (多行布局) ===== */
+  .tab-bar { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e5e7; padding-top: env(safe-area-inset-top, 0); }
+  .tab-bar-row0 { display: flex; align-items: center; justify-content: center; padding: 10px 24px 2px; }
+  .tab-title { font-size: 22px; font-weight: 700; color: #2E4057; white-space: nowrap; }
+  .tab-title .tab-subtitle { font-size: 12px; font-weight: 400; color: #999; margin-left: 8px; }
+  .tab-bar-status { display: flex; flex-direction: column; align-items: center; padding: 2px 24px 4px; gap: 2px; }
+  .tab-bar-status-row { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; color: #666; }
+  .tab-bar-info { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #666; flex-shrink: 0; }
+  .tab-bar-info .info-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+  .tab-bar-info .info-divider { width: 1px; height: 14px; background: #e0e0e0; }
+  .tab-bar-info .info-icon { font-size: 14px; line-height: 1; }
+  .tab-bar-info .info-label { color: #aaa; }
+  .tab-bar-info .info-value { font-weight: 600; color: #2E4057; }
+  .rate-swap-btn { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid #e0e0e0; border-radius: 50%; background: #fff; cursor: pointer; font-size: 11px; color: #999; transition: all .25s; flex-shrink: 0; line-height: 1; padding: 0; }
+  .rate-swap-btn:hover { background: #f0f0f0; color: #2E4057; border-color: #ccc; }
+  .rate-swap-btn:active { transform: rotate(180deg); }
+  .rate-swap-btn svg { width: 12px; height: 12px; pointer-events: none; }
+  .tab-bar-row2 { display: flex; align-items: center; padding: 0 24px; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-bar-row2::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 8px 18px; font-size: 14px; font-weight: 500; color: #86868b; background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; flex-shrink: 0; }
+  .tab-btn:hover { color: #1d1d1f; }
+  .tab-btn.active { color: #2E4057; border-bottom-color: #2E4057; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px 80px; padding-bottom: calc(80px + env(safe-area-inset-bottom, 0)); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== 行程日程 ===== */
+
+  /* Day navigation pills */
+.day-nav { display: flex; gap: 6px; margin-bottom: 16px; overflow-x: auto; padding: 8px 0; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 90; background: #f5f5f7; margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+.day-nav::-webkit-scrollbar { display: none; }
+.day-pill { padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #2E4057; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 1.3; }
+.day-pill .pill-date { font-size: 10px; font-weight: 400; color: #aaa; }
+.day-pill:hover { border-color: #2E4057; color: #2E4057; }
+.day-pill.active { background: #2E4057; color: #fff; border-color: #2E4057; }
+.day-pill.active .pill-date { color: rgba(255,255,255,.65); }
+
+  /* Day card */
+  .day-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; display: none; }
+.day-card.day-active { display: block; }
+#backup { display: none; }
+#backup.day-active { display: block; }
+  .day-header { padding: 20px 24px 14px; border-bottom: 1px solid #f0f0f2; }
+  .day-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .day-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .day-header-text h2 { font-size: 17px; font-weight: 700; color: #1d1d1f; }
+  .day-header-text .day-date { font-size: 12px; color: #86868b; margin-top: 1px; }
+  .day-meta { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
+  .day-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
+  .day-meta-item svg { flex-shrink: 0; }
+
+  /* Timeline */
+  .timeline { padding: 0 24px 20px; }
+  .tl-item { display: flex; gap: 16px; position: relative; padding: 16px 0; }
+  .tl-item:not(:last-child)::after { content:''; position: absolute; left: 15px; top: 48px; bottom: 0; width: 1.5px; background: #e8e8ea; }
+  .tl-dot-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; padding-top: 2px; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; flex-shrink: 0; }
+  .tl-content { flex: 1; min-width: 0; }
+.tl-time { font-size: 11px; color: #86868b; font-weight: 500; margin-bottom: 2px; letter-spacing: .3px; }
+.tl-time .tl-duration { color: #bbb; margin-left: 4px; font-weight: 400; }
+.tl-name { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 3px; }
+.tl-name-en { font-size: 12px; color: #aaa; font-weight: 400; margin-left: 4px; }
+  .tl-desc { font-size: 13px; color: #555; line-height: 1.6; margin-top: 4px; }
+  .tl-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 500; margin-top: 6px; margin-right: 4px; }
+  .tl-tip { font-size: 12px; color: #E65100; background: #FFF8E1; padding: 6px 10px; border-radius: 8px; margin-top: 8px; display: inline-block; }
+  .tl-optional { opacity: .6; }
+  .tl-img { margin-top: 10px; border-radius: 10px; overflow: hidden; }
+  .tl-img img { width: 100%; max-width: 480px; height: auto; display: block; border-radius: 10px; cursor: pointer; transition: transform .2s, opacity .4s ease; opacity: 1; }
+  .tl-img img:hover { transform: scale(1.02); }
+  .tl-img img[loading="lazy"] { opacity: 0; }
+  .tl-img img.loaded, .tl-img img[loading="lazy"].loaded { opacity: 1; }
+  .tl-img-row { display: flex; gap: 8px; margin-top: 10px; }
+  .tl-img-row img { flex: 1; min-width: 0; max-width: 240px; height: auto; border-radius: 10px; cursor: pointer; transition: transform .2s; }
+  .tl-img-row img:hover { transform: scale(1.02); }
+  .backup-card img { width: 100%; border-radius: 8px; margin-top: 8px; cursor: pointer; transition: opacity .4s ease; }
+  .backup-card img[loading="lazy"] { opacity: 0; }
+  .backup-card img.loaded { opacity: 1; }
+
+  /* Location info */
+  .tl-loc { display: flex; align-items: flex-start; gap: 4px; margin-top: 6px; font-size: 11px; color: #999; line-height: 1.4; }
+  .tl-loc svg { flex-shrink: 0; margin-top: 1px; }
+  .tl-loc a { color: #1565C0; text-decoration: none; }
+  .tl-loc a:hover { text-decoration: underline; }
+
+  /* Map tab */
+  #tab-map { padding: 0; }
+  #tab-map .container { padding: 0; max-width: 100%; }
+  .map-wrap { width: 100%; height: calc(100vh - 82px); position: relative; min-height: 500px; }
+  #mapContainer { width: 100%; height: 100%; min-height: 500px; background: #e8e8e8; }
+  .map-legend { position: absolute; bottom: 24px; left: 16px; z-index: 500; background: #fff; border-radius: 12px; padding: 12px 16px; box-shadow: 0 2px 12px rgba(0,0,0,.12); max-width: 200px; }
+  .map-legend h4 { font-size: 12px; font-weight: 600; color: #2E4057; margin-bottom: 6px; }
+  .map-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #555; margin-bottom: 3px; }
+  .map-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .map-day-filter { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 500; display: flex; gap: 4px; background: #fff; border-radius: 20px; padding: 4px; box-shadow: 0 2px 12px rgba(0,0,0,.12); flex-wrap: nowrap; overflow-x: auto; max-width: 90vw; }
+  .map-day-filter::-webkit-scrollbar { display: none; }
+  .map-filter-btn { padding: 5px 12px; font-size: 11px; font-weight: 500; border-radius: 16px; border: none; background: transparent; color: #666; cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .map-filter-btn:hover { background: #f0f0f0; }
+  .map-filter-btn.active { background: #2E4057; color: #fff; }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 300; align-items: center; justify-content: center; cursor: zoom-out; will-change: opacity; }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,.4); }
+  .tl-optional .tl-name::after { content: '可选'; font-size: 10px; background: #f0f0f0; color: #999; padding: 1px 6px; border-radius: 8px; margin-left: 6px; font-weight: 400; vertical-align: middle; }
+
+  /* Dot colors by type */
+  .dot-spot { border-color: #1565C0; background: #E3F2FD; }
+  .dot-food { border-color: #C62828; background: #FCE4EC; }
+  .dot-hotel { border-color: #2E7D32; background: #E8F5E9; }
+  .dot-transport { border-color: #E65100; background: #FFF3E0; }
+  .dot-activity { border-color: #6A1B9A; background: #F3E5F5; }
+
+  /* Tag colors */
+  .tag-spot { background: #E3F2FD; color: #1565C0; }
+  .tag-food { background: #FCE4EC; color: #C62828; }
+  .tag-hotel { background: #E8F5E9; color: #2E7D32; }
+  .tag-transport { background: #FFF3E0; color: #E65100; }
+  .tag-tips { background: #FFF8E1; color: #F57F17; }
+
+  /* Day badge colors */
+  .badge-1 { background: linear-gradient(135deg, #5C6BC0, #3949AB); }
+  .badge-2 { background: linear-gradient(135deg, #26A69A, #00897B); }
+  .badge-3 { background: linear-gradient(135deg, #EF5350, #E53935); }
+  .badge-4 { background: linear-gradient(135deg, #AB47BC, #8E24AA); }
+  .badge-5 { background: linear-gradient(135deg, #FFA726, #FB8C00); }
+  .badge-6 { background: linear-gradient(135deg, #66BB6A, #43A047); }
+  .badge-7 { background: linear-gradient(135deg, #42A5F5, #1E88E5); }
+  .badge-8 { background: linear-gradient(135deg, #78909C, #546E7A); }
+
+  /* Backup spots */
+  .backup-section { margin-top: 8px; }
+  .backup-title { font-size: 14px; font-weight: 600; color: #86868b; padding: 12px 0 8px; display: flex; align-items: center; gap: 6px; }
+  .backup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .backup-card { background: #fff; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); border-left: 3px solid #e0e0e0; contain: layout style; }
+  .backup-card h4 { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px; }
+  .backup-card p { font-size: 12px; color: #888; line-height: 1.5; }
+  .backup-card .bc-region { font-size: 11px; color: #aaa; margin-bottom: 4px; }
+
+  /* ===== 支出记录 ===== */
+  .expense-summary { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 140px; background: #fff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .summary-card .label { font-size: 12px; color: #86868b; margin-bottom: 4px; }
+  .summary-card .value { font-size: 24px; font-weight: 700; color: #2E4057; }
+
+  .expense-table-wrap { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); overflow: hidden; }
+  .expense-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; gap: 8px; }
+  .expense-toolbar .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-chip { padding: 5px 12px; font-size: 12px; border-radius: 16px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; transition: all .2s; }
+  .filter-chip:hover, .filter-chip.active { background: #2E4057; color: #fff; border-color: #2E4057; }
+  .btn-add { padding: 7px 16px; font-size: 13px; font-weight: 500; background: #2E4057; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; }
+  .btn-add:hover { background: #1a2a3a; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th { padding: 10px 12px; font-size: 12px; font-weight: 600; color: #86868b; text-align: left; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; }
+  thead th:last-child { text-align: center; }
+  tbody td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.empty-hint td { text-align: center; color: #ccc; padding: 32px; font-size: 13px; }
+
+  .cat-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  .cat-交通 { background: #FFF3E0; color: #E65100; }
+  .cat-住宿 { background: #E8F5E9; color: #2E7D32; }
+  .cat-餐饮 { background: #FCE4EC; color: #C62828; }
+  .cat-门票 { background: #E3F2FD; color: #1565C0; }
+  .cat-购物 { background: #F3E5F5; color: #6A1B9A; }
+  .cat-其他 { background: #F5F5F5; color: #616161; }
+
+  .amount { font-variant-numeric: tabular-nums; font-weight: 500; text-align: right; }
+  .actions { text-align: center; }
+  .btn-del { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; padding: 4px 8px; border-radius: 4px; transition: color .2s; }
+  .btn-del:hover { color: #e53935; }
+
+  /* ===== Modal ===== */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 200; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: #fff; border-radius: 16px; padding: 28px 24px; width: 420px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+  .modal h3 { font-size: 17px; font-weight: 700; color: #2E4057; margin-bottom: 20px; }
+  .modal .field { margin-bottom: 14px; }
+  .modal label { display: block; font-size: 12px; font-weight: 500; color: #86868b; margin-bottom: 4px; }
+  .modal input, .modal select { width: 100%; padding: 9px 12px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 8px; outline: none; transition: border .2s; }
+  .modal input:focus, .modal select:focus { border-color: #2E4057; }
+  .modal .row { display: flex; gap: 10px; }
+  .modal .row .field { flex: 1; }
+  .modal .btn-row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .modal .btn-cancel { padding: 9px 20px; font-size: 14px; background: #f5f5f5; border: none; border-radius: 8px; cursor: pointer; color: #666; }
+  .modal .btn-save { padding: 9px 20px; font-size: 14px; background: #2E4057; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+  .modal .btn-save:hover { background: #1a2a3a; }
+
+  /* ===== 出行清单 ===== */
+  .checklist-progress { background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); display: flex; align-items: center; gap: 16px; }
+  .progress-bar-wrap { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #43A047, #66BB6A); border-radius: 4px; transition: width .3s; }
+  .progress-text { font-size: 13px; color: #86868b; white-space: nowrap; }
+
+  .checklist-section { margin-bottom: 16px; }
+  .section-header { font-size: 13px; font-weight: 600; color: #2E4057; padding: 10px 16px 6px; }
+  .checklist-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); overflow: hidden; }
+  .checklist-item { display: flex; align-items: center; padding: 11px 16px; border-bottom: 1px solid #f5f5f5; gap: 12px; transition: background .15s; }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item:hover { background: #fafafa; }
+  .checklist-item.checked .item-name { text-decoration: line-through; color: #bbb; }
+  .checklist-item.checked .item-note { color: #ddd; }
+  .check-box { width: 22px; height: 22px; border: 2px solid #d0d0d0; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; }
+  .check-box:hover { border-color: #43A047; }
+  .checklist-item.checked .check-box { background: #43A047; border-color: #43A047; }
+  .check-box svg { display: none; }
+  .checklist-item.checked .check-box svg { display: block; }
+  .item-name { font-size: 14px; flex: 1; }
+  .item-note { font-size: 12px; color: #999; max-width: 200px; text-align: right; }
+  .item-del { background: none; border: none; color: #ddd; cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity .2s; }
+  .checklist-item:hover .item-del { opacity: 1; }
+  .item-del:hover { color: #e53935; }
+  .add-item-row { display: flex; gap: 8px; padding: 8px 16px; }
+  .add-item-row input { flex: 1; padding: 8px 12px; font-size: 13px; border: 1px dashed #ddd; border-radius: 8px; outline: none; }
+  .add-item-row input:focus { border-color: #2E4057; border-style: solid; }
+  .add-item-row button { padding: 8px 14px; font-size: 13px; background: #f5f5f5; border: none; border-radius: 8px; cursor: pointer; color: #666; }
+  .add-item-row button:hover { background: #2E4057; color: #fff; }
+
+  /* 凭证超链接（行程内） */
+  .tl-cert-link { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #1565C0; text-decoration: none; background: #E3F2FD; padding: 2px 8px; border-radius: 8px; margin-top: 6px; margin-right: 4px; cursor: pointer; transition: background .15s; }
+  .tl-cert-link:hover { background: #BBDEFB; }
+  .tl-cert-link svg { flex-shrink: 0; }
+
+  /* ===== Responsive — Mobile ===== */
+  @media (max-width: 640px) {
+/* --- Tab Navigation: 多行 + 居中 --- */
+.tab-bar-row0 { padding: 8px 12px 2px; }
+.tab-title { font-size: 19px; }
+.tab-bar-status { padding: 2px 12px 2px; gap: 1px; }
+.tab-bar-status-row { gap: 6px; font-size: 11px; }
+.tab-bar-info { gap: 6px; font-size: 11px; }
+    .tab-bar-info .info-divider { height: 12px; }
+    .tab-bar-row2 { padding: 0 12px; }
+    .tab-btn { padding: 7px 11px; font-size: 13px; }
+
+    /* --- Container --- */
+    .container { padding: 14px 10px 80px; }
+
+    /* --- Day nav 吸顶适配 --- */
+    .day-nav { margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; }
+
+    /* --- Day 卡片 --- */
+    .day-header { padding: 14px 14px 10px; }
+    .day-header-text h2 { font-size: 16px; }
+    .day-badge { width: 38px; height: 38px; font-size: 12px; }
+    .timeline { padding: 0 14px 14px; }
+    .tl-item { gap: 12px; }
+    .tl-name { font-size: 14px; }
+    .tl-desc { font-size: 12.5px; }
+    .tl-img img { max-width: 100%; border-radius: 8px; }
+    .tl-img img:hover { transform: none; }
+    .tl-img-row { flex-direction: column; }
+    .tl-img-row img { max-width: 100%; }
+
+    /* --- 乘机人信息溢出 --- */
+    .passenger-info, [style*="background:#F8F9FA"] { font-size: 12px; word-break: break-all; }
+
+    /* --- 备选景点 --- */
+    .backup-grid { grid-template-columns: 1fr; }
+    .backup-card img:hover { transform: none; }
+
+    /* --- 支出记录表格: 横向可滚动 --- */
+    .expense-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .expense-table-wrap table { min-width: 600px; }
+    .summary-card { min-width: 0; padding: 12px 14px; }
+    .summary-card .value { font-size: 20px; }
+
+    /* --- 弹窗 --- */
+    .modal { padding: 20px 16px; width: 100%; max-width: 92vw; }
+    .modal .row { flex-direction: column; gap: 0; }
+
+    /* --- 出行清单 --- */
+    .item-note { max-width: 100px; font-size: 11px; }
+    .item-del { opacity: 1; }  /* 手机上没有 hover，始终显示删除按钮 */
+    .checklist-item { padding: 10px 12px; gap: 10px; }
+    .check-box { width: 20px; height: 20px; }
+    .item-name { font-size: 13px; }
+    .add-item-row { padding: 8px 12px; }
+
+    /* --- 地图 --- */
+    .map-wrap { height: calc(100vh - 72px); min-height: 400px; }
+    .map-legend { bottom: 12px; left: 8px; padding: 8px 12px; max-width: 160px; font-size: 10px; }
+    .map-legend h4 { font-size: 11px; }
+    .map-day-filter { max-width: 95vw; top: 8px; padding: 3px; }
+    .map-filter-btn { padding: 4px 10px; font-size: 10px; }
+
+    /* --- Lightbox --- */
+    .lightbox img { max-width: 96vw; max-height: 88vh; border-radius: 4px; }
+
+    /* --- 全局触摸优化 --- */
+    .tab-btn, .day-pill, .filter-chip, .btn-add, .btn-del, .check-box,
+    .map-filter-btn, .tl-cert-link, .add-item-row button, .modal .btn-cancel, .modal .btn-save {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* 禁用手机上无意义的 hover 效果 */
+    tbody tr:hover { background: transparent; }
+    .checklist-item:hover { background: transparent; }
+    .btn-del:hover { color: #ccc; }
+  }
+
+  /* ===== 避雷指南 ===== */
+  .tips-hero { background: linear-gradient(135deg, #FF6B35, #F7C948); border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; color: #fff; position: relative; overflow: hidden; }
+  .tips-hero::after { content: '⚡'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: .15; }
+  .tips-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .tips-hero p { font-size: 13px; opacity: .9; line-height: 1.6; }
+
+  .tips-nav { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .tips-nav::-webkit-scrollbar { display: none; }
+  .tips-nav-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 20px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; }
+  .tips-nav-btn:hover { border-color: #FF6B35; color: #FF6B35; }
+  .tips-nav-btn.active { background: #FF6B35; color: #fff; border-color: #FF6B35; }
+
+  .tips-section { margin-bottom: 24px; scroll-margin-top: 80px; }
+  .tips-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .tips-section-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .tips-section-title { font-size: 17px; font-weight: 700; color: #2E4057; }
+
+  .tip-card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 12px; overflow: hidden; border-left: 4px solid transparent; }
+  .tip-card.danger { border-left-color: #E53935; }
+  .tip-card.warning { border-left-color: #FF9800; }
+  .tip-card.info { border-left-color: #1976D2; }
+  .tip-card.good { border-left-color: #43A047; }
+
+  .tip-card-inner { padding: 16px 18px; }
+  .tip-title { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .tip-level { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .level-danger { background: #FFEBEE; color: #C62828; }
+  .level-warning { background: #FFF3E0; color: #E65100; }
+  .level-info { background: #E3F2FD; color: #1565C0; }
+  .level-good { background: #E8F5E9; color: #2E7D32; }
+  .tip-body { font-size: 13px; color: #555; line-height: 1.7; }
+  .tip-body strong { color: #1d1d1f; font-weight: 600; }
+  .tip-compare { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .tip-compare-item { flex: 1; min-width: 140px; padding: 10px 14px; border-radius: 10px; font-size: 12px; line-height: 1.5; }
+  .tip-cn { background: #FFF8E1; border: 1px solid #FFE082; }
+  .tip-ge { background: #E8F5E9; border: 1px solid #A5D6A7; }
+  .tip-compare-label { font-size: 11px; font-weight: 600; margin-bottom: 4px; display: block; }
+  .tip-cn .tip-compare-label { color: #F57F17; }
+  .tip-ge .tip-compare-label { color: #2E7D32; }
+
+  .tips-quick-ref { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; margin-bottom: 24px; }
+  .tips-quick-ref h3 { font-size: 15px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #E53935, #C62828); padding: 14px 18px; }
+  .tips-quick-table { width: 100%; border-collapse: collapse; }
+  .tips-quick-table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #f5f5f5; vertical-align: top; }
+  .tips-quick-table tr:last-child td { border-bottom: none; }
+  .tips-quick-table td:first-child { font-weight: 600; color: #C62828; white-space: nowrap; width: 120px; }
+  .tips-quick-table td:last-child { color: #43A047; }
+
+  @media (max-width: 640px) {
+    .tips-hero { padding: 20px 16px; }
+    .tips-hero h2 { font-size: 18px; }
+    .tips-hero::after { font-size: 48px; right: 12px; }
+    .tips-nav-btn { padding: 7px 14px; font-size: 12px; }
+    .tip-card-inner { padding: 14px 14px; }
+    .tip-compare { flex-direction: column; }
+    .tips-quick-table td:first-child { width: auto; }
+    .tips-quick-ref { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  }
+
+  /* ===== 极窄屏幕适配 (≤360px) ===== */
+  @media (max-width: 360px) {
+    .tab-title { font-size: 17px; }
+.tab-bar-status-row { gap: 4px; font-size: 10px; }
+.tab-bar-info { gap: 4px; font-size: 10px; }
+    .tab-btn { padding: 10px 10px; font-size: 12px; }
+    
+    .day-header-text h2 { font-size: 15px; }
+    .tl-name { font-size: 13px; }
+    .tl-desc { font-size: 12px; }
+    .summary-card .value { font-size: 18px; }
+  }
+
+  /* ===== 历史文化 ===== */
+  .hist-hero { background: linear-gradient(135deg, #6A4C93, #2E4057); border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; color: #fff; position: relative; overflow: hidden; }
+  .hist-hero::after { content: '🏛️'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: .15; }
+  .hist-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .hist-hero p { font-size: 13px; opacity: .9; line-height: 1.6; max-width: 90%; }
+  .hist-hero .hist-source { font-size: 11px; opacity: .7; margin-top: 10px; }
+
+  .hist-nav { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .hist-nav::-webkit-scrollbar { display: none; }
+  .hist-nav-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 20px; border: 1px solid #e5e5e7; background: #fff; color: #666; cursor: pointer; white-space: nowrap; transition: all .2s; flex-shrink: 0; }
+  .hist-nav-btn:hover { border-color: #6A4C93; color: #6A4C93; }
+  .hist-nav-btn.active { background: #6A4C93; color: #fff; border-color: #6A4C93; }
+
+  /* 时间线（国家简史） */
+  .hist-timeline-wrap { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 20px 20px 6px; margin-bottom: 24px; }
+  .hist-timeline-wrap h3 { font-size: 15px; font-weight: 700; color: #2E4057; margin-bottom: 16px; }
+  .hist-era { display: flex; gap: 14px; padding-bottom: 18px; position: relative; }
+  .hist-era:not(:last-child)::after { content: ''; position: absolute; left: 5px; top: 22px; bottom: 0; width: 1.5px; background: #ece6f5; }
+  .hist-era-dot { width: 11px; height: 11px; border-radius: 50%; background: #6A4C93; flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 3px #ece6f5; }
+  .hist-era-body .hist-era-time { font-size: 11px; font-weight: 700; color: #6A4C93; text-transform: uppercase; letter-spacing: .3px; }
+  .hist-era-body .hist-era-title { font-size: 14px; font-weight: 600; color: #1d1d1f; margin: 2px 0 4px; }
+  .hist-era-body .hist-era-desc { font-size: 12.5px; color: #666; line-height: 1.65; }
+
+  /* 章节 */
+  .hist-section { margin-bottom: 26px; scroll-margin-top: 80px; }
+  .hist-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .hist-section-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .hist-section-title { font-size: 17px; font-weight: 700; color: #2E4057; }
+  .hist-section-sub { font-size: 12px; color: #999; margin-top: 1px; }
+
+  /* 景点/城市卡片 */
+  .hist-card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 14px; overflow: hidden; }
+  .hist-card-inner { padding: 16px 18px; }
+  .hist-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .hist-card-title { font-size: 15px; font-weight: 700; color: #1d1d1f; }
+  .hist-card-title .en { font-size: 11.5px; color: #aaa; font-weight: 400; margin-left: 6px; }
+  .hist-card-badge { font-size: 10.5px; font-weight: 600; padding: 2px 9px; border-radius: 10px; background: #F3E8FF; color: #6A4C93; white-space: nowrap; }
+  .hist-card-body { font-size: 13px; color: #555; line-height: 1.75; }
+  .hist-card-body strong { color: #1d1d1f; font-weight: 600; }
+  .hist-card-body + .hist-card-body { margin-top: 8px; }
+  .hist-tag-row { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .hist-tag { font-size: 10.5px; font-weight: 500; padding: 2px 9px; border-radius: 10px; background: #F5F5F7; color: #777; }
+  .hist-fact { margin-top: 10px; font-size: 12px; color: #8E5C00; background: #FFF8E1; padding: 8px 12px; border-radius: 8px; line-height: 1.6; }
+  .hist-fact b { color: #E65100; }
+
+  /* 关联行程标记 */
+  .hist-itin-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #2E7D32; background: #E8F5E9; padding: 2px 9px; border-radius: 10px; margin-top: 10px; }
+
+  @media (max-width: 640px) {
+    .hist-hero { padding: 20px 16px; }
+    .hist-hero h2 { font-size: 18px; }
+    .hist-hero p { max-width: 100%; }
+    .hist-hero::after { font-size: 48px; right: 12px; }
+    .hist-nav-btn { padding: 7px 14px; font-size: 12px; }
+    .hist-card-inner { padding: 14px 14px; }
+    .hist-timeline-wrap { padding: 16px 16px 4px; }
+  }
+
+  /* ===== Malaysia additions ===== */
+  .info-box { margin-top:10px; padding:10px 14px; background:#f8f9fa; border-radius:10px; font-size:12.5px; line-height:1.75; color:#444; }
+  .info-box-title { font-weight:600; color:#2E4057; margin-bottom:4px; font-size:13px; }
+  .info-box b { color:#1d1d1f; }
+  .trip-banner { background:#fff; border-radius:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); padding:14px 18px; margin-bottom:10px; font-size:13px; color:#555; line-height:1.7; border-left:4px solid #2E4057; }
+  .trip-banner .tb-title { font-weight:700; color:#2E4057; font-size:14px; margin-bottom:4px; }
+  .trip-banner .tb-warn { color:#E65100; font-weight:600; }
+  .trip-banner details { margin-top:6px; }
+  .trip-banner summary { cursor:pointer; color:#1565C0; font-size:12.5px; }
+  .trip-banner details div { margin-top:6px; font-size:12.5px; }
+  .tab-bar-status-row .tz-note { color:#aaa; font-size:11px; }
+  @media (max-width: 640px) { .tips-quick-table td:first-child { white-space:normal; width:46%; } .trip-banner { padding:12px 14px; font-size:12.5px; } .info-box { font-size:12px; word-break:break-word; } }
+
+</style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <div class="tab-bar-row0">
+    <div class="tab-title">🇲🇾 马来西亚亲子游手册<span class="tab-subtitle">馒头 & 刺猬 & 跳跳</span></div>
+  </div>
+  <div class="tab-bar-status">
+    <div class="tab-bar-status-row">
+      <div class="info-item" id="clockKul"><span class="info-icon">🇲🇾</span><span class="info-value">--:--</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="clockBj"><span class="info-icon">🇨🇳</span><span class="info-value">--:--</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="weatherInfo"><span class="info-icon">☀️</span><span class="info-value">--°C</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="sunsetInfo"><span class="info-icon">🌅</span><span class="info-label">日落</span><span class="info-value">--:--</span></div>
+    </div>
+    <div class="tab-bar-status-row" id="headerInfo">
+      <div class="info-item" id="rateInfo1"><span class="info-label">1RM≈</span><span class="info-value">--</span><span>¥</span></div>
+      <div class="info-divider"></div>
+      <div class="info-item" id="rateInfo2"><span class="info-label">1RM≈</span><span class="info-value">--</span><span>$</span></div>
+      <button class="rate-swap-btn" id="rateSwapBtn" onclick="toggleRateDirection()" title="切换汇率方向"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></button>
+      <span class="tz-note">· 无时差</span>
+    </div>
+  </div>
+  <div class="tab-bar-row2">
+    <button class="tab-btn active" onclick="switchTab('itinerary')">旅行日程</button>
+    <button class="tab-btn" onclick="switchTab('map')">地图模式</button>
+    <button class="tab-btn" onclick="switchTab('expense')">支出记录</button>
+    <button class="tab-btn" onclick="switchTab('checklist')">出行清单</button>
+    <button class="tab-btn" onclick="switchTab('history')">🏛️ 历史文化</button>
+    <button class="tab-btn" onclick="switchTab('tips')">⚡ 避雷指南</button>
+  </div>
+</div>
+
+<!-- ===== 旅行日程 ===== -->
+<div id="tab-itinerary" class="tab-content active">
+<div class="container">
+  <div class="trip-banner">
+    <div class="tb-title">🗓️ 2027年1月23日（周六）— 1月28日（周四）· 6天5晚 · 吉隆坡 → 马六甲 → 兰卡威</div>
+    <div>上海市教委《2026学年校历》：中小学寒假 <b>2027年1月23日</b> 开始（幼儿园放假安排以园方通知为准）。春节 <b>2月6日</b>，本行程返程距除夕还有一周多，避开国内出境高峰与马来西亚春节歇业期。</div>
+    <div class="tb-warn">⚠️ 所有机票、酒店、包车均未预订；标注“推荐（未预订）/ 参考 / 待确认 / 价格待查”的信息请出行前核实。</div>
+    <details><summary>为什么选兰卡威而不是槟城？</summary>
+      <div>① <b>1 月是兰卡威旱季</b>，海水和沙滩状态最好；② 行程以<b>度假酒店为中心</b>，酒店自带儿童戏水区和儿童俱乐部，离机场近，每天车程短；③ 缆车、红树林游船、海滩都是<b>“坐着/玩沙就能完成”</b>的项目，适合 3 岁孩子；④ 槟城以乔治市街头暴走、美食和壁画为主，热天推车走街串巷对跳跳较累、城区交通拥堵，更适合孩子大一点或“美食游”。槟城列入备选。</div>
+    </details>
+    <details><summary>马六甲为什么住一晚？</summary>
+      <div>当天往返要坐 4 小时车；住一晚后 D4 直接从马六甲去吉隆坡国际机场（约 1.5 小时）飞兰卡威，不走回头路，每天车程都控制在 2 小时左右。</div>
+    </details>
+  </div>
+
+  <div class="day-nav">
+    <span class="day-pill active" onclick="scrollToDay('day1')">Day 1 吉隆坡<span class="pill-date">1.23 周六</span></span>
+    <span class="day-pill" onclick="scrollToDay('day2')">Day 2 KLCC<span class="pill-date">1.24 周日</span></span>
+    <span class="day-pill" onclick="scrollToDay('day3')">Day 3 马六甲<span class="pill-date">1.25 周一</span></span>
+    <span class="day-pill" onclick="scrollToDay('day4')">Day 4 兰卡威<span class="pill-date">1.26 周二</span></span>
+    <span class="day-pill" onclick="scrollToDay('day5')">Day 5 兰卡威<span class="pill-date">1.27 周三</span></span>
+    <span class="day-pill" onclick="scrollToDay('day6')">Day 6 返程<span class="pill-date">1.28 周四</span></span>
+    <span class="day-pill" onclick="scrollToDay('backup')">备选景点<span class="pill-date">可替换</span></span>
+  </div>
+
+  <!-- ========== Day 1 ========== -->
+  <div class="day-card" id="day1">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-1">D1</div>
+        <div class="day-header-text">
+          <h2>上海 → 吉隆坡</h2>
+          <div class="day-date">2027年1月23日 周六 · 到达日 · 上海寒假第一天</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M22 2L2 10l7 3 3 7z"/></svg> 浦东 PVG → 吉隆坡 KUL 直飞 · 航班待定（未预订）</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 🔖 住 KLCC 区域酒店 · 推荐（未预订）· 2 晚</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">上午 <span class="tl-duration">· 约 5.5–6h</span></div>
+          <div class="tl-name">上海浦东 → 吉隆坡<span class="tl-name-en">PVG → KUL</span></div>
+          
+          <div class="tl-desc">马来西亚与北京时间<b>没有时差</b>（均为 UTC+8），不用倒时差，对跳跳的作息非常友好。建议上午出发、下午落地，晚上可以正常睡觉。</div>
+          <div class="info-box"><div class="info-box-title">✈️ 上海浦东 ⇄ 吉隆坡 直飞候选航司（未预订 · 参考）</div><div>据 FlyTeam / biirdee 截至 2026 年 9 月的航线资料，PVG–KUL 直飞航司包括：<b>马来西亚航空 MH</b>、<b>亚航X AirAsia X (D7)</b>、<b>东方航空 MU</b>、<b>上海航空 FM</b>、<b>吉祥航空 HO</b>、<b>春秋航空 9C</b>、<b>马印航空 Batik Air Malaysia (OD)</b>。</div><div>航程约 5.5–6 小时（各航司时刻不同）。具体航班号、起降时刻、票价：<b>价格待查</b>，以订票时为准。</div><div>亲子建议：优先选<b>白天出发</b>、全服务航司（MH/MU/FM，含餐和托运），避免红眼航班。跳跳满 2 岁需<b>单独占座购票</b>（儿童票）。</div><div>⚠️ 1/23 为上海中小学寒假首日，出行需求大，建议尽早比价。</div></div><div class="info-box"><div class="info-box-title">👨‍👩‍👦 出行人（机票未预订）</div><div>👤 馒头 · LIU/MING · 机票：<span style="color:#E65100">未预订</span></div><div>👤 刺猬 · ZHOU/ZIWEI · 机票：<span style="color:#E65100">未预订</span></div><div>👶 跳跳 · 3 岁 · 需占座儿童票 · 机票：<span style="color:#E65100">未预订</span></div></div>
+          <span class="tl-tag tag-transport">直飞 · 约 5.5–6h</span><span class="tl-tag tag-tips">无时差</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">落地 <span class="tl-duration">· 30–60min</span></div>
+          <div class="tl-name">入境 · 出示 MDAC<span class="tl-name-en">Immigration · KLIA</span></div>
+          
+          <div class="tl-desc">持中国普通护照（有效期≥6个月）<b>免签入境</b>，单次停留≤30天、每180天累计≤90天（中马互免签证协定，2025-07-17 生效，中国驻马使馆 FAQ）。<b>每位旅客（包括跳跳）都必须在抵达前 3 天（72 小时）内</b>在官网 imigresen-online.imi.gov.my 免费提交 <b>MDAC 马来西亚数字入境卡</b>，保存确认邮件/二维码。</div>
+          
+          <span class="tl-tag tag-tips">免签 30 天</span><span class="tl-tag tag-tips">MDAC ×3 人</span>
+          <div class="tl-tip">💡 只用官网填写 MDAC，收费的第三方网站都不是官方。自助通道（autogate）官方名单含中国大陆，但首次入境/带儿童可能需走人工柜台，以现场指引为准（待确认）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">入境后 <span class="tl-duration">· 20min</span></div>
+          <div class="tl-name">换汇 · 电话卡 · 下载 Grab<span class="tl-name-en">Money · SIM · Grab</span></div>
+          
+          <div class="tl-desc">机场到达层有换汇柜台和运营商柜台（如 Hotlink/Maxis、CelcomDigi、U Mobile 等），可买旅游流量卡；也可出发前买 eSIM。只换少量林吉特现金（打车、夜市、小摊），大部分商场/酒店可刷 Visa/Mastercard。部分商户支持支付宝/微信（覆盖程度待确认）。</div>
+          
+          <span class="tl-tag tag-tips">机场只换少量</span><span class="tl-tag tag-tips">eSIM 更省心</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">约 16:00 <span class="tl-duration">· 约 1h</span></div>
+          <div class="tl-name">机场 → KLCC 酒店<span class="tl-name-en">KLIA → KLCC</span></div>
+          
+          <div class="tl-desc">带娃+行李，推荐<b>提前预约带儿童座椅的接机包车</b>或 Grab 6 座车（需自带儿童座椅，见下方提示）。也可坐 KLIA Ekspres 机场快线到 KL Sentral 再打车，但拖行李换乘较折腾。</div>
+          
+          <span class="tl-tag tag-transport">包车/Grab</span>
+          <div class="tl-tip">💡 Grab 马来西亚 2026 年 9 月推出的 Kid-Friendly Rides（测试版）只提供增高垫、适用 4–12 岁、目前仅限 KLIA 接送机预约；跳跳 3 岁不在适用范围，建议自带便携儿童座椅（价格与可用性待确认）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">约 17:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住 KLCC 区域酒店<span class="tl-name-en">Hotel near KLCC Park</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>候选：Traders Hotel Kuala Lumpur / Mandarin Oriental Kuala Lumpur / Grand Hyatt Kuala Lumpur · <a href="https://www.google.com/maps/search/?api=1&query=Traders+Hotel+Kuala+Lumpur" target="_blank">地图</a></span></div>
+          <div class="tl-desc">住 KLCC 附近，双子塔、KLCC 公园戏水池、水族馆都能<b>步行或推车到达</b>，D2 不用坐车。选房时问清：可否加婴儿床/儿童床、是否有浴缸、泳池是否有儿童区。</div>
+          
+          <span class="tl-tag tag-hotel">推荐（未预订）· 价格待查</span><span class="tl-tag tag-tips">旅游税 RM10/间/晚</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">晚餐 + 双子塔夜景<span class="tl-name-en">Suria KLCC · Lake Symphony</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Suria KLCC, Kuala Lumpur City Centre · <a href="https://www.google.com/maps/search/?api=1&query=Suria+KLCC" target="_blank">地图</a></span></div>
+          <div class="tl-desc">双子塔脚下的 Suria KLCC 商场有美食广场和大量中餐/连锁餐厅，冷气足、有母婴室，第一晚不用折腾。饭后到商场外 KLCC 公园湖边看灯光下的双子塔，湖上有音乐喷泉（Lake Symphony，场次时间待确认）。</div>
+          
+          <span class="tl-tag tag-food">商场美食广场</span><span class="tl-tag tag-spot">双子塔夜景</span>
+          <div class="tl-tip">💡 室内冷气很足，给跳跳带一件薄长袖外套。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Day 2 ========== -->
+  <div class="day-card" id="day2">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-2">D2</div>
+        <div class="day-header-text">
+          <h2>吉隆坡 · KLCC 亲子日</h2>
+          <div class="day-date">2027年1月24日 周日 · 双子塔 · 戏水池 · 水族馆</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6A1B9A" stroke-width="2"><circle cx="12" cy="6" r="3"/><path d="M6 21v-4a6 6 0 0112 0v4"/></svg> 全天步行/推车可达 · 午睡回酒店</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 🔖 续住 KLCC 酒店（未预订）</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item tl-optional">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">07:30 <span class="tl-duration">· 2.5h</span></div>
+          <div class="tl-name">黑风洞（可选）<span class="tl-name-en">Batu Caves</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Gombak, Selangor · 距 KLCC 约 13km · <a href="https://www.google.com/maps/search/?api=1&query=Batu+Caves" target="_blank">地图</a></span></div>
+          <div class="tl-desc">印度教圣地，金色神像和 272 级彩虹阶梯。<b>免费入场</b>，一般 7:00–21:00 开放（参考）。<b>推车上不去</b>，需背娃爬台阶；台阶上猴子很多，会抢食物和塑料袋。须<b>遮肩过膝</b>，不合格需在山脚购买/租用纱笼（参考 RM15）。</div>
+          
+          <span class="tl-tag tag-spot">免费</span><span class="tl-tag tag-tips">遮肩过膝</span>
+          <div class="tl-tip">💡 1/22（周五）是大宝森节 Thaipusam，前后几天黑风洞人流极大、清理现场，1/24 可能仍较拥挤；精力不够就放弃，把上午留给 KLCC 公园。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">10:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">KLCC 公园儿童戏水池 + 游乐场<span class="tl-name-en">KLCC Park Wading Pool</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>KLCC Park, Jalan Ampang, Kuala Lumpur · <a href="https://www.google.com/maps/search/?api=1&query=KLCC+Park+Wading+Pool" target="_blank">地图</a></span></div>
+          <div class="tl-desc">双子塔脚下的城市公园，有<b>免费儿童戏水池</b>和大型游乐场。戏水池一般<b>周二至周日约 10:00–19:30 开放，周一闭池维护</b>（多个旅游网站资料，参考/待确认），12 岁以下儿童免费。上午阳光没那么毒，最适合玩水。</div>
+          
+          <span class="tl-tag tag-spot">免费</span><span class="tl-tag tag-tips">周一关闭</span><span class="tl-tag tag-tips">带泳衣+毛巾</span>
+          <div class="tl-tip">💡 给跳跳穿泳衣+防晒衣，涂 SPF50 儿童防晒；带一套干衣服，玩完直接回酒店冲澡。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">午餐<span class="tl-name-en">Suria KLCC Food Court</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Suria KLCC · <a href="https://www.google.com/maps/search/?api=1&query=Suria+KLCC" target="_blank">地图</a></span></div>
+          <div class="tl-desc">商场里选择多：海南鸡饭、肉骨茶、港式茶餐厅、日料等。点菜可以说“不要辣 (no chili)”，很多餐厅有儿童餐或可要儿童椅。</div>
+          
+          <span class="tl-tag tag-food">不要辣 = No chili</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">13:00 <span class="tl-duration">· 2h</span></div>
+          <div class="tl-name">回酒店午睡<span class="tl-name-en">Nap time</span></div>
+          
+          <div class="tl-desc">一天最热的时段（约 13:00–15:00）回酒店午睡，大人也可以在泳池休息。</div>
+          
+          <span class="tl-tag tag-hotel">午睡</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">15:30 <span class="tl-duration">· 1.5–2h</span></div>
+          <div class="tl-name">吉隆坡城中城水族馆<span class="tl-name-en">Aquaria KLCC</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Kuala Lumpur Convention Centre, Jalan Pinang（与 KLCC 公园相连） · <a href="https://www.google.com/maps/search/?api=1&query=Aquaria+KLCC" target="_blank">地图</a></span></div>
+          <div class="tl-desc">有海底隧道、鲨鱼、水母、互动触摸池，全程室内冷气，推车可进。每日开放，约 10:00–19:00/20:00（各来源不一，待确认）。3 岁以下免费，<b>跳跳 3 岁需买儿童票</b>；非马来西亚居民儿童票参考 RM59–75，官网/线上常有折扣（参考，以官网为准）。</div>
+          
+          <span class="tl-tag tag-spot">室内 · 推车友好</span><span class="tl-tag tag-tips">官网/线上购票</span>
+          
+        </div>
+      </div>
+      <div class="tl-item tl-optional">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">18:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">双子塔天桥 / 观景台（可选）<span class="tl-name-en">PETRONAS Twin Towers Skybridge</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Kuala Lumpur City Centre · <a href="https://www.google.com/maps/search/?api=1&query=Petronas+Twin+Towers" target="_blank">地图</a></span></div>
+          <div class="tl-desc">官网信息（核实于 2026-09）：<b>周二至周日及公共假期 9:00–21:00</b>（最后入场 20:30）；周一仅每月第 2、4 个周一开放。非 MyKad 票价：<b>成人 RM98、2–12 岁儿童 RM50、2 岁以下免费</b>。须在官网 eticket.petronastwintowers.com.my 按时段购票，提前 15 分钟到入口，不可退改；参观中禁止饮食。</div>
+          
+          <span class="tl-tag tag-spot">官网预约时段</span><span class="tl-tag tag-tips">带娃可只看外观</span>
+          <div class="tl-tip">💡 3 岁孩子对高空观景兴趣有限、安检排队较久，如果跳跳累了，直接在公园湖边看夜景就够了。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:30 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">晚餐 + 双子塔夜景<span class="tl-name-en">KLCC Esplanade</span></div>
+          
+          <div class="tl-desc">公园湖边步道拍双子塔亮灯全景；晚餐可以在商场或酒店附近解决，早点回去洗澡睡觉，明天去马六甲。</div>
+          
+          <span class="tl-tag tag-food">晚餐</span><span class="tl-tag tag-spot">夜景</span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Day 3 ========== -->
+  <div class="day-card" id="day3">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-3">D3</div>
+        <div class="day-header-text">
+          <h2>吉隆坡 → 马六甲</h2>
+          <div class="day-date">2027年1月25日 周一 · 古城一日 · 住马六甲</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> 包车 KL → 马六甲 约 2h（未预订）</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 🔖 住马六甲河畔酒店 · 推荐（未预订）</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:30 <span class="tl-duration">· 约 2h</span></div>
+          <div class="tl-name">吉隆坡 → 马六甲<span class="tl-name-en">KL → Melaka · ~150km</span></div>
+          
+          <div class="tl-desc">约 2 小时车程，全程高速。建议预订<b>带儿童座椅的包车</b>（平台下单时备注儿童座椅；价格待查），或 Grab 长途（需自带座椅）。跳跳可能在车上补一觉。</div>
+          
+          <span class="tl-tag tag-transport">包车 + 儿童座椅</span>
+          <div class="tl-tip">💡 <b>决定：在马六甲住一晚</b>，不当天往返。理由：①当天往返要坐 4 小时车，对 3 岁孩子太累；②马六甲到吉隆坡国际机场只要约 1.5 小时，D4 直接从马六甲去机场飞兰卡威，不走回头路；③傍晚古城最舒服，可以慢慢逛河边。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">寄存行李 + 午餐：鸡饭粒 / 娘惹菜<span class="tl-name-en">Chicken Rice Ball · Nyonya</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Jonker Street 一带 · <a href="https://www.google.com/maps/search/?api=1&query=Jonker+Street+Melaka" target="_blank">地图</a></span></div>
+          <div class="tl-desc">马六甲名吃“鸡饭粒”（捏成团的海南鸡饭），小孩很爱；娘惹菜（峇峇娘惹融合菜）偏酸辣，点菜注意“不要辣”。热门老店排队长，带娃可以选人少的店。</div>
+          
+          <span class="tl-tag tag-food">鸡饭粒</span><span class="tl-tag tag-food">娘惹菜</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">13:00 <span class="tl-duration">· 2h</span></div>
+          <div class="tl-name">回酒店午睡<span class="tl-name-en">Nap time</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>候选：Casa del Rio Melaka（河畔，近鸡场街） / Holiday Inn Melaka · <a href="https://www.google.com/maps/search/?api=1&query=Casa+del+Rio+Melaka" target="_blank">地图</a></span></div>
+          <div class="tl-desc">住河畔古城区，步行即可到红屋广场和鸡场街。</div>
+          
+          <span class="tl-tag tag-hotel">推荐（未预订）· 价格待查</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">15:30 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">荷兰红屋广场 · 基督教堂 · 圣保罗山<span class="tl-name-en">Dutch Square · Stadthuys · Christ Church · St Paul's Hill</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Jalan Gereja, Bandar Hilir, Melaka · <a href="https://www.google.com/maps/search/?api=1&query=Stadthuys+Melaka" target="_blank">地图</a></span></div>
+          <div class="tl-desc">马六甲的地标：红色的荷兰总督府（Stadthuys，1650 年代）、基督教堂、维多利亚喷泉。登上圣保罗山可看葡萄牙时期教堂遗址，下山是葡萄牙古城门 A Famosa（坡道+台阶，推车不便，建议背带）。</div>
+          
+          <span class="tl-tag tag-spot">世界遗产</span><span class="tl-tag tag-tips">周一博物馆闭馆</span>
+          <div class="tl-tip">💡 <b>注意：红屋内的历史与民族博物馆周一闭馆</b>（周二–周日约 9:00–17:30，参考），今天只看外观和广场即可。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">17:00 <span class="tl-duration">· 30min</span></div>
+          <div class="tl-name">坐卡通三轮车<span class="tl-name-en">Trishaw Ride</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>红屋广场前 · <a href="https://www.google.com/maps/search/?api=1&query=Dutch+Square+Melaka" target="_blank">地图</a></span></div>
+          <div class="tl-desc">红屋广场前挂满卡通公仔和彩灯、放着音乐的三轮车，是马六甲的特色，小朋友会很兴奋。<b>上车前先谈好价格和路线</b>（价格待查）。</div>
+          
+          <span class="tl-tag tag-tips">先谈价</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">18:00 <span class="tl-duration">· 45min</span></div>
+          <div class="tl-name">马六甲河游船<span class="tl-name-en">Melaka River Cruise</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>码头在马六甲河沿岸（如 Muara 码头） · <a href="https://www.google.com/maps/search/?api=1&query=Melaka+River+Cruise" target="_blank">地图</a></span></div>
+          <div class="tl-desc">沿河两岸的壁画、老房子和彩灯，坐着就能看，适合小朋友。日落前后上船最舒服（一月马六甲日落约 19:20 前后，参考）。营业时间与票价待确认。</div>
+          
+          <span class="tl-tag tag-spot">坐着就能看</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">鸡场街晚餐散步<span class="tl-name-en">Jonker Street</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Jalan Hang Jebat, Melaka · <a href="https://www.google.com/maps/search/?api=1&query=Jonker+Street+Melaka" target="_blank">地图</a></span></div>
+          <div class="tl-desc">老街两旁是华人老店、糕点、白咖啡和手信。<b>鸡场街夜市只在周五、周六、周日 18:00–24:00 营业</b>（马六甲旅游局等），今天周一没有夜市，但街上人少、推车更好走。</div>
+          
+          <span class="tl-tag tag-food">华人老街</span><span class="tl-tag tag-tips">夜市仅周五–周日</span>
+          <div class="tl-tip">💡 如果想逛夜市，可把行程改为：D2 周日去马六甲（当晚有夜市、博物馆也开放），D3 周一回吉隆坡——但 KLCC 戏水池周一关闭，会失去最适合跳跳的项目，所以默认保留现方案。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Day 4 ========== -->
+  <div class="day-card" id="day4">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-4">D4</div>
+        <div class="day-header-text">
+          <h2>马六甲 → 吉隆坡机场 → 兰卡威</h2>
+          <div class="day-date">2027年1月26日 周二 · 飞往海岛</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M22 2L2 10l7 3 3 7z"/></svg> KUL → LGK 国内航班 约 1h10m · 航班待定（未预订）</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 🔖 住兰卡威珍南海滩度假酒店 · 推荐（未预订）×2 晚</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">08:30 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">早餐 + 河边散步<span class="tl-name-en">Melaka Riverside</span></div>
+          
+          <div class="tl-desc">清晨的河边很凉快，可以再走一小段拍照。</div>
+          
+          <span class="tl-tag tag-food">早餐</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:30 <span class="tl-duration">· 约 1.5h</span></div>
+          <div class="tl-name">马六甲 → 吉隆坡国际机场<span class="tl-name-en">Melaka → KLIA</span></div>
+          
+          <div class="tl-desc">包车直达机场（带儿童座椅，未预订，价格待查）。<b>先确认航班是 T1（马航/Batik）还是 T2（亚航）</b>，两个航站楼不在一起。</div>
+          
+          <span class="tl-tag tag-transport">包车直达 KLIA</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">约 12:00 <span class="tl-duration">· 约 1h10m</span></div>
+          <div class="tl-name">吉隆坡 → 兰卡威<span class="tl-name-en">KUL → LGK</span></div>
+          
+          <div class="tl-desc">国内航班，无需再过边检，但要安检。亚航托运行李需额外购买，订票时注意。</div>
+          <div class="info-box"><div class="info-box-title">✈️ 吉隆坡 → 兰卡威 国内航班（未预订 · 参考）</div><div>直飞航司：<b>亚航 AirAsia</b>（KLIA T2 出发）、<b>马来西亚航空 MH</b> 与 <b>Batik Air</b>（KLIA T1 出发），飞行约 1h05–1h15，每周约 40 余班（FlightConnections / FlyTeam 数据）。</div><div>具体时刻与票价：<b>价格待查</b>。建议选 11:00–13:00 左右的航班，给马六甲→机场留足缓冲。</div></div>
+          <span class="tl-tag tag-transport">国内段 ~1h10m</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">约 14:00 <span class="tl-duration">· —</span></div>
+          <div class="tl-name">入住度假酒店 + 午睡<span class="tl-name-en">Pelangi Beach Resort & Spa</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Pantai Cenang, Langkawi · 候选：Pelangi Beach Resort & Spa / The Westin Langkawi Resort & Spa · <a href="https://www.google.com/maps/search/?api=1&query=Pelangi+Beach+Resort+%26+Spa+Langkawi" target="_blank">地图</a></span></div>
+          <div class="tl-desc"><b>首选 Pelangi</b>：位于珍南海滩北端，离兰卡威机场车程短；官网显示有 KiKi Club 儿童俱乐部（每日 9:00–20:00，5 岁以下须家长陪同）、带滑梯喷泉的儿童戏水区、KiKi 小动物农场。<b>备选 Westin</b>：靠近瓜镇，更安静，有儿童俱乐部和幼儿泳池（据旅客点评，参考）。</div>
+          
+          <span class="tl-tag tag-hotel">推荐（未预订）· 价格待查</span><span class="tl-tag tag-tips">酒店内即可玩一天</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">17:00 <span class="tl-duration">· 2.5h</span></div>
+          <div class="tl-name">珍南海滩玩沙 + 日落<span class="tl-name-en">Pantai Cenang Sunset</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Pantai Cenang, Langkawi · <a href="https://www.google.com/maps/search/?api=1&query=Pantai+Cenang" target="_blank">地图</a></span></div>
+          <div class="tl-desc">沙滩平缓、细沙，傍晚玩沙最舒服；1 月是兰卡威旱季，日落约 19:20 前后。晚餐可以在沙滩边餐厅吃海鲜/烧烤。</div>
+          
+          <span class="tl-tag tag-spot">日落</span><span class="tl-tag tag-food">海边晚餐</span>
+          <div class="tl-tip">💡 海边注意水母提示牌；傍晚蚊子多，给跳跳涂儿童驱蚊液。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Day 5 ========== -->
+  <div class="day-card" id="day5">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-5">D5</div>
+        <div class="day-header-text">
+          <h2>兰卡威 · 缆车 & 红树林</h2>
+          <div class="day-date">2027年1月27日 周三 · 海岛慢节奏</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><rect x="1" y="6" width="22" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> 酒店接送 / Grab（不自驾）</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 🔖 续住兰卡威度假酒店（未预订）</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">09:30 <span class="tl-duration">· 2.5h</span></div>
+          <div class="tl-name">兰卡威缆车 + 天空之桥<span class="tl-name-en">Langkawi SkyCab & Sky Bridge</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Oriental Village, Burau Bay, Langkawi · <a href="https://www.google.com/maps/search/?api=1&query=Panorama+Langkawi+SkyCab" target="_blank">地图</a></span></div>
+          <div class="tl-desc">全球最陡的缆车之一，直上马运山（Gunung Mat Cincang），俯瞰安达曼海和群岛。上午云少、气温低，建议一开门就去。营业时间约 9:00/9:30–18:00，外国人票价参考：成人 RM85、儿童 RM65，天空之桥需另付费或买套票（第三方旅游资讯，<b>以官网 panoramalangkawi.com 为准，待确认</b>）。缆车会因大风/维护临时停运，出发前看官网运营日历。</div>
+          
+          <span class="tl-tag tag-spot">上午去</span><span class="tl-tag tag-tips">官网看运营日历</span>
+          <div class="tl-tip">💡 推车可以折叠带上缆车，但天空之桥和山顶步道有台阶，建议用背带；恐高的大人可以只坐到中间站。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">12:00 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">东方村午餐<span class="tl-name-en">Oriental Village</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Oriental Village, Langkawi · <a href="https://www.google.com/maps/search/?api=1&query=Oriental+Village+Langkawi" target="_blank">地图</a></span></div>
+          <div class="tl-desc">缆车山脚的小商业街，有餐厅和纪念品店。</div>
+          
+          <span class="tl-tag tag-food">午餐</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">13:00 <span class="tl-duration">· 2h</span></div>
+          <div class="tl-name">回酒店午睡<span class="tl-name-en">Nap time</span></div>
+          
+          <div class="tl-desc">车程约 20–30 分钟（参考），跳跳可能在车上就睡着了。</div>
+          
+          <span class="tl-tag tag-hotel">午睡</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">15:30 <span class="tl-duration">· 2–3h</span></div>
+          <div class="tl-name">基林地质森林公园 红树林游船<span class="tl-name-en">Kilim Karst Geoforest Park</span></div>
+          <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Kilim Jetty, Langkawi · <a href="https://www.google.com/maps/search/?api=1&query=Kilim+Geoforest+Park+Jetty" target="_blank">地图</a></span></div>
+          <div class="tl-desc">联合国教科文组织世界地质公园的一部分。坐小船穿过红树林和石灰岩峡湾，看<b>老鹰喂食</b>、渔排养鱼场、蝙蝠洞。坐着就能看，适合 3 岁孩子。拼船参考 RM60–90/成人，包船（2–5h）参考 RM350–550（第三方旅游商报价，价格待确认）；蝙蝠洞门票另收少量费用。船上提供救生衣。</div>
+          
+          <span class="tl-tag tag-spot">世界地质公园</span><span class="tl-tag tag-tips">建议包船 2h 短线</span>
+          <div class="tl-tip">💡 带娃选 2 小时短线包船即可，要求提供儿童救生衣；戴帽子、涂防晒，船上很晒。如果跳跳状态不好，改成在酒店泳池/KiKi Club 玩也完全 OK。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-food"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">19:00 <span class="tl-duration">· 1.5h</span></div>
+          <div class="tl-name">晚餐<span class="tl-name-en">Pantai Cenang</span></div>
+          
+          <div class="tl-desc">回珍南海滩一带吃晚饭；兰卡威是免税岛，巧克力、酒类便宜，可以顺便买手信。</div>
+          
+          <span class="tl-tag tag-food">晚餐</span><span class="tl-tag tag-tips">免税岛</span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== Day 6 ========== -->
+  <div class="day-card" id="day6">
+    <div class="day-header">
+      <div class="day-header-top">
+        <div class="day-badge badge-6">D6</div>
+        <div class="day-header-text">
+          <h2>兰卡威 → 吉隆坡 → 上海</h2>
+          <div class="day-date">2027年1月28日 周四 · 返程日</div>
+        </div>
+      </div>
+      <div class="day-meta"><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M22 2L2 10l7 3 3 7z"/></svg> LGK → KUL → PVG · 航班待定（未预订）</div><div class="day-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 无住宿</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-activity"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">上午 <span class="tl-duration">· 2–3h</span></div>
+          <div class="tl-name">酒店泳池 / 海滩最后一玩<span class="tl-name-en">Pool & Beach</span></div>
+          
+          <div class="tl-desc">不安排景点，睡到自然醒，泳池或沙滩玩一会儿，中午前退房。</div>
+          
+          <span class="tl-tag tag-tips">轻松</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-spot"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">中午 <span class="tl-duration">· 1h</span></div>
+          <div class="tl-name">免税店买手信<span class="tl-name-en">Duty-free Shopping</span></div>
+          
+          <div class="tl-desc">珍南海滩一带的商场或机场免税店，巧克力、咖啡、白咖啡都是热门手信。注意：<b>榴莲类食品不要带进酒店和机舱</b>。</div>
+          
+          <span class="tl-tag tag-tips">免税</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">下午 <span class="tl-duration">· 约 1h10m</span></div>
+          <div class="tl-name">兰卡威 → 吉隆坡<span class="tl-name-en">LGK → KUL</span></div>
+          
+          <div class="tl-desc">国内段抵达 KLIA 后转国际段；出境需过边检。</div>
+          <div class="info-box"><div class="info-box-title">✈️ 返程衔接建议（未预订）</div><div>方案 A（推荐）：<b>同一本票联程</b>，如马航 MH LGK→KUL→PVG（两段都在 KLIA T1），误机有保障、行李直挂（以航司规定为准，待确认）。</div><div>方案 B：亚航 AirAsia LGK→KUL + 亚航X D7 KUL→PVG（都在 T2），可在官网合并预订，行李是否直挂待确认。</div><div>若两段分开买（自行中转），国内段到达与国际段起飞之间至少留 <b>3–4 小时</b>，带娃更要宽裕。</div><div>具体航班与票价：<b>价格待查</b>。</div></div>
+          <span class="tl-tag tag-transport">国内段</span>
+          
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot dot-transport"></div></div>
+        <div class="tl-content">
+          <div class="tl-time">傍晚/夜间 <span class="tl-duration">· 约 5.5h</span></div>
+          <div class="tl-name">吉隆坡 → 上海浦东<span class="tl-name-en">KUL → PVG</span></div>
+          
+          <div class="tl-desc">直飞航司同 D1（MH / D7 / MU / FM / HO / 9C / OD），具体时刻待查。尽量选抵达上海时间不太晚的航班。<b>上海 1 月底很冷</b>（和马来西亚温差 20 多度），落地前给跳跳换上厚外套。</div>
+          
+          <span class="tl-tag tag-transport">直飞 ~5.5h</span><span class="tl-tag tag-tips">带厚外套</span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== 备选景点 ========== -->
+  <div id="backup">
+    <div class="backup-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      备选景点（未放入行程，可替换）
+    </div>
+    <div class="backup-grid">
+      <div class="backup-card">
+        <div class="bc-region">槟城 Penang（本次未选）</div>
+        <h4>槟城：乔治市壁画 · 升旗山 · Entopia 蝴蝶园</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>George Town, Penang · <a href="https://www.google.com/maps/search/?api=1&query=George+Town+Penang" target="_blank">地图</a></span></div>
+        <p>乔治市（2008 世界遗产）街头壁画、娘惹/华人美食天堂；升旗山缆轨车（Penang Hill）；Entopia 蝴蝶园（室内外结合，适合小孩）。本次没选的原因见“地图”页说明：城市暴走+炎热对 3 岁孩子较累，交通拥堵；更适合孩子大一点、以美食为主的行程。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">沙巴 Sabah</div>
+        <h4>沙巴 · 亚庇</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Kota Kinabalu, Sabah · <a href="https://www.google.com/maps/search/?api=1&query=Kota+Kinabalu" target="_blank">地图</a></span></div>
+        <p>需再飞约 2.5 小时（从吉隆坡）。海岛浮潜、长鼻猴/萤火虫红树林、神山。上海有直飞亚庇的航班（待确认）。1 月受东北季风影响，海况需关注。适合单独一趟行程。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">柔佛 Johor</div>
+        <h4>柔佛乐高乐园</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>LEGOLAND Malaysia Resort, Iskandar Puteri, Johor · <a href="https://www.google.com/maps/search/?api=1&query=LEGOLAND+Malaysia+Resort" target="_blank">地图</a></span></div>
+        <p>乐高主题乐园 + 水上乐园 + 乐高酒店，最适合 3–12 岁。距吉隆坡约 3.5–4 小时车程（超出单日驾车上限），可作为“吉隆坡+新加坡”行程的一站。开放时间与票价待查。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">布城 Putrajaya</div>
+        <h4>布城 · 粉红清真寺</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Putra Mosque, Putrajaya · <a href="https://www.google.com/maps/search/?api=1&query=Putra+Mosque+Putrajaya" target="_blank">地图</a></span></div>
+        <p>行政首都，粉红色的布特拉清真寺、湖景。离 KLIA 约 30 分钟，可在 D1 落地后或 D4 去机场前顺路（但会压缩午睡）。进清真寺需遮盖，女士需披袍/头巾（现场提供，参考）。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">彭亨 Pahang</div>
+        <h4>云顶高原</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Genting Highlands, Pahang · <a href="https://www.google.com/maps/search/?api=1&query=Genting+Highlands" target="_blank">地图</a></span></div>
+        <p>凉爽山区（约 20 多度），云顶天城缆车、室内外主题乐园。距 KL 约 1 小时山路，周末人多，山路弯多易晕车。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">吉隆坡</div>
+        <h4>吉隆坡飞禽公园</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>KL Bird Park, Jalan Cenderawasih · <a href="https://www.google.com/maps/search/?api=1&query=KL+Bird+Park" target="_blank">地图</a></span></div>
+        <p>大型步入式鸟园，可近距离看犀鸟、孔雀，适合小孩；位于湖滨公园内，可与国家清真寺顺路。开放时间与票价待查。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">吉隆坡</div>
+        <h4>石油科学探索中心</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Petrosains, Suria KLCC Level 4 · <a href="https://www.google.com/maps/search/?api=1&query=Petrosains+Discovery+Centre" target="_blank">地图</a></span></div>
+        <p>双子塔商场内的互动科学馆，下雨天的室内备选。票价与闭馆日待确认。</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-region">雪兰莪 Selangor</div>
+        <h4>双威水上乐园</h4>
+        <div class="tl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span>Sunway Lagoon, Bandar Sunway · <a href="https://www.google.com/maps/search/?api=1&query=Sunway+Lagoon" target="_blank">地图</a></span></div>
+        <p>大型水上+动物主题乐园，离市区约 30–40 分钟；适合想多玩一天的情况。价格待查。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ===== 地图模式 ===== -->
+<div id="tab-map" class="tab-content">
+  <div class="map-wrap">
+    <div class="map-day-filter" id="mapDayFilter">
+      <button class="map-filter-btn active" data-day="all">全部</button>
+      <button class="map-filter-btn" data-day="1">D1 吉隆坡</button>
+      <button class="map-filter-btn" data-day="2">D2 KLCC</button>
+      <button class="map-filter-btn" data-day="3">D3 马六甲</button>
+      <button class="map-filter-btn" data-day="4">D4 兰卡威</button>
+      <button class="map-filter-btn" data-day="5">D5 兰卡威</button>
+      <button class="map-filter-btn" data-day="6">D6 返程</button>
+      <button class="map-filter-btn" data-day="backup">备选</button>
+    </div>
+    <div id="mapContainer"></div>
+    <div class="map-legend">
+      <h4>图例</h4>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#5C6BC0"></div> D1 到达吉隆坡</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#26A69A"></div> D2 KLCC</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#EF5350"></div> D3 马六甲</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#AB47BC"></div> D4 飞兰卡威</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#FFA726"></div> D5 兰卡威</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#78909C"></div> D6 返程</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#90A4AE"></div> 备选景点</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 支出记录 ===== -->
+<div id="tab-expense" class="tab-content">
+<div class="container">
+  <div class="expense-summary">
+    <div class="summary-card"><div class="label">总支出 (CNY)</div><div class="value" id="totalCNY">--</div></div>
+    <div class="summary-card"><div class="label">总支出 (MYR)</div><div class="value" id="totalMYR">--</div></div>
+    <div class="summary-card"><div class="label">笔数</div><div class="value" id="totalCount">--</div></div>
+  </div>
+  <div class="expense-table-wrap">
+    <div class="expense-toolbar">
+      <div class="filters">
+        <span class="filter-chip active" data-cat="全部">全部</span>
+        <span class="filter-chip" data-cat="交通">交通</span>
+        <span class="filter-chip" data-cat="住宿">住宿</span>
+        <span class="filter-chip" data-cat="餐饮">餐饮</span>
+        <span class="filter-chip" data-cat="门票">门票</span>
+        <span class="filter-chip" data-cat="购物">购物</span>
+        <span class="filter-chip" data-cat="其他">其他</span>
+      </div>
+      <button class="btn-add" onclick="openModal()">+ 添加</button>
+    </div>
+    <table>
+      <thead><tr><th>日期</th><th>类别</th><th>项目</th><th style="text-align:right">MYR</th><th style="text-align:right">CNY</th><th>支付方式</th><th>备注</th><th></th></tr></thead>
+      <tbody id="expenseBody"></tbody>
+    </table>
+  </div>
+  <div style="text-align:center;color:#bbb;font-size:12px;margin-top:12px">尚无任何预订，因此没有预填支出；出行时在此记账（数据保存在本机浏览器）。</div>
+</div>
+</div>
+
+<!-- ===== 出行清单 ===== -->
+<div id="tab-checklist" class="tab-content">
+<div class="container">
+  <div class="checklist-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">0/0 已完成</div>
+  </div>
+  <div id="checklistContainer"></div>
+</div>
+</div>
+
+<!-- ===== 历史文化 ===== -->
+<div id="tab-history" class="tab-content">
+<div class="container">
+<div class="hist-hero">
+  <h2>马来西亚历史文化</h2>
+  <p>从马六甲海峡的古老港口到热带雨林中的摩天双塔，马来人、华人、印度人与原住民在这里共同生活了几百年。跟着行程，看懂吉隆坡、马六甲、兰卡威背后的故事。</p>
+  <div class="hist-source">内容整理自公开历史资料、马来西亚旅游局及 UNESCO 世界遗产介绍，仅供亲子游参考</div>
+</div>
+<div class="hist-nav">
+  <button class="hist-nav-btn active" onclick="scrollToHistSection('hist-overview')">国家简史</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-kl')">吉隆坡</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-melaka')">马六甲</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-langkawi')">兰卡威</button>
+  <button class="hist-nav-btn" onclick="scrollToHistSection('hist-people')">多元族群</button>
+</div>
+<div class="hist-timeline-wrap" id="hist-overview">
+  <h3>📜 马来西亚简史</h3>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">约公元 5 世纪起</div><div class="hist-era-title">布秧谷与海上贸易古国</div><div class="hist-era-desc">马来半岛北部吉打州的布秧谷（Bujang Valley）留有大量印度教—佛教遗址，说明早在一千多年前，这里就是连接印度与中国的海上贸易中转站。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">约 1400 年</div><div class="hist-era-title">马六甲王朝建立</div><div class="hist-era-desc">相传来自苏门答腊的王子拜里米苏拉（Parameswara）在马六甲建城。马六甲扼守海峡，迅速成为东南亚最繁华的港口，王室后来皈依伊斯兰教。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1405—1433 年</div><div class="hist-era-title">郑和下西洋</div><div class="hist-era-desc">明朝郑和船队多次停靠马六甲，马六甲与明朝建立朝贡关系。今天马六甲仍有三宝山、三宝井等与郑和相关的地名和传说。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1511 年</div><div class="hist-era-title">葡萄牙占领马六甲</div><div class="hist-era-desc">葡萄牙人攻占马六甲并修建法摩沙城堡（A Famosa），今天只剩下一座城门——圣地亚哥城门。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1641 年</div><div class="hist-era-title">荷兰时代</div><div class="hist-era-desc">荷兰东印度公司从葡萄牙手中夺取马六甲，建起红色的总督府（Stadthuys）和基督教堂，形成今天“红屋广场”的样貌。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1786—1826 年</div><div class="hist-era-title">英国与海峡殖民地</div><div class="hist-era-desc">1786 年英国人莱特（Francis Light）登陆槟城；1824 年英荷条约后马六甲归英国；1826 年槟城、马六甲、新加坡组成“海峡殖民地”。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1857 年</div><div class="hist-era-title">锡矿与吉隆坡诞生</div><div class="hist-era-desc">华人矿工沿巴生河、鹤龙河上溯开采锡矿，在两河交汇处形成聚落，“Kuala Lumpur”意为“泥泞的河口”。华人甲必丹叶亚来对早期吉隆坡建设影响很大。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1941—1945 年</div><div class="hist-era-title">日本占领</div><div class="hist-era-desc">二战期间马来亚被日军占领，当地华人等族群遭受严重苦难。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1957 年 8 月 31 日</div><div class="hist-era-title">马来亚独立</div><div class="hist-era-desc">马来亚联合邦脱离英国独立（Merdeka），8 月 31 日成为国庆日。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1963 年</div><div class="hist-era-title">马来西亚成立</div><div class="hist-era-desc">马来亚与沙巴、砂拉越、新加坡组成马来西亚（9 月 16 日为马来西亚日）；1965 年新加坡独立出去。1974 年中马建交。</div></div></div>
+  <div class="hist-era"><div class="hist-era-dot"></div><div class="hist-era-body"><div class="hist-era-time">1998 年—今</div><div class="hist-era-title">现代马来西亚</div><div class="hist-era-desc">1998 年双子塔落成（至 2004 年为世界最高建筑）、吉隆坡国际机场启用；2008 年马六甲与槟城乔治市一起列入世界文化遗产；2025 年中马互免签证协定生效。</div></div></div>
+</div>
+<div class="hist-section" id="hist-kl">
+  <div class="hist-section-header"><div class="hist-section-icon" style="background:#E3F2FD;">🏙️</div><div><div class="hist-section-title">吉隆坡 — 从锡矿河口到双子塔</div><div class="hist-section-sub">Kuala Lumpur · 首都 · D1–D2</div></div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">国油双峰塔 <span class="en">PETRONAS Twin Towers</span></div><div class="hist-card-badge">1998 年落成</div></div>
+      <div class="hist-card-body">高约 452 米、88 层，由美国建筑师西萨·佩里设计，平面取自伊斯兰八角星图案。两座塔分别由日本和韩国建筑公司承建，41–42 层之间的双层天桥（Skybridge）把两塔连在一起。</div><div class="hist-tag-row"><span class="hist-tag">世界最高双塔</span><span class="hist-tag">D2 可参观</span></div><div class="hist-fact">💡 1998–2004 年间是世界最高建筑，之后被台北 101 超越。</div><div class="hist-itin-link">📍 行程 D2</div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">KLCC 公园 <span class="en">KLCC Park</span></div><div class="hist-card-badge">城市绿肺</div></div>
+      <div class="hist-card-body">双子塔脚下约 50 英亩的城市公园，由巴西景观设计师 Roberto Burle Marx 设计，保留了大量原生树木，有儿童戏水池、游乐场和慢跑道。</div><div class="hist-tag-row"><span class="hist-tag">免费</span><span class="hist-tag">亲子友好</span></div><div class="hist-itin-link">📍 行程 D2</div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">黑风洞 <span class="en">Batu Caves</span></div><div class="hist-card-badge">印度教圣地</div></div>
+      <div class="hist-card-body">约 4 亿年历史的石灰岩山洞，1890 年代起成为印度教圣地。洞口 42.7 米高的金色战神穆卢干（Murugan）像是世界最高的穆卢干像之一；每年大宝森节（Thaipusam）有上百万信众前来朝拜。</div><div class="hist-tag-row"><span class="hist-tag">272 级台阶</span><span class="hist-tag">需遮肩过膝</span></div><div class="hist-fact">💡 2027 年大宝森节是 1 月 22 日（周五），就在我们到达前一天。</div><div class="hist-itin-link">📍 D2 可选</div>
+  </div></div>
+</div>
+<div class="hist-section" id="hist-melaka">
+  <div class="hist-section-header"><div class="hist-section-icon" style="background:#FFEBEE;">🏰</div><div><div class="hist-section-title">马六甲 — 海峡古城</div><div class="hist-section-sub">Melaka · UNESCO 世界文化遗产（2008）· D3</div></div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">荷兰红屋 <span class="en">Stadthuys</span></div><div class="hist-card-badge">1650 年代</div></div>
+      <div class="hist-card-body">东南亚现存最古老的荷兰建筑之一，曾是荷兰总督府，现为历史与民族博物馆（周一闭馆）。旁边的基督教堂建于 1753 年。整片建筑后来被刷成标志性的红色。</div><div class="hist-tag-row"><span class="hist-tag">荷兰时期</span><span class="hist-tag">周一博物馆闭馆</span></div><div class="hist-itin-link">📍 行程 D3</div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">圣保罗山与圣地亚哥城门 <span class="en">St Paul's Hill · A Famosa</span></div><div class="hist-card-badge">1511 年起</div></div>
+      <div class="hist-card-body">葡萄牙人攻占马六甲后修建的法摩沙城堡，后被英国人拆除，只剩圣地亚哥城门。山顶圣保罗教堂遗址里曾短暂安葬过天主教传教士圣方济各·沙勿略。</div><div class="hist-tag-row"><span class="hist-tag">葡萄牙时期</span></div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">鸡场街 <span class="en">Jonker Street</span></div><div class="hist-card-badge">华人老街</div></div>
+      <div class="hist-card-body">马六甲华人聚居的老街，两旁是百年店屋、会馆和寺庙，附近的青云亭是马来西亚最古老的华人庙宇之一。周五至周日晚上有夜市。</div><div class="hist-tag-row"><span class="hist-tag">夜市 周五–周日</span></div><div class="hist-fact">💡 马六甲“峇峇娘惹”（土生华人）文化：早期华人与当地通婚形成的独特族群，饮食、服饰、建筑融合了中马两种风格。</div><div class="hist-itin-link">📍 行程 D3</div>
+  </div></div>
+</div>
+<div class="hist-section" id="hist-langkawi">
+  <div class="hist-section-header"><div class="hist-section-icon" style="background:#E8F5E9;">🦅</div><div><div class="hist-section-title">兰卡威 — 传说之岛</div><div class="hist-section-sub">Langkawi · UNESCO 世界地质公园（2007）· D4–D6</div></div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">名字的由来 <span class="en">Helang + Kawi</span></div><div class="hist-card-badge">老鹰之岛</div></div>
+      <div class="hist-card-body">一种流行说法：“Langkawi”来自马来语 helang（老鹰）+ kawi（红褐色），意为“红褐色的老鹰”。岛上的婆罗门鸢（Brahminy Kite）就是红褐色的，瓜镇码头的巨型老鹰广场也是地标。</div><div class="hist-tag-row"><span class="hist-tag">老鹰广场</span><span class="hist-tag">D5 看老鹰</span></div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">玛苏丽的诅咒 <span class="en">Legend of Mahsuri</span></div><div class="hist-card-badge">民间传说</div></div>
+      <div class="hist-card-body">相传 200 多年前少女玛苏丽被冤枉处死，临终留下“兰卡威七代不得繁荣”的诅咒，白色的血证明了她的清白。直到 1980 年代后兰卡威发展起来，人们说诅咒“期满”了。岛上有玛苏丽陵墓可参观。</div><div class="hist-tag-row"><span class="hist-tag">传说故事</span></div><div class="hist-fact">💡 1987 年兰卡威成为免税岛，旅游业迅速发展。</div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">基林地质森林公园 <span class="en">Kilim Karst Geoforest Park</span></div><div class="hist-card-badge">世界地质公园</div></div>
+      <div class="hist-card-body">兰卡威 2007 年成为东南亚首个 UNESCO 世界地质公园。基林是其中的核心景区：数亿年历史的石灰岩山体、红树林河道、蝙蝠洞和成群的老鹰。</div><div class="hist-tag-row"><span class="hist-tag">红树林</span><span class="hist-tag">老鹰</span></div><div class="hist-itin-link">📍 行程 D5</div>
+  </div></div>
+</div>
+<div class="hist-section" id="hist-people">
+  <div class="hist-section-header"><div class="hist-section-icon" style="background:#FFF3E0;">🤝</div><div><div class="hist-section-title">多元族群 — 一个国家，多种节日</div><div class="hist-section-sub">马来人 · 华人 · 印度人 · 原住民</div></div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">三大族群 <span class="en">Malay · Chinese · Indian</span></div><div class="hist-card-badge">多元社会</div></div>
+      <div class="hist-card-body">马来西亚约有一半以上人口为马来人（多为穆斯林，伊斯兰教为联邦宗教），华人约占两成多，印度裔不到一成，东马还有众多原住民族群。国语是马来语，但英语普及，华人之间通用华语、粤语、闽南语、客家话等。</div><div class="hist-tag-row"><span class="hist-tag">马来语</span><span class="hist-tag">英语</span><span class="hist-tag">华语</span></div>
+  </div></div>
+  <div class="hist-card"><div class="hist-card-inner">
+      <div class="hist-card-head"><div class="hist-card-title">节日一年到头 <span class="en">Festivals</span></div><div class="hist-card-badge">四季都在过节</div></div>
+      <div class="hist-card-body">开斋节（Hari Raya）、农历新年、屠妖节（Deepavali）、大宝森节、圣诞节都是公共假期。各族群会在节日“开放门户”（Open House）招待朋友和邻居，是马来西亚独特的传统。</div><div class="hist-tag-row"><span class="hist-tag">Open House</span></div>
+  </div></div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== 避雷指南 ===== -->
+<div id="tab-tips" class="tab-content">
+<div class="container">
+<div class="tips-hero">
+  <h2>马来西亚避雷指南</h2>
+  <p>马来西亚华人多、说中文很方便，但它是一个以伊斯兰教为主的多元国家。了解这些差异，带娃出行更顺利。</p>
+</div>
+<div class="tips-nav">
+  <button class="tips-nav-btn active" onclick="scrollToTipSection('tips-quick')">快速避雷</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-entry')">入境证件</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-kids')">带娃专区</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-religion')">宗教礼仪</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-food')">饮食注意</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-traffic')">交通出行</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-money')">钱与通讯</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-festival')">节假日</button>
+  <button class="tips-nav-btn" onclick="scrollToTipSection('tips-other')">其他差异</button>
+</div>
+<div class="tips-quick-ref" id="tips-quick">
+  <h3>🚨 中国游客最常踩的 10 个坑</h3>
+  <table class="tips-quick-table">
+    <tr><td>❌ 不填 MDAC 就出发</td><td>✅ 抵达前 3 天内，3 个人（含跳跳）各填一份，官网免费</td></tr>
+    <tr><td>❌ 穿短裤吊带进清真寺/黑风洞</td><td>✅ 遮肩过膝，女士进清真寺需包头（现场常可借袍）</td></tr>
+    <tr><td>❌ 用左手递东西、用食指指人</td><td>✅ 用右手或双手递物，指方向用大拇指</td></tr>
+    <tr><td>❌ 在马来餐厅要猪肉/带猪肉制品</td><td>✅ 尊重清真（Halal），猪肉去华人餐馆吃</td></tr>
+    <tr><td>❌ 拿着中国驾照直接租车</td><td>✅ 中国不签发 IDP，合规性存疑，本次不自驾，用 Grab/包车</td></tr>
+    <tr><td>❌ 路边拦出租车不打表</td><td>✅ 统一用 Grab，价格透明</td></tr>
+    <tr><td>❌ 中午带娃暴晒逛景点</td><td>✅ 13:00–15:00 回酒店午睡，早晚出门</td></tr>
+    <tr><td>❌ 忽视蚊子</td><td>✅ 登革热由白天叮人的伊蚊传播，全天涂儿童驱蚊液</td></tr>
+    <tr><td>❌ 把榴莲带进酒店/飞机</td><td>✅ 大部分酒店和公共交通禁止携带榴莲</td></tr>
+    <tr><td>❌ 带国内两孔/三孔插头</td><td>✅ 马来西亚用英标三方孔（Type G），带转换插头</td></tr>
+  </table>
+</div>
+<div class="tips-section" id="tips-entry">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#E3F2FD;">🛂</div><div class="tips-section-title">入境与证件</div></div>
+  <div class="tip-card danger"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 每个人都要提前填 MDAC 数字入境卡</div>
+      <div class="tip-body">自 2024 年起所有外国旅客（新加坡公民等少数除外）必须在<strong>抵达前 3 天（72 小时）内</strong>在马来西亚移民局官网 imigresen-online.imi.gov.my 提交 <strong>MDAC（Malaysia Digital Arrival Card）</strong>，免费，不能提前太多，也不能落地再补。<strong>儿童也要单独填一份</strong>。建议 1/21 晚上一起填好，截图保存。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>过去很多国家落地填纸质入境卡</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>必须提前在线填，落地不能补，第三方收费网站不是官方</div></div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 中国护照免签 30 天</div>
+      <div class="tip-body">《中马互免签证协定》2025 年 7 月 17 日生效：持中国普通护照（有效期不少于 6 个月）可免签入境，<strong>单次停留不超过 30 天，每 180 天累计不超过 90 天</strong>，限旅游探亲等目的（中国驻马来西亚大使馆 FAQ）。建议随身带返程机票和酒店预订单备查。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 自助通关（Autogate）</div>
+      <div class="tip-body">马来西亚移民局 2024 年起向 63 个国家/地区开放自助通道，名单中包括中国大陆（Fragomen 2024-06 通报）。但首次入境、儿童可能仍需走人工柜台，以现场指引为准（待确认）。</div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 毒品与违禁品</div>
+      <div class="tip-body">马来西亚对毒品犯罪处罚极重（含死刑），不要帮陌生人带任何东西。儿童常用药建议带原包装和说明书。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-kids">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#F3E5F5;">🧒</div><div class="tips-section-title">带娃专区（跳跳 3 岁）</div></div>
+  <div class="tip-card danger"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 防晒防中暑</div>
+      <div class="tip-body">马来西亚常年 30°C 左右、紫外线极强。<strong>10:00–16:00 尽量待在室内或阴凉处</strong>，出门戴宽檐帽、穿防晒衣、涂 SPF50 儿童防晒，随身带水。行程已把每天 13:00–15:00 留作午睡。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>1 月上海冬天，孩子户外不怕晒</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>终年盛夏，1 月是西海岸旱季，阳光更猛</div></div>
+  </div></div>
+  <div class="tip-card danger"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 防蚊：登革热</div>
+      <div class="tip-body">马来西亚是登革热流行区，传播它的伊蚊<strong>白天也叮人</strong>。给跳跳用适合儿童的驱蚊液（派卡瑞丁 Picaridin 或低浓度避蚊胺 DEET，按说明书年龄使用），穿浅色长袖长裤去红树林和公园。如出现高烧、皮疹，及时就医并告知医生去过的地方。</div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 儿童安全座椅</div>
+      <div class="tip-body">马来西亚 2020 年起要求私家车使用儿童安全座椅（出租车/网约车执行情况不一，待确认）。Grab 新推出的 Kid-Friendly Rides（测试版）只提供增高垫、适用 4–12 岁、仅限 KLIA 接送机，<strong>跳跳 3 岁不适用</strong>。建议：①包车时下单备注儿童座椅；②或自带轻便旅行座椅。</div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 推车友好度</div>
+      <div class="tip-body">KLCC 商场、水族馆、机场、度假酒店推车很友好；<strong>黑风洞 272 级台阶、圣保罗山、天空之桥、马六甲老街人行道</strong>不适合推车。建议带一辆可登机的轻便推车 + 一个背带。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 冷气房 vs 室外</div>
+      <div class="tip-body">商场、餐厅、车上冷气非常足，室内外温差大，容易感冒。随身带一件薄长袖外套和小毯子。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 吃饭与儿童餐</div>
+      <div class="tip-body">很多餐厅可以要儿童椅（baby chair）。马来菜、娘惹菜偏辣，点菜说 <strong>“No chili / 不要辣”</strong>。酒店和商场常有意面、炒饭、鸡块等儿童友好选项。<strong>自来水不要直接喝</strong>，喝瓶装水。</div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 没有时差，作息不乱</div>
+      <div class="tip-body">马来西亚与北京时间相同（UTC+8），飞行约 5.5–6 小时，跳跳的午睡和晚睡时间可以照常。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-religion">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#E8F5E9;">🕌</div><div class="tips-section-title">宗教与礼仪</div></div>
+  <div class="tip-card danger"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 清真寺与寺庙着装</div>
+      <div class="tip-body">进清真寺须<strong>遮肩过膝</strong>，女士需包住头发，脱鞋入内；很多清真寺游客入口会借出长袍和头巾（参考）。<strong>礼拜时间</strong>尤其周五中午（主麻日）通常不接待游客。黑风洞等印度教寺庙也要求遮肩过膝。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>参观寺庙着装相对宽松</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>宗教场所着装要求严格，不合格不让进</div></div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 左手与手势</div>
+      <div class="tip-body">在马来人和印度人文化中，<strong>左手被视为不洁</strong>，递东西、给钱、吃东西都用右手或双手。<strong>不要用食指指人或指物</strong>，用右手大拇指（四指握拢）指方向更礼貌。</div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 别随便摸别人的头</div>
+      <div class="tip-body">在当地文化中头部被视为神圣，不要随意摸当地小朋友的头；同理，如果有人热情地想摸跳跳，也可以礼貌婉拒。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 公共场合</div>
+      <div class="tip-body">在公共场合避免过于亲密的举动；穆斯林女性一般不与异性握手，对方不主动伸手就点头微笑即可。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-food">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#FFF3E0;">🍜</div><div class="tips-section-title">饮食注意</div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 清真（Halal）与猪肉</div>
+      <div class="tip-body">马来餐厅和大部分连锁快餐是清真的，<strong>不供应猪肉和酒</strong>，也不要把猪肉制品带进去。想吃肉骨茶、叉烧就去华人餐馆（通常挂“Non-Halal”标识）。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>饭店默认什么都有</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>餐厅分清真/非清真，互不混用</div></div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 榴莲禁令</div>
+      <div class="tip-body">大多数酒店、公共交通（包括飞机）<strong>禁止带入榴莲</strong>，违者可能被罚款。想吃就在摊位现场吃完。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 辣度与口味</div>
+      <div class="tip-body">马来菜、娘惹菜、印度菜普遍辣、香料重。推荐适合孩子的：海南鸡饭、鸡饭粒、炒粿条（去辣）、印度煎饼 Roti Canai、椰浆饭（辣酱另放）。</div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 中文点菜无压力</div>
+      <div class="tip-body">吉隆坡、马六甲的华人餐馆基本都能用中文点菜，粤语、闽南语也很通用。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-traffic">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#FFF8E1;">🚗</div><div class="tips-section-title">交通出行</div></div>
+  <div class="tip-card danger"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-danger">高危</span> 靠左行驶 · 本次不自驾</div>
+      <div class="tip-body">马来西亚<strong>靠左行驶</strong>，右舵车。外国人自驾一般需要本国驾照 + 国际驾照（IDP）；<strong>中国不是《日内瓦/维也纳道路交通公约》签约国，无法签发 IDP</strong>，仅凭中国驾照或翻译件租车的合规性和保险理赔都存疑（待确认）。带着 3 岁孩子，<strong>本行程不安排自驾</strong>，全部用 Grab 或包车。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>靠右行驶，左舵车</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>靠左行驶；过马路先看右边</div></div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 打车用 Grab</div>
+      <div class="tip-body">Grab 是马来西亚最主流的打车软件（吉隆坡、马六甲、兰卡威均可用），价格透明，可绑定国内信用卡。带行李和推车叫 <strong>6 座车</strong>。尽量不要在路边拦出租车或接受机场揽客。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 过马路</div>
+      <div class="tip-body">车辆靠左，<strong>过马路先看右边</strong>；摩托车很多且常穿行，牵好孩子。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-money">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#E3F2FD;">💳</div><div class="tips-section-title">钱、税与通讯</div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 货币：林吉特 MYR（RM）</div>
+      <div class="tip-body">商场、酒店、连锁餐厅普遍可刷 Visa/Mastercard；夜市、小摊、三轮车需要现金。机场只换少量应急。部分商户支持支付宝/微信（覆盖程度待确认）。页面顶部显示实时汇率。</div>
+  </div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 旅游税 + 服务费</div>
+      <div class="tip-body">外国旅客住宿需交<strong>旅游税 RM10/间/晚</strong>（预订时或入住时收取）。餐厅账单常另加服务费和销售与服务税（SST），看清菜单上的 “++”。小费不是强制的。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 电话卡与 eSIM</div>
+      <div class="tip-body">机场到达层有运营商柜台可买旅游卡，也可出发前购买 eSIM。马来西亚网络可正常使用 Google Maps 与 Grab。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 插头与电压</div>
+      <div class="tip-body">英标三方孔插座（Type G），220–240V。国内充电器一般支持宽电压，只需带<strong>英标转换插头</strong>。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-festival">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#FFEBEE;">🧧</div><div class="tips-section-title">节假日与出行时间</div></div>
+  <div class="tip-card warning"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-warning">注意</span> 马来西亚的农历新年</div>
+      <div class="tip-body">马来西亚也过农历新年，而且是<strong>全国公共假期</strong>：2027 年春节为 <strong>2 月 6 日（周六）、2 月 7 日（周日）</strong>，部分州或有补假（以官方公布为准，待确认）。节前几周<strong>吉隆坡（茨厂街、各大商场）、槟城（极乐寺点灯）、马六甲（鸡场街）</strong>张灯结彩、有舞狮，非常有年味。但要注意：<strong>很多华人经营的店铺、茶餐厅、小贩会在初一至初三（甚至更久）关门</strong>；酒店、机票和包车价格上涨，中国出境游高峰与当地返乡潮叠加。</div><div class="tip-compare"><div class="tip-compare-item tip-cn"><span class="tip-compare-label">🇨🇳 中国习惯</span>春节是国内出境游最高峰</div><div class="tip-compare-item tip-ge"><span class="tip-compare-label">🇲🇾 马来西亚</span>当地也放假，华人店铺集体歇业，热门地酒店涨价</div></div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 本次日期已避开春节高峰</div>
+      <div class="tip-body">我们选的是 <strong>2027 年 1 月 23 日（周六）— 1 月 28 日（周四）</strong>：上海市教委《2026 学年校历》规定寒假 1 月 23 日开始，出发日正好是放假第一天，返程距除夕（2 月 5 日）还有一周多，<strong>避开了春节前后的国内出境高峰和马来西亚春节歇业期</strong>。商场里已经有新年装饰和年货，能感受到节日气氛。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 大宝森节 Thaipusam（1 月 22 日）</div>
+      <div class="tip-body">2027 年大宝森节在 <strong>1 月 22 日（周五）</strong>，吉隆坡、雪兰莪、槟城等地放假（马来西亚雇主联合会 2027 年假期表）。黑风洞当天及前后有大规模朝圣游行，人极多。我们 1/23 才到，D2 去黑风洞仍可能较拥挤，列为可选。</div>
+  </div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 其他日期提醒</div>
+      <div class="tip-body">2 月 1 日是联邦直辖区日（吉隆坡放假）；2027 年斋月预计 2 月上旬开始（以官方为准），都在我们行程之后。</div>
+  </div></div>
+</div>
+<div class="tips-section" id="tips-other">
+  <div class="tips-section-header"><div class="tips-section-icon" style="background:#E8F5E9;">💡</div><div class="tips-section-title">其他差异</div></div>
+  <div class="tip-card info"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-info">了解</span> 天气：1 月是西海岸旱季</div>
+      <div class="tip-body">吉隆坡、马六甲、兰卡威 1 月相对干燥，但仍可能有午后雷阵雨，带一把折叠伞。东海岸（如热浪岛）1 月受东北季风影响海况差，本次不去。</div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 说中文很方便</div>
+      <div class="tip-body">马来西亚华人多，吉隆坡、马六甲购物吃饭基本可以用中文沟通；英语也普及。</div>
+  </div></div>
+  <div class="tip-card good"><div class="tip-card-inner">
+      <div class="tip-title"><span class="tip-level level-good">好消息</span> 兰卡威是免税岛</div>
+      <div class="tip-body">兰卡威巧克力、酒类、部分日用品免税，价格便宜，适合买手信。</div>
+  </div></div>
+</div>
+
+<div style="text-align:center;padding:20px 0 10px;color:#bbb;font-size:12px;line-height:1.8">
+  信息来源：中国驻马来西亚大使馆《中马互免签证协定》FAQ、马来西亚移民局 MDAC 官网说明、Fragomen 自助通关通报、PETRONAS 双子塔官网、Pelangi Beach Resort 官网、上海市教委《上海市中小学2026学年校历》、马来西亚雇主联合会 2027 年公共假期表、马六甲旅游局、Grab 马来西亚新闻稿、FlyTeam / biirdee / FlightConnections 航线数据，以及 Trip.com、Klook 等旅游资讯（核实于 2026 年 9 月）。<br>
+  标注“参考 / 待确认 / 价格待查”的内容请出行前再次核实。<b>本手册中所有机票、酒店、包车均未预订。</b>
+</div>
+</div>
+</div>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+</div>
+
+<!-- ===== Modal ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+<div class="modal">
+  <h3 id="modalTitle">添加支出</h3>
+  <div class="row">
+    <div class="field"><label>日期</label><input type="date" id="fDate"></div>
+    <div class="field"><label>类别</label>
+      <select id="fCat"><option>交通</option><option>住宿</option><option>餐饮</option><option>门票</option><option>购物</option><option>其他</option></select>
+    </div>
+  </div>
+  <div class="field"><label>项目</label><input type="text" id="fItem" placeholder="如：Grab 机场到酒店"></div>
+  <div class="row">
+    <div class="field"><label>金额 (MYR)</label><input type="number" id="fMYR" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label>金额 (CNY)</label><input type="number" id="fCNY" step="0.01" placeholder="0.00"></div>
+  </div>
+  <div class="row">
+    <div class="field"><label>支付方式</label>
+      <select id="fPay"><option value="">-</option><option>现金</option><option>信用卡</option><option>支付宝</option><option>微信</option><option>Grab</option><option>其他</option></select>
+    </div>
+    <div class="field"><label>备注</label><input type="text" id="fNote" placeholder="可选"></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-cancel" onclick="closeModal()">取消</button>
+    <button class="btn-save" onclick="saveExpense()">保存</button>
+  </div>
+</div>
+</div>
+
+<script>
+// ===== Data persistence =====
+const STORAGE_EXP = 'malaysia_expenses';
+const STORAGE_CHK = 'malaysia_checklist';
+
+function loadExpenses() { try { return JSON.parse(localStorage.getItem(STORAGE_EXP)) || []; } catch { return []; } }
+function saveExpenses(d) { localStorage.setItem(STORAGE_EXP, JSON.stringify(d)); }
+function loadChecklist() { try { return JSON.parse(localStorage.getItem(STORAGE_CHK)); } catch { return null; } }
+function saveChecklist(d) { localStorage.setItem(STORAGE_CHK, JSON.stringify(d)); }
+
+let expenses = loadExpenses();
+// 无预订：不预填支出
+
+const defaultChecklist = [
+  { section:'证件 & 钱', items:[ {name:'护照 ×3（含跳跳）',note:'有效期需超过6个月',checked:false}, {name:'MDAC 数字入境卡 ×3',note:'抵达前3天内官网免费填写（1/20–1/22）',checked:false}, {name:'往返机票行程单',note:'尚未预订',checked:false}, {name:'酒店预订确认单',note:'尚未预订',checked:false}, {name:'少量林吉特现金',note:'夜市/三轮车/小摊用',checked:false}, {name:'信用卡 Visa/Mastercard',note:'商场酒店普遍可刷',checked:false}, {name:'跳跳出生证明/户口本复印件',note:'备用（亲子关系证明，待确认是否需要）',checked:false} ]},
+  { section:'儿童专属（跳跳）', items:[ {name:'轻便推车',note:'可登机/登机口托运',checked:false}, {name:'背带/腰凳',note:'黑风洞、圣保罗山、天空之桥用',checked:false}, {name:'便携儿童安全座椅',note:'包车/Grab 用（Grab 增高垫仅 4 岁+）',checked:false}, {name:'儿童防晒霜 SPF50',note:'每 2 小时补涂',checked:false}, {name:'儿童驱蚊液',note:'派卡瑞丁/低浓度 DEET，看适用年龄',checked:false}, {name:'宽檐帽 + 防晒衣',note:'',checked:false}, {name:'泳衣 + 游泳圈/浮力背心',note:'KLCC 戏水池、酒店泳池',checked:false}, {name:'儿童常用药',note:'退烧、补液盐、晕车、止痒、创可贴',checked:false}, {name:'体温计',note:'',checked:false}, {name:'纸尿裤/拉拉裤',note:'视情况',checked:false}, {name:'儿童水杯 + 零食',note:'飞机上和车上',checked:false}, {name:'平板 + 动画 + 儿童耳机',note:'飞行 5.5–6 小时',checked:false}, {name:'薄长袖外套 / 小毯子',note:'冷气房和飞机上',checked:false}, {name:'湿巾 / 免洗洗手液',note:'',checked:false} ]},
+  { section:'电子设备', items:[ {name:'手机 + 充电器',note:'',checked:false}, {name:'充电宝',note:'≤20000mAh 随身携带',checked:false}, {name:'英标转换插头 Type G',note:'马来西亚为英标三方孔',checked:false}, {name:'eSIM / 当地电话卡',note:'出发前买或机场买',checked:false} ]},
+  { section:'衣物', items:[ {name:'夏装',note:'当地约 30°C',checked:false}, {name:'遮肩过膝的衣服',note:'清真寺/黑风洞',checked:false}, {name:'凉鞋 + 舒适步行鞋',note:'',checked:false}, {name:'折叠伞',note:'午后雷阵雨',checked:false}, {name:'墨镜',note:'',checked:false}, {name:'返程厚外套',note:'上海 1 月底寒冷',checked:false} ]},
+  { section:'出行工具', items:[ {name:'Grab App',note:'注册并绑卡',checked:false}, {name:'Google Maps 离线地图',note:'',checked:false}, {name:'PETRONAS 官网购票',note:'如去双子塔观景台',checked:false}, {name:'包车预订（含儿童座椅）',note:'KL→马六甲→KLIA，尚未预订',checked:false} ]},
+  { section:'其他', items:[ {name:'旅行保险',note:'含儿童医疗、航班延误',checked:false}, {name:'小背包',note:'白天出行用',checked:false} ]},
+];
+
+let checklist = loadChecklist() || JSON.parse(JSON.stringify(defaultChecklist));
+// 自动补充新增的 section（如入境准备），不覆盖用户已有数据
+defaultChecklist.forEach(defSec => {
+  if (!checklist.find(s => s.section === defSec.section)) {
+    checklist.splice(1, 0, JSON.parse(JSON.stringify(defSec)));
+  }
+});
+saveChecklist(checklist);
+
+// ===== Lazy Image Fade-In =====
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  if (img.complete) { img.classList.add('loaded'); }
+  else { img.addEventListener('load', () => img.classList.add('loaded'), { once: true }); }
+});
+
+// ===== localStorage Version Management =====
+const STORAGE_VERSION = 'malaysia_v';
+const CURRENT_VERSION = '1';
+(function migrateStorage() {
+  const v = localStorage.getItem(STORAGE_VERSION);
+  if (v !== CURRENT_VERSION) {
+    localStorage.removeItem(STORAGE_EXP);
+    localStorage.setItem(STORAGE_VERSION, CURRENT_VERSION);
+  }
+})();
+// Re-load after possible migration
+expenses = loadExpenses();
+// 无预订：不预填支出
+
+// ===== Tab Switch (cached DOM) =====
+let currentFilter = '全部';
+const _tabBtns = document.querySelectorAll('.tab-btn');
+const _tabContents = document.querySelectorAll('.tab-content');
+function switchTab(tab) {
+  _tabBtns.forEach(b => b.classList.remove('active'));
+  _tabContents.forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ===== Day nav scroll =====
+// 行程日期映射：day1=2027-01-23 … day6=2027-01-28
+var tripDayDates = [
+  { id: 'day1', month: 1, date: 23 },
+  { id: 'day2', month: 1, date: 24 },
+  { id: 'day3', month: 1, date: 25 },
+  { id: 'day4', month: 1, date: 26 },
+  { id: 'day5', month: 1, date: 27 },
+  { id: 'day6', month: 1, date: 28 },
+];
+var tripYear = 2027;
+
+function scrollToDay(id) {
+  // 更新 pill 高亮
+  document.querySelectorAll('.day-pill').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.day-pill').forEach(function(p) {
+    var oc = p.getAttribute('onclick') || '';
+    if (oc.indexOf("'" + id + "'") !== -1) p.classList.add('active');
+  });
+  // 让 active pill 在导航栏内水平滚动到可见位置
+  var activeP = document.querySelector('.day-pill.active');
+  var nav = document.querySelector('.day-nav');
+  if (activeP && nav) {
+    var pillLeft = activeP.offsetLeft - nav.offsetLeft;
+    var scrollTarget = pillLeft - (nav.clientWidth / 2) + (activeP.clientWidth / 2);
+    nav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+  }
+  // 隐藏所有 day-card 和 backup，只显示当前选中的
+  document.querySelectorAll('.day-card').forEach(function(c) { c.classList.remove('day-active'); });
+  var backup = document.getElementById('backup');
+  if (backup) backup.classList.remove('day-active');
+  var el = document.getElementById(id);
+  if (el) el.classList.add('day-active');
+  // 滚动到 container 顶部，让 day-nav 吸顶可见
+  var container = document.querySelector('#tab-itinerary .container');
+  if (container) {
+    var tabBar = document.querySelector('.tab-bar');
+    var tabBarH = tabBar ? tabBar.offsetHeight : 0;
+    var top = container.getBoundingClientRect().top + window.pageYOffset - tabBarH;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+  }
+}
+
+// 动态设置 day-nav 吸顶位置（跟随 tab-bar 高度）
+(function setDayNavStickyTop() {
+  function update() {
+    var tabBar = document.querySelector('.tab-bar');
+    var dayNav = document.querySelector('.day-nav');
+    if (tabBar && dayNav) dayNav.style.top = tabBar.offsetHeight + 'px';
+  }
+  update();
+  window.addEventListener('resize', update);
+})();
+
+// 页面加载时根据系统时间自动定位到当天
+(function initDayByDate() {
+  var now = new Date();
+  var y = now.getFullYear(), m = now.getMonth() + 1, d = now.getDate();
+  var targetId = 'day1'; // 默认 Day 1
+  if (y === tripYear) {
+    for (var i = 0; i < tripDayDates.length; i++) {
+      var td = tripDayDates[i];
+      if (m === td.month && d === td.date) { targetId = td.id; break; }
+    }
+  }
+  // 延迟执行确保 DOM 已渲染
+  setTimeout(function() { scrollToDay(targetId); }, 100);
+})();
+
+// ===== Tips nav scroll =====
+function scrollToTipSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.tips-nav-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.tips-nav-btn');
+  btns.forEach(b => { if (b.getAttribute('onclick').includes(id)) b.classList.add('active'); });
+}
+
+// ===== History nav scroll =====
+function scrollToHistSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.hist-nav-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.hist-nav-btn');
+  btns.forEach(b => { if (b.getAttribute('onclick').includes(id)) b.classList.add('active'); });
+}
+
+// ===== Debounce Helper =====
+function debounce(fn, ms) { let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); }; }
+
+// ===== Expense Rendering (cached DOM refs) =====
+const _expenseBody = document.getElementById('expenseBody');
+const _totalCNY = document.getElementById('totalCNY');
+const _totalMYR = document.getElementById('totalMYR');
+const _totalCount = document.getElementById('totalCount');
+function renderExpenses() {
+  const filtered = currentFilter === '全部' ? expenses : expenses.filter(e => e.cat === currentFilter);
+  if (!filtered.length) {
+    _expenseBody.innerHTML = '<tr class="empty-hint"><td colspan="8">暂无记录，点击右上角「+ 添加」开始记账</td></tr>';
+  } else {
+    _expenseBody.innerHTML = filtered.map(e => {
+      const ri = expenses.indexOf(e);
+      const d = e.date ? e.date.slice(5).replace('-','/') : '';
+      return `<tr><td>${d}</td><td><span class="cat-tag cat-${e.cat}">${e.cat}</span></td><td>${esc(e.item)}</td><td class="amount">${e.myr!==''&&e.myr!=null&&e.myr!==undefined?Number(e.myr).toFixed(2):'-'}</td><td class="amount">${e.cny!==''&&e.cny!==null?Number(e.cny).toFixed(2):'-'}</td><td>${esc(e.pay||'')}</td><td style="color:#999;font-size:12px">${esc(e.note||'')}</td><td class="actions"><button class="btn-del" onclick="delExpense(${ri})" title="删除">×</button></td></tr>`;
+    }).join('');
+  }
+  let tCNY=0, tMYR=0;
+  expenses.forEach(e => { tCNY += Number(e.cny)||0; tMYR += Number(e.myr)||0; });
+  _totalCNY.innerHTML = tCNY ? `¥${tCNY.toLocaleString()}` : '--';
+  _totalMYR.innerHTML = tMYR ? `RM${tMYR.toLocaleString()}` : '--';
+  _totalCount.textContent = expenses.length;
+}
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+document.querySelectorAll('#tab-expense .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#tab-expense .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentFilter = chip.dataset.cat;
+    renderExpenses();
+  });
+});
+
+let editIdx = -1;
+function openModal(idx) {
+  editIdx = idx !== undefined ? idx : -1;
+  document.getElementById('modalTitle').textContent = editIdx >= 0 ? '编辑支出' : '添加支出';
+  if (editIdx >= 0) {
+    const e = expenses[editIdx];
+    document.getElementById('fDate').value = e.date||'';
+    document.getElementById('fCat').value = e.cat||'其他';
+    document.getElementById('fItem').value = e.item||'';
+    document.getElementById('fMYR').value = e.myr||'';
+    document.getElementById('fCNY').value = e.cny||'';
+    document.getElementById('fPay').value = e.pay||'';
+    document.getElementById('fNote').value = e.note||'';
+  } else {
+    document.getElementById('fDate').value = '';
+    document.getElementById('fCat').value = '交通';
+    document.getElementById('fItem').value = '';
+    document.getElementById('fMYR').value = '';
+    document.getElementById('fCNY').value = '';
+    document.getElementById('fPay').value = '';
+    document.getElementById('fNote').value = '';
+  }
+  document.getElementById('modalOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('fItem').focus(), 100);
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('show'); }
+function saveExpense() {
+  const e = { date:document.getElementById('fDate').value, cat:document.getElementById('fCat').value, item:document.getElementById('fItem').value.trim(), myr:document.getElementById('fMYR').value, cny:document.getElementById('fCNY').value, pay:document.getElementById('fPay').value, note:document.getElementById('fNote').value.trim() };
+  if (!e.item) { document.getElementById('fItem').focus(); return; }
+  if (editIdx >= 0) { expenses[editIdx] = e; } else { expenses.push(e); }
+  saveExpenses(expenses); renderExpenses(); closeModal();
+}
+function delExpense(idx) {
+  if (!confirm('确认删除这条记录？')) return;
+  expenses.splice(idx, 1); saveExpenses(expenses); renderExpenses();
+}
+
+// ===== Checklist =====
+function renderChecklist() {
+  const container = document.getElementById('checklistContainer');
+  let total=0, done=0;
+  checklist.forEach(s => s.items.forEach(it => { total++; if(it.checked) done++; }));
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progressBar').style.width = pct+'%';
+  document.getElementById('progressText').textContent = `${done}/${total} 已完成`;
+  container.innerHTML = checklist.map((sec,si) => `
+    <div class="checklist-section">
+      <div class="section-header">${esc(sec.section)}</div>
+      <div class="checklist-card">
+        ${sec.items.map((it,ii) => `
+          <div class="checklist-item${it.checked?' checked':''}">
+            <div class="check-box" onclick="toggleCheck(${si},${ii})">
+              <svg width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7l3 3 6-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="item-name">${esc(it.name)}</span>
+            <span class="item-note">${esc(it.note||'')}</span>
+            <button class="item-del" onclick="delCheckItem(${si},${ii})" title="删除">×</button>
+          </div>
+        `).join('')}
+        <div class="add-item-row">
+          <input type="text" placeholder="添加物品…" id="addInput_${si}" onkeydown="if(event.key==='Enter')addCheckItem(${si})">
+          <button onclick="addCheckItem(${si})">添加</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleCheck(si,ii) { checklist[si].items[ii].checked=!checklist[si].items[ii].checked; saveChecklist(checklist); renderChecklist(); }
+function delCheckItem(si,ii) { checklist[si].items.splice(ii,1); if(!checklist[si].items.length) checklist.splice(si,1); saveChecklist(checklist); renderChecklist(); }
+function addCheckItem(si) {
+  const input=document.getElementById('addInput_'+si); const name=input.value.trim(); if(!name) return;
+  checklist[si].items.push({name,note:'',checked:false}); saveChecklist(checklist); renderChecklist();
+  setTimeout(()=>{ const ni=document.getElementById('addInput_'+si); if(ni) ni.focus(); },50);
+}
+
+// ===== Lightbox =====
+const _lightbox = document.getElementById('lightbox');
+const _lightboxImg = document.getElementById('lightboxImg');
+function openLightbox(img) {
+  _lightboxImg.src = img.src;
+  _lightbox.classList.add('show');
+  // 手机端禁止背景滚动
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  _lightbox.classList.remove('show');
+  document.body.style.overflow = '';
+}
+// 点击图片本身不关闭（阻止冒泡）
+_lightboxImg.addEventListener('click', e => e.stopPropagation());
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeLightbox(); } });
+
+renderExpenses();
+renderChecklist();
+
+// ===== Map =====
+const spots = [
+  // ===== Day 1 =====
+  {id:1,name_zh:"吉隆坡国际机场",name_en:"Kuala Lumpur International Airport",lat:2.7456,lng:101.7099,day:1},
+  {id:2,name_zh:"KLCC 区域酒店（候选 Traders）",name_en:"Traders Hotel Kuala Lumpur",lat:3.1556,lng:101.7148,day:1},
+  {id:3,name_zh:"Suria KLCC 商场",name_en:"Suria KLCC",lat:3.1579,lng:101.7123,day:1},
+  // ===== Day 2 =====
+  {id:4,name_zh:"黑风洞（可选）",name_en:"Batu Caves",lat:3.2379,lng:101.6840,day:2},
+  {id:5,name_zh:"KLCC 公园儿童戏水池",name_en:"KLCC Park Wading Pool",lat:3.1547,lng:101.7137,day:2},
+  {id:6,name_zh:"城中城水族馆",name_en:"Aquaria KLCC",lat:3.1535,lng:101.7133,day:2},
+  {id:7,name_zh:"双子塔",name_en:"PETRONAS Twin Towers",lat:3.1578,lng:101.7119,day:2},
+  // ===== Day 3 =====
+  {id:8,name_zh:"荷兰红屋广场",name_en:"Stadthuys Melaka",lat:2.1942,lng:102.2489,day:3},
+  {id:9,name_zh:"圣保罗山",name_en:"St Paul's Hill Melaka",lat:2.1920,lng:102.2494,day:3},
+  {id:10,name_zh:"圣地亚哥城门",name_en:"A Famosa Melaka",lat:2.1914,lng:102.2505,day:3},
+  {id:11,name_zh:"马六甲河游船",name_en:"Melaka River Cruise",lat:2.1930,lng:102.2470,day:3},
+  {id:12,name_zh:"鸡场街",name_en:"Jonker Street Melaka",lat:2.1953,lng:102.2466,day:3},
+  {id:13,name_zh:"河畔酒店（候选 Casa del Rio）",name_en:"Casa del Rio Melaka",lat:2.1943,lng:102.2462,day:3},
+  // ===== Day 4 =====
+  {id:14,name_zh:"吉隆坡国际机场",name_en:"Kuala Lumpur International Airport",lat:2.7456,lng:101.7099,day:4},
+  {id:15,name_zh:"兰卡威国际机场",name_en:"Langkawi International Airport",lat:6.3297,lng:99.7286,day:4},
+  {id:16,name_zh:"Pelangi 度假酒店（候选）",name_en:"Pelangi Beach Resort & Spa Langkawi",lat:6.2968,lng:99.7252,day:4},
+  {id:17,name_zh:"珍南海滩",name_en:"Pantai Cenang",lat:6.2920,lng:99.7260,day:4},
+  // ===== Day 5 =====
+  {id:18,name_zh:"兰卡威缆车（东方村）",name_en:"Panorama Langkawi SkyCab",lat:6.3721,lng:99.6716,day:5},
+  {id:19,name_zh:"天空之桥",name_en:"Langkawi Sky Bridge",lat:6.3865,lng:99.6617,day:5},
+  {id:20,name_zh:"基林红树林码头",name_en:"Kilim Geoforest Park Jetty",lat:6.4083,lng:99.8575,day:5},
+  // ===== Day 6 =====
+  {id:21,name_zh:"兰卡威国际机场",name_en:"Langkawi International Airport",lat:6.3297,lng:99.7286,day:6},
+  {id:22,name_zh:"吉隆坡国际机场（转机）",name_en:"Kuala Lumpur International Airport",lat:2.7456,lng:101.7099,day:6},
+  // ===== 备选 =====
+  {id:23,name_zh:"槟城乔治市",name_en:"George Town Penang",lat:5.4141,lng:100.3288,day:"backup"},
+  {id:24,name_zh:"亚庇（沙巴）",name_en:"Kota Kinabalu",lat:5.9804,lng:116.0735,day:"backup"},
+  {id:25,name_zh:"柔佛乐高乐园",name_en:"LEGOLAND Malaysia Resort",lat:1.4268,lng:103.6297,day:"backup"},
+  {id:26,name_zh:"布城粉红清真寺",name_en:"Putra Mosque Putrajaya",lat:2.9360,lng:101.6897,day:"backup"},
+  {id:27,name_zh:"云顶高原",name_en:"Genting Highlands",lat:3.4236,lng:101.7932,day:"backup"},
+  {id:28,name_zh:"吉隆坡飞禽公园",name_en:"KL Bird Park",lat:3.1430,lng:101.6881,day:"backup"},
+  {id:29,name_zh:"石油科学探索中心",name_en:"Petrosains Discovery Centre",lat:3.1582,lng:101.7118,day:"backup"},
+  {id:30,name_zh:"双威水上乐园",name_en:"Sunway Lagoon",lat:3.0697,lng:101.6072,day:"backup"},
+];
+
+const dayColors = {1:'#5C6BC0',2:'#26A69A',3:'#EF5350',4:'#AB47BC',5:'#FFA726',6:'#78909C',backup:'#90A4AE'};
+const dayLabels = {1:'D1',2:'D2',3:'D3',4:'D4',5:'D5',6:'D6',backup:'备选'};
+
+let map = null;
+let markers = [];
+let routeLines = [];
+
+function initMap() {
+  if (map) { map.invalidateSize(); return; }
+  // Wait for Leaflet to load (defer script)
+  if (typeof L === 'undefined') { setTimeout(initMap, 100); return; }
+  const container = document.getElementById('mapContainer');
+  if (!container || container.clientHeight < 10) {
+    setTimeout(initMap, 200);
+    return;
+  }
+  map = L.map('mapContainer', { zoomControl: false }).setView([4.2, 101.3], 7);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+  // ensure tiles render after container is visible
+  setTimeout(() => map.invalidateSize(), 300);
+
+  renderMarkers('all');
+
+  // Day filter buttons
+  document.querySelectorAll('.map-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMarkers(btn.dataset.day);
+    });
+  });
+}
+
+function renderMarkers(dayFilter) {
+  markers.forEach(m => map.removeLayer(m));
+  routeLines.forEach(l => map.removeLayer(l));
+  markers = [];
+  routeLines = [];
+
+  const filtered = dayFilter === 'all' ? spots : spots.filter(s => String(s.day) === dayFilter);
+  const bounds = [];
+
+  filtered.forEach(s => {
+    const color = dayColors[s.day] || '#78909C';
+    const label = dayLabels[s.day] || '';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width:28px;height:28px;border-radius:50%;background:${color};color:#fff;
+        display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;
+        box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff;
+      ">${s.id}</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
+    });
+
+    const marker = L.marker([s.lat, s.lng], { icon })
+      .bindPopup(`
+        <div style="min-width:160px">
+          <b style="font-size:14px">${s.name_zh}</b><br>
+          <span style="font-size:11px;color:#888">${s.name_en}</span><br>
+          <span style="display:inline-block;margin-top:4px;padding:1px 6px;border-radius:8px;font-size:10px;background:${color};color:#fff">${label} ${typeof s.day==='number'?'Day '+s.day:'备选'}</span><br>
+          <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name_en)}" target="_blank" style="font-size:11px;color:#1565C0;margin-top:4px;display:inline-block">在 Google Maps 中打开 →</a>
+        </div>
+      `)
+      .addTo(map);
+    markers.push(marker);
+    if (s.day !== 'backup' || dayFilter === 'backup') bounds.push([s.lat, s.lng]);
+  });
+
+  // Draw route lines for specific days
+  if (dayFilter !== 'all' && dayFilter !== 'backup') {
+    const daySpots = spots.filter(s => String(s.day) === dayFilter).sort((a,b) => a.id - b.id);
+    if (daySpots.length > 1) {
+      const latlngs = daySpots.map(s => [s.lat, s.lng]);
+      const color = dayColors[dayFilter] || '#999';
+      const line = L.polyline(latlngs, { color, weight: 2.5, opacity: 0.6, dashArray: '8,6' }).addTo(map);
+      routeLines.push(line);
+    }
+  }
+
+  if (bounds.length) {
+    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+  }
+}
+
+// Override switchTab to initialize map on first view
+const _origSwitchTab = switchTab;
+switchTab = function(tab) {
+  _origSwitchTab(tab);
+  if (tab === 'map') {
+    setTimeout(() => initMap(), 200);
+  }
+};
+// ===== 天气 & 汇率实时数据 =====
+(function() {
+  const WEATHER_MAP = {
+    '113':['☀️','晴'],'116':['⛅','多云'],'119':['☁️','阴'],'122':['☁️','阴天'],
+    '143':['🌫️','雾'],'176':['🌦️','小雨'],'179':['🌨️','小雪'],'182':['🌧️','冻雨'],
+    '185':['🌧️','冻雨'],'200':['⛈️','雷阵雨'],'227':['🌨️','飘雪'],'230':['❄️','暴风雪'],
+    '248':['🌫️','雾'],'260':['🌫️','冻雾'],'263':['🌦️','毛毛雨'],'266':['🌦️','小雨'],
+    '281':['🌧️','冻雨'],'284':['🌧️','冻雨'],'293':['🌧️','小雨'],'296':['🌧️','小雨'],
+    '299':['🌧️','中雨'],'302':['🌧️','中雨'],'305':['🌧️','大雨'],'308':['🌧️','暴雨'],
+    '311':['🌧️','冻雨'],'314':['🌧️','冻雨'],'317':['🌨️','雨夹雪'],'320':['🌨️','雨夹雪'],
+    '323':['🌨️','小雪'],'326':['🌨️','小雪'],'329':['❄️','中雪'],'332':['❄️','中雪'],
+    '335':['❄️','大雪'],'338':['❄️','大雪'],'350':['🌧️','冰雹'],'353':['🌦️','阵雨'],
+    '356':['🌧️','中雨'],'359':['🌧️','大雨'],'362':['🌨️','雨夹雪'],'365':['🌨️','雨夹雪'],
+    '368':['🌨️','阵雪'],'371':['❄️','中雪'],'374':['🌧️','冰雹'],'377':['🌧️','冰雹'],
+    '386':['⛈️','雷阵雨'],'389':['⛈️','雷暴'],'392':['⛈️','雷雪'],'395':['❄️','暴风雪']
+  };
+
+  function updateWeather() {
+    fetch('https://wttr.in/Kuala_Lumpur?format=j1')
+      .then(r => r.json())
+      .then(d => {
+        const c = d.current_condition[0];
+        const temp = c.temp_C;
+        const code = c.weatherCode;
+        const m = WEATHER_MAP[code] || ['🌤️','晴'];
+        const el = document.getElementById('weatherInfo');
+        if (el) el.innerHTML = '<span class="info-icon">' + m[0] + '</span><span class="info-value">' + temp + '°</span><span style="color:#aaa">' + m[1] + '</span>';
+      })
+      .catch(() => {});
+  }
+
+  // 汇率方向: false = 1 MYR → CNY/USD, true = 1 CNY/USD → MYR
+  var rateReversed = false;
+  var cachedRates = null;
+
+  function updateRates() {
+    fetch('https://api.exchangerate-api.com/v4/latest/MYR')
+      .then(r => r.json())
+      .then(d => {
+        cachedRates = { cny: d.rates.CNY, usd: d.rates.USD };
+        renderRates();
+      })
+      .catch(() => {});
+  }
+
+  function renderRates() {
+    if (!cachedRates) return;
+    const el1 = document.getElementById('rateInfo1');
+    const el2 = document.getElementById('rateInfo2');
+    if (rateReversed) {
+      const gelPerCny = (1 / cachedRates.cny).toFixed(2);
+      const gelPerUsd = (1 / cachedRates.usd).toFixed(2);
+      if (el1) el1.innerHTML = '<span class="info-label">1¥≈</span><span class="info-value">' + gelPerCny + '</span><span>RM</span>';
+      if (el2) el2.innerHTML = '<span class="info-label">1$≈</span><span class="info-value">' + gelPerUsd + '</span><span>RM</span>';
+    } else {
+      if (el1) el1.innerHTML = '<span class="info-label">1RM≈</span><span class="info-value">' + cachedRates.cny.toFixed(2) + '</span><span>¥</span>';
+      if (el2) el2.innerHTML = '<span class="info-label">1RM≈</span><span class="info-value">' + cachedRates.usd.toFixed(2) + '</span><span>$</span>';
+    }
+  }
+
+  window.toggleRateDirection = function() {
+    rateReversed = !rateReversed;
+    var btn = document.getElementById('rateSwapBtn');
+    if (btn) { btn.style.transform = 'rotate(180deg)'; setTimeout(function(){ btn.style.transform = ''; }, 300); }
+    renderRates();
+  };
+
+  // ===== 两地时钟 =====
+  function fmtTime(tz) {
+    try {
+      return new Intl.DateTimeFormat('zh-CN', {
+        timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+      }).format(new Date());
+    } catch (e) { return '--:--'; }
+  }
+function updateClocks() {
+var t = document.querySelector('#clockKul .info-value');
+var b = document.querySelector('#clockBj .info-value');
+if (t) t.textContent = fmtTime('Asia/Kuala_Lumpur');
+if (b) b.textContent = fmtTime('Asia/Shanghai');
+}
+
+// 日落时间计算（吉隆坡 41.7151°N, 44.8271°E）
+function calcSunset() {
+var lat = 3.1390, lng = 101.6869;
+// 获取吉隆坡当前日期
+var now = new Date();
+var tbilisi = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur' }));
+var start = new Date(tbilisi.getFullYear(), 0, 1);
+var dayOfYear = Math.floor((tbilisi - start) / 86400000) + 1;
+var zenith = 90.833;
+var D2R = Math.PI / 180, R2D = 180 / Math.PI;
+var lngHour = lng / 15;
+var tSet = dayOfYear + (18 - lngHour) / 24;
+var M = 0.9856 * tSet - 3.289;
+var L = M + 1.916 * Math.sin(M * D2R) + 0.020 * Math.sin(2 * M * D2R) + 282.634;
+L = ((L % 360) + 360) % 360;
+var RA = R2D * Math.atan(0.91764 * Math.tan(L * D2R));
+RA = ((RA % 360) + 360) % 360;
+RA += Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90;
+RA = RA / 15;
+var sinDec = 0.39782 * Math.sin(L * D2R);
+var cosDec = Math.cos(Math.asin(sinDec));
+var cosH = (Math.cos(zenith * D2R) - sinDec * Math.sin(lat * D2R)) / (cosDec * Math.cos(lat * D2R));
+if (cosH > 1 || cosH < -1) return '--:--';
+var H = R2D * Math.acos(cosH) / 15;
+var T = H + RA - 0.06571 * tSet - 6.622;
+var UT = ((T - lngHour) % 24 + 24) % 24;
+// 吉隆坡 UTC+4
+var localH = Math.floor((UT + 8) % 24);
+var localM = Math.round((UT + 8 - Math.floor(UT + 8)) * 60);
+if (localM === 60) { localH++; localM = 0; }
+return (localH < 10 ? '0' : '') + localH + ':' + (localM < 10 ? '0' : '') + localM;
+}
+function updateSunset() {
+var el = document.querySelector('#sunsetInfo .info-value');
+if (el) el.textContent = calcSunset();
+}
+
+// 页面加载时立即刷新
+updateWeather();
+updateRates();
+updateClocks();
+updateSunset();
+  // 时钟每 10 秒刷新（分钟级显示，误差可忽略）
+  setInterval(updateClocks, 10 * 1000);
+  // 每30分钟自动刷新
+  setInterval(updateWeather, 30 * 60 * 1000);
+  setInterval(updateRates, 30 * 60 * 1000);
+})();
+
+</script>
+</body>
+</html>
