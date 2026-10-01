@@ -36,6 +36,19 @@
   .tab-btn { padding: 8px 18px; font-size: 14px; font-weight: 500; color: #86868b; background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; flex-shrink: 0; }
   .tab-btn:hover { color: #1d1d1f; }
   .tab-btn.active { color: #2E4057; border-bottom-color: #2E4057; }
+  .itin-note { font-size: 12px; color: #999; text-align: center; margin: 0 0 6px; }
+  .plan-card { background:#fff; border-radius:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px 18px; margin-bottom:12px; border-left:4px solid #2E4057; }
+  .plan-card-title { font-weight:700; color:#2E4057; font-size:15px; margin-bottom:6px; }
+  .plan-card-body { font-size:13px; color:#555; line-height:1.75; }
+  .plan-warn { color:#E65100; font-weight:600; }
+  .plan-table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .plan-table th, .plan-table td { border:1px solid #eee; padding:6px 8px; text-align:left; vertical-align:top; }
+  .plan-table th { background:#f5f5f7; color:#2E4057; }
+  .plan-table td:first-child { white-space:nowrap; color:#888; }
+  @media (max-width: 640px) { .plan-card { padding:12px 14px; } .plan-table { font-size:12px; } .plan-table td:first-child { white-space:normal; } }
+  /* 居中：内容放得下时居中，放不下时从左开始可横向滚动（auto margin 在溢出时为 0） */
+  .tab-bar-row2 > .tab-btn:first-child, .day-nav > .day-pill:first-child { margin-left: auto; }
+  .tab-bar-row2 > .tab-btn:last-child, .day-nav > .day-pill:last-child { margin-right: auto; }
 
   .container { max-width: 960px; margin: 0 auto; padding: 24px 16px 80px; padding-bottom: calc(80px + env(safe-area-inset-bottom, 0)); }
   .tab-content { display: none; }
@@ -499,26 +512,14 @@
     <button class="tab-btn" onclick="switchTab('checklist')">出行清单</button>
     <button class="tab-btn" onclick="switchTab('history')">🏛️ 历史文化</button>
     <button class="tab-btn" onclick="switchTab('tips')">⚡ 避雷指南</button>
+    <button class="tab-btn" onclick="switchTab('plan')">🧭 规划逻辑</button>
   </div>
 </div>
 
 <!-- ===== 旅行日程 ===== -->
 <div id="tab-itinerary" class="tab-content active">
 <div class="container">
-  <div class="trip-banner">
-    <div class="tb-title">🗓️ 2027年1月23日（周六）— 1月28日（周四）· 6天5晚 · 上海 → 亚庇（沙巴）3 晚 → 吉隆坡 2 晚 → 上海</div>
-    <div>上海市教委《2026学年校历》：中小学寒假 <b>2027年1月23日</b> 开始（幼儿园放假安排以园方通知为准）。春节 <b>2月6日</b>，本行程返程距除夕还有一周多，避开国内出境高峰与马来西亚春节歇业期。全程只坐 <b>3 段飞机</b>：上海→亚庇直飞、亚庇→吉隆坡、吉隆坡→上海直飞。</div>
-    <div class="tb-warn">⚠️ 所有机票、酒店、包车均未预订；标注“推荐（未预订）/ 参考 / 待确认 / 价格待查”的信息请出行前核实。</div>
-    <details><summary>为什么是“亚庇 + 吉隆坡”，不再去兰卡威和马六甲？</summary>
-      <div>兰卡威和亚庇之间<b>没有直飞</b>（Roame 航线数据里没有这条航线，各订票网站都是经吉隆坡转机）。三个地方都去，6 天里要坐 5–6 段飞机、换 3 家酒店，对 3 岁孩子太折腾。只去“亚庇 + 吉隆坡”：3 段飞机，2 家酒店，每天都有午睡。兰卡威和马六甲放进了备选景点。</div>
-    </details>
-    <details><summary>为什么先去亚庇、最后在吉隆坡？</summary>
-      <div>① 上海→亚庇有<b>傍晚出发、21:45 到达</b>的直飞，而亚庇→上海的直飞全部是<b>深夜/凌晨</b>起飞（22:30–02:20），带孩子不合适；吉隆坡→上海则有白天的直飞（如 14:00→19:20）。所以去程飞亚庇、回程从吉隆坡走，不坐红眼航班。② 1/24 正好是周日，能逛<b>加雅街周日集市</b>。③ 吉隆坡安排在周二、周三，KLCC 戏水池（周一闭池）和双子塔观景台都开放。</div>
-    </details>
-    <details><summary>⚠️ 1 月亚庇的天气</summary>
-      <div>亚庇 1 月是<b>东北季风/雨季的尾巴</b>，不算旱季：经常有午后雷阵雨，海上风浪会让去海岛的船停开（malaysiajourneys、citympvtravel 等）。所以海岛安排在<b>上午</b>，下午留给酒店；停航就改成酒店海滩。吉隆坡 1 月相对干一些。如果最看重海水和沙滩，兰卡威（1 月旱季）其实更稳，见备选景点。</div>
-    </details>
-  </div>
+  <div class="itin-note">⚠️ 机票、酒店均<b>未预订</b> · 路线怎么定的见「规划逻辑」</div>
 
   <div class="day-nav">
     <span class="day-pill active" onclick="scrollToDay('day1')">Day 1 飞亚庇<span class="pill-date">1.23 周六</span></span>
@@ -1524,6 +1525,36 @@
   信息来源：中国驻马来西亚大使馆《中马互免签证协定》FAQ、马来西亚移民局 MDAC 与国内旅行说明、美国国务院马来西亚旅行须知、sabahguide.com、沙巴旅游局、沙巴公园官网（东姑阿都拉曼公园收费）、Jesselton Point 官网、MySabah.com、丹绒亚路香格里拉官网、PETRONAS 双子塔官网、Panorama Langkawi 官网、上海市教委《上海市中小学2026学年校历》、马来西亚雇主联合会 2027 年公共假期表、携程国际机票时刻表、Roame 航线数据、《东方日报》、Grab 马来西亚新闻稿，以及 Trip.com、Klook、各旅行社与旅游博客（核实于 2026 年 9–10 月）。<br>
   标注“参考 / 待确认 / 价格待查”的内容请出行前再次核实。<b>本手册中所有机票、酒店、包车均未预订。</b>
 </div>
+</div>
+</div>
+
+<!-- ===== 规划逻辑 ===== -->
+<div id="tab-plan" class="tab-content">
+<div class="container">
+  <div class="plan-card">
+    <div class="plan-card-title">🗓️ 行程概览</div>
+    <div class="plan-card-body">2027年1月23日（周六）— 1月28日（周四）· 6天5晚 · 上海 → 亚庇（沙巴）3 晚 → 吉隆坡 2 晚 → 上海</div>
+  </div>
+  <div class="plan-card">
+    <div class="plan-card-title">📅 为什么是这几天</div>
+    <div class="plan-card-body">上海市教委《2026学年校历》：中小学寒假 <b>2027年1月23日</b> 开始（幼儿园放假安排以园方通知为准）。春节 <b>2月6日</b>，本行程返程距除夕还有一周多，避开国内出境高峰与马来西亚春节歇业期。全程只坐 <b>3 段飞机</b>：上海→亚庇直飞、亚庇→吉隆坡、吉隆坡→上海直飞。</div>
+  </div>
+  <div class="plan-card">
+    <div class="plan-card-title">⚖️ 方案比较：要不要三个地方都去？</div>
+    <div class="plan-card-body"><table class="plan-table"><tr><th></th><th>A：吉隆坡 + 兰卡威 + 亚庇</th><th>B：吉隆坡 + 亚庇 ✅</th></tr><tr><td>飞机段数</td><td>5–6 段（兰卡威↔亚庇没有直飞，要经吉隆坡转机）</td><td><b>3 段</b>（上海→亚庇、亚庇→吉隆坡、吉隆坡→上海）</td></tr><tr><td>空中时间</td><td>约 14–15 小时，另有 4–5 次进出机场</td><td>约 12 小时（约 4h15 + 2h30 + 5h20）</td></tr><tr><td>酒店</td><td>3–4 家，几乎每 1–2 晚换一次</td><td>2 家（亚庇 3 晚 + 吉隆坡 2 晚）</td></tr><tr><td>3 岁孩子的节奏</td><td>好几天要赶飞机，午睡难保证</td><td>每天都有午睡；只有 D4 一段国内航班</td></tr><tr><td>能玩到什么</td><td>多了兰卡威旱季海滩和缆车，但每处都很赶</td><td>亚庇海岛、周日集市、日落、长鼻猴（可选）+ 吉隆坡 KLCC 亲子日</td></tr></table><div style="margin-top:8px">结论：选 <b>B</b>。兰卡威、马六甲放在行程页的“备选景点”里，以后可以单独安排。</div><div style="margin-top:8px">兰卡威和亚庇之间<b>没有直飞</b>（Roame 航线数据里没有这条航线，各订票网站都是经吉隆坡转机）。三个地方都去，6 天里要坐 5–6 段飞机、换 3 家酒店，对 3 岁孩子太折腾。只去“亚庇 + 吉隆坡”：3 段飞机，2 家酒店，每天都有午睡。兰卡威和马六甲放进了备选景点。</div></div>
+  </div>
+  <div class="plan-card">
+    <div class="plan-card-title">🔁 为什么先去亚庇、最后在吉隆坡</div>
+    <div class="plan-card-body">① 上海→亚庇有<b>傍晚出发、21:45 到达</b>的直飞，而亚庇→上海的直飞全部是<b>深夜/凌晨</b>起飞（22:30–02:20），带孩子不合适；吉隆坡→上海则有白天的直飞（如 14:00→19:20）。所以去程飞亚庇、回程从吉隆坡走，不坐红眼航班。② 1/24 正好是周日，能逛<b>加雅街周日集市</b>。③ 吉隆坡安排在周二、周三，KLCC 戏水池（周一闭池）和双子塔观景台都开放。</div>
+  </div>
+  <div class="plan-card">
+    <div class="plan-card-title">🌧️ 1 月亚庇的天气</div>
+    <div class="plan-card-body">亚庇 1 月是<b>东北季风/雨季的尾巴</b>，不算旱季：经常有午后雷阵雨，海上风浪会让去海岛的船停开（malaysiajourneys、citympvtravel 等）。所以海岛安排在<b>上午</b>，下午留给酒店；停航就改成酒店海滩。吉隆坡 1 月相对干一些。如果最看重海水和沙滩，兰卡威（1 月旱季）其实更稳，见备选景点。</div>
+  </div>
+  <div class="plan-card">
+    <div class="plan-card-title">🔖 预订状态</div>
+    <div class="plan-card-body"><span class="plan-warn">⚠️ 所有机票、酒店、包车均未预订；标注“推荐（未预订）/ 参考 / 待确认 / 价格待查”的信息请出行前核实。</span></div>
+  </div>
 </div>
 </div>
 
